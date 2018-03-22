@@ -4,9 +4,15 @@ game:
 - Abstract
 - Contains two player Snakes
 - Contains screen which is where game will be displayed
-- Represented by Deque
 - Communication done through reader and Writer
 - These will be generated with TCP
+
+Snake:
+-represented by Deque
+-Two exist to represent the two players
+
+Cell:
+-represents a Cell in the Game
 
 ServerGame:
 - Inherits from Game
