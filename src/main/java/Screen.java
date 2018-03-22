@@ -31,7 +31,7 @@ public class Screen {
      * this function should color the rectangle at a certain location in the game the desired color.
      * This indicates that the player currently has visited there
      */
-    public void colorLocation(){
+    public void colorLocation(int row, int col, Color color){
 
     }
 
@@ -39,8 +39,9 @@ public class Screen {
      * This function should restore a block to default color indicating that the player no longer covers
      * that space.
      */
-    public void unColorLocation(){
-
+    public void unColorLocation(int row, int col){
+        //This might not be a necessary function
+        //COuld just plot background and redraw snake instead
     }
 
     public void plotWinScreen(){
@@ -55,7 +56,7 @@ public class Screen {
 
     }
 
-    public void plotPowerUp(){
+    public void plotPowerUp(int row, int col){
 
     }
 

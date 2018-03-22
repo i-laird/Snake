@@ -70,23 +70,11 @@ public abstract class Game {
             }while(playerOne.snakeCoverMove(powerUp) || playerTwo.snakeCoverMove(powerUp));
         }
         gameScreen.plotBackground();
-        gameScreen.plotPowerUp();
+        gameScreen.plotPowerUp(powerUp.getRow(), powerUp.getCol());
         playerOne.moveLocation(playerOneMove);
         playerTwo.moveLocation(playerTwoMove);
         playerOne.drawSnake(gameScreen);
         playerTwo.drawSnake(gameScreen);
-    }
-
-    public void initNetwork(String hostName, int portNum){
-        try {
-            initializeSocket(hostName, portNum);
-        }catch(IOException e){
-            LOGGER.severe("Socket failed to open!");
-            return;
-        }
-        if(!initNetIn() || !initNetOut()){
-            LOGGER.severe("Network initialization failed");
-        }
     }
 
     /**
@@ -109,6 +97,26 @@ public abstract class Game {
      */
     protected Cell getPlayerOneMove(){
 
+    }
+
+    /**
+     * This should send the move over the network
+     * @param move
+     */
+    protected void sendPlayerOneMove(Cell move){
+
+    }
+
+    public void initNetwork(String hostName, int portNum){
+        try {
+            initializeSocket(hostName, portNum);
+        }catch(IOException e){
+            LOGGER.severe("Socket failed to open!");
+            return;
+        }
+        if(!initNetIn() || !initNetOut()){
+            LOGGER.severe("Network initialization failed");
+        }
     }
 
     protected boolean initNetIn(){
@@ -139,7 +147,7 @@ public abstract class Game {
 
     ////////////////////////////////////////////////////////////////
 
-    public abstract void initializeSocket(String hostName, int PortNumber) throws IOException;
+    protected abstract void initializeSocket(String hostName, int PortNumber) throws IOException;
 
     /**
      * This should get a move for other player from over the network

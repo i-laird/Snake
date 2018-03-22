@@ -27,6 +27,14 @@ public class Cell {
                 ThreadLocalRandom.current().nextInt(0, height + 1));
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

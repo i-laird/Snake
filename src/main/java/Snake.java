@@ -6,6 +6,8 @@ public class Snake {
     //As snake travels we pop tiles off b/c fixed length
     private Deque<Cell> locations = new ArrayDeque<Cell>();
 
+    private Color color;
+
     //Holds the length of the Snake
     private int length = 0;
 
@@ -41,5 +43,13 @@ public class Snake {
      */
     public boolean snakeCoverMove(Cell location){
         return this.locations.contains(location);
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

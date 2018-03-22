@@ -8,11 +8,11 @@ game:
 - These will be generated with TCP
 
 Snake:
--represented by Deque
--Two exist to represent the two players
+- represented by Deque
+- Two exist to represent the two players
 
 Cell:
--represents a Cell in the Game
+- represents a Cell in the Game
 
 ServerGame:
 - Inherits from Game
