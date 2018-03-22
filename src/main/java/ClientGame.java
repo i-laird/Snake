@@ -1,9 +1,9 @@
 public class ClientGame extends Game {
-    private ClientGame singleGame = null;
+    private static ClientGame singleGame = null;
 
     private ClientGame(){}
 
-    public Game getGame(){
+    public static Game getClientGame(){
         if(singleGame == null)
             singleGame = new ClientGame();
         return  singleGame;

@@ -21,4 +21,17 @@ public class Snake {
     public void increaseLength(){
         this.length+=1;
     }
+
+    /**
+     * @author: Ian Laird
+     * @param moveTo
+     * This method is used to record a Snake movement
+     * It removes the tail of teh snake and adds a new head
+     */
+    public void moveLocation(Pair<Integer, Integer> moveTo){
+        if(locations.size() == this.length){
+            locations.pop();
+        }
+        locations.push(moveTo);
+    }
 }

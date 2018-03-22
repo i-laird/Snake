@@ -1,10 +1,10 @@
 public class ServerGame extends Game {
 
-    private ServerGame singleGame = null;
+    private static ServerGame singleGame = null;
 
     private ServerGame(){}
 
-    public Game getGame(){
+    public static Game getServerGame(){
         if(singleGame == null)
             singleGame = new ServerGame();
         return  singleGame;
