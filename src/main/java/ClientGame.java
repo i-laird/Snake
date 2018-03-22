@@ -1,5 +1,8 @@
 import javafx.util.Pair;
 
+import java.io.IOException;
+import java.net.Socket;
+
 public class ClientGame extends Game {
     private static ClientGame singleGame = null;
 
@@ -11,8 +14,8 @@ public class ClientGame extends Game {
         return  singleGame;
     }
 
-    public void setUpGame(String networkStuff){
-
+    public void initializeSocket(String hostName, int portNumber) throws IOException{
+        networkSocket = new Socket(hostName, portNumber);
     }
 
     /**
