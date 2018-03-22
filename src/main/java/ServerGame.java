@@ -24,14 +24,6 @@ public class ServerGame extends Game {
     }
 
     /**
-     * Player 1 is the home player so in this case the Server
-     * @return
-     */
-    protected Cell getPlayerOneMove(){
-
-    }
-
-    /**
      * Player 2 is the client
      * @return
      */

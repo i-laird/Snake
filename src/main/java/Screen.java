@@ -4,18 +4,18 @@
 public class Screen {
     private int width;
     private int length;
-    private static Screen thisInstance = new Screen();
+    private static Screen thisInstance = null;
 
     /**
      * @author: Ian Laird
      * Because singleton the constructor is private
      */
-    private Screen()
+    private Screen(int width, int length)
     {
     }
-    public static Screen getInstance()
+    public static Screen getInstance(int width, int length)
     {
-        return thisInstance;
+        return (thisInstance == null ? thisInstance = new Screen(width, length) : thisInstance);
     }
 
     /**
@@ -49,5 +49,21 @@ public class Screen {
 
     public void plotDefeatScreen(){
 
+    }
+
+    public void plotBackground(){
+
+    }
+
+    public void plotPowerUp(){
+
+    }
+
+    public int getWidth(){
+        return this.width;
+    }
+
+    public int getHeight(){
+        return this.length;
     }
 }
