@@ -28,4 +28,12 @@ public class ClientGame extends Game {
 
     }
 
+    /**
+     * This should send the move over the network
+     * @param move
+     */
+    protected void sendPlayerOneMove(Cell move){
+
+    }
+
 }

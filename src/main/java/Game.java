@@ -103,9 +103,7 @@ public abstract class Game {
      * This should send the move over the network
      * @param move
      */
-    protected void sendPlayerOneMove(Cell move){
-
-    }
+    protected abstract void sendPlayerOneMove(Cell move);
 
     public void initNetwork(String hostName, int portNum){
         try {

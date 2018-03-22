@@ -27,7 +27,15 @@ public class ServerGame extends Game {
      * Player 2 is the client
      * @return
      */
-    protected  Cell getPlayerTwoMove(){
+    protected Cell getPlayerTwoMove(){
+
+    }
+
+    /**
+     * This should send the move over the network
+     * @param move
+     */
+    protected void sendPlayerOneMove(Cell move){
 
     }
 
