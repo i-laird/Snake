@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  * @author: Ian Laird
  */
 public abstract class Game {
-    Logger LOGGER = Logger.getLogger("Game");
+    private static Logger LOGGER = Logger.getLogger("Game");
 
     protected Snake playerOne;
 
@@ -20,10 +20,10 @@ public abstract class Game {
     protected Socket networkSocket = null;
 
     //For sending mopves over network
-    private PrintWriter moveSender = null;
+    protected PrintWriter moveSender = null;
 
     //for receiving moves over network
-    private Scanner moveReader = null;
+    protected Scanner moveReader = null;
 
     private boolean gameOver = false;
 
@@ -42,13 +42,13 @@ public abstract class Game {
         playerOneMove = getPlayerOneMove();
         playerTwoMove = getPlayerTwoMove();
         //See if player one  just lost
-        if(moveKillsPlayer(playerTwo, playerOneMove)){
+        if(playerDeadAfterMove(playerTwo, playerOneMove)){
             gameOver = true;
             gameScreen.plotDefeatScreen();
             //Should this return IDK yet
         }
         //See if player 1 just won
-        if(moveKillsPlayer(playerOne, playerTwoMove)){
+        if(playerDeadAfterMove(playerOne, playerTwoMove)){
             gameOver = true;
             gameScreen.plotWinScreen();
         }
@@ -79,7 +79,7 @@ public abstract class Game {
      * @param otherPlayer
      * @return
      */
-    protected boolean moveKillsPlayer(Snake otherPlayer, Pair<Integer, Integer> move){
+    protected boolean playerDeadAfterMove(Snake otherPlayer, Pair<Integer, Integer> move){
         boolean moveKills = false;
         moveKills = otherPlayer.snakeCoverMove(move);
         if(moveKills == true) {
