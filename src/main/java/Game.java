@@ -37,8 +37,7 @@ public abstract class Game {
         this.gameOver = false;
     }
     public void MovePlayers(){
-        Pair <Integer, Integer> playerOneMove,
-                playerTwoMove;
+        Cell playerOneMove, playerTwoMove;
         playerOneMove = getPlayerOneMove();
         playerTwoMove = getPlayerTwoMove();
         //See if player one  just lost
@@ -79,26 +78,26 @@ public abstract class Game {
      * @param otherPlayer
      * @return
      */
-    protected boolean playerDeadAfterMove(Snake otherPlayer, Pair<Integer, Integer> move){
+    protected boolean playerDeadAfterMove(Snake otherPlayer, Cell moveTo){
         boolean moveKills = false;
-        moveKills = otherPlayer.snakeCoverMove(move);
+        moveKills = otherPlayer.snakeCoverMove(moveTo);
         if(moveKills == true) {
             return true;
         }
-        return moveInBounds();
+        return moveInBounds(moveTo);
     }
 
     /**
      * This should get the move for home Machine from user on this machine
      * @return
      */
-    protected abstract Pair<Integer, Integer> getPlayerOneMove();
+    protected abstract Cell getPlayerOneMove();
 
     /**
      * This should get a move for other player from over the network
      * @return
      */
-    protected abstract Pair<Integer, Integer> getPlayerTwoMove();
+    protected abstract Cell getPlayerTwoMove();
 
     protected boolean initNetIn(){
         try{
@@ -122,7 +121,7 @@ public abstract class Game {
         return true;
     }
     //TODO
-    protected boolean moveInBounds(Pair<Integer, Integer>){
+    protected boolean moveInBounds(Cell move){
 
     }
 

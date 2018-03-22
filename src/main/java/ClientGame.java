@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 import java.io.IOException;
 import java.net.Socket;
 
@@ -26,7 +24,7 @@ public class ClientGame extends Game {
      * Player 1 is the home player so in this case the client
      * @return
      */
-    protected Pair<Integer, Integer> getPlayerOneMove(){
+    protected Cell getPlayerOneMove(){
 
     }
 
@@ -34,7 +32,7 @@ public class ClientGame extends Game {
      * Player 2 is the server
      * @return
      */
-    protected  Pair<Integer, Integer> getPlayerTwoMove(){
+    protected  Cell getPlayerTwoMove(){
 
     }
 

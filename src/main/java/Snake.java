@@ -1,12 +1,10 @@
-import javafx.util.Pair;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Snake {
     //As the snake travels to new tiles we push on
     //As snake travels we pop tiles off b/c fixed length
-    private Deque<Pair<Integer,Integer>> locations = new ArrayDeque<Pair<Integer, Integer>>();
+    private Deque<Cell> locations = new ArrayDeque<Cell>();
 
     //Holds the length of the Snake
     private int length = 0;
@@ -28,7 +26,7 @@ public class Snake {
      * This method is used to record a Snake movement
      * It removes the tail of teh snake and adds a new head
      */
-    public void moveLocation(Pair<Integer, Integer> moveTo){
+    public void moveLocation(Cell moveTo){
         if(locations.size() == this.length){
             locations.pop();
         }
@@ -41,7 +39,7 @@ public class Snake {
      * @param location
      * @return
      */
-    public boolean snakeCoverMove(Pair<Integer, Integer> location){
+    public boolean snakeCoverMove(Cell location){
         return this.locations.contains(location);
     }
 }
