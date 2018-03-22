@@ -34,4 +34,14 @@ public class Snake {
         }
         locations.push(moveTo);
     }
+
+    /**
+     * This method sees if the indicated Location is present in the Snake.
+     * It is used to see check for Snake collisions
+     * @param location
+     * @return
+     */
+    public boolean snakeCoverMove(Pair<Integer, Integer> location){
+        return this.locations.contains(location);
+    }
 }

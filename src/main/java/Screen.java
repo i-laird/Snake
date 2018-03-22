@@ -2,6 +2,8 @@
  * This class should be a singleton b/c only one screen should exist
  */
 public class Screen {
+    private int width;
+    private int length;
     private static Screen thisInstance = new Screen();
 
     /**
@@ -38,6 +40,14 @@ public class Screen {
      * that space.
      */
     public void unColorLocation(){
+
+    }
+
+    public void plotWinScreen(){
+
+    }
+
+    public void plotDefeatScreen(){
 
     }
 }
