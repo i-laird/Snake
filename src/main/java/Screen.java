@@ -1,6 +1,8 @@
 /**
  * This class should be a singleton b/c only one screen should exist
  */
+//TODO Most of this class is unfinished...We need to implement Swing stuff
+    //-Ian
 public class Screen {
     private int width;
     private int length;
@@ -42,6 +44,7 @@ public class Screen {
     public void unColorLocation(int row, int col){
         //This might not be a necessary function
         //COuld just plot background and redraw snake instead
+        //Probably Unncessary
     }
 
     public void plotWinScreen(){

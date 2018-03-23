@@ -22,21 +22,4 @@ public class ServerGame extends Game {
         ServerSocket serverSocket = new ServerSocket(portNumber);
         networkSocket = serverSocket.accept();
     }
-
-    /**
-     * Player 2 is the client
-     * @return
-     */
-    protected Cell getPlayerTwoMove(){
-
-    }
-
-    /**
-     * This should send the move over the network
-     * @param move
-     */
-    protected void sendPlayerOneMove(Cell move){
-
-    }
-
 }

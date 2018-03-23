@@ -1,3 +1,13 @@
+Overview of Progress 3/22/2018 Ian Laird
+=====
++ I have made good progress
++ Game class is almost entirely "finished"
+    + One thing left undone is reading unbuffered input from keyboard for moves
++ Screen class is nowhere bear being done
+    + Methods I need for Game are created but most are unfinished
++ Look into KeyListener Interface
+   - https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyListener.html
+
 Overview of classes
 ===========
 game:

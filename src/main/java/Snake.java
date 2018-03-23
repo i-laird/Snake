@@ -11,7 +11,7 @@ public class Snake {
     //Holds the length of the Snake
     private int length = 0;
 
-    public void drawSnake(Screen screen){
+    public void drawSnake(Screen screen, int cubeDimension){
         //Should draw all elements in the Snake onto Screen
     }
 

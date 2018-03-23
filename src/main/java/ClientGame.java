@@ -19,21 +19,4 @@ public class ClientGame extends Game {
     public void initializeSocket(String hostName, int portNumber) throws IOException{
         networkSocket = new Socket(hostName, portNumber);
     }
-
-    /**
-     * Player 2 is the server
-     * @return
-     */
-    protected  Cell getPlayerTwoMove(){
-
-    }
-
-    /**
-     * This should send the move over the network
-     * @param move
-     */
-    protected void sendPlayerOneMove(Cell move){
-
-    }
-
 }
