@@ -30,9 +30,9 @@ public class Snake {
      */
     public void moveLocation(Cell moveTo){
         if(locations.size() == this.length){
-            locations.pop();
+            locations.removeFirst();
         }
-        locations.push(moveTo);
+        locations.addLast(moveTo);
     }
 
     /**

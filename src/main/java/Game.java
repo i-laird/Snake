@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -88,7 +86,7 @@ public abstract class Game {
         if(moveKills == true) {
             return true;
         }
-        return moveInBounds(moveTo);
+        return isMoveInBounds(moveTo);
     }
 
     /**
@@ -139,7 +137,7 @@ public abstract class Game {
         return true;
     }
     //TODO
-    protected boolean moveInBounds(Cell move){
+    protected boolean isMoveInBounds(Cell move){
 
     }
 
