@@ -1,3 +1,5 @@
+import game_stuff.Game;
+import game_stuff.gameMaker;
 import exceptions.NetworkException;
 
 import java.util.Scanner;

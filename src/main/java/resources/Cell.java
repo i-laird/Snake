@@ -1,3 +1,5 @@
+package resources;
+
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -7,8 +9,8 @@ public class Cell {
 
     /**
      * @author: Ian Laird
-     * @param r the row of the Cell
-     * @param c the column of the Cell
+     * @param r the row of the resources.Cell
+     * @param c the column of the resources.Cell
      */
     public Cell(int r, int c){
         row = r;
@@ -16,11 +18,11 @@ public class Cell {
     }
 
     /**
-     * creates a Cell in a random location in the table
-     * @author:Ian Laird
+     * creates a resources.Cell in a random location in the table
+     * @author: Ian Laird
      * @param width of the table
      * @param height of the table
-     * @return newly generated Cell
+     * @return newly generated resources.Cell
      */
     public static Cell createRandom(int width, int height){
         return new Cell(ThreadLocalRandom.current().nextInt(0, width + 1),

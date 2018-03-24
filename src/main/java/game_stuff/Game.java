@@ -1,3 +1,6 @@
+package game_stuff;
+import resources.*;
+
 import Enums.Direct;
 import exceptions.NetworkException;
 
@@ -11,7 +14,7 @@ import java.util.logging.Logger;
  */
 public abstract class Game {
 
-    //TODO figure out if this is a goos size or not
+    //TODO figure out if this is a good size or not
     protected static final int CELLSIZE = 10;
     protected static final int SCREEN_WIDTH = 400;
     protected static final int SCREEN_HEIGHT = 400;
@@ -97,7 +100,7 @@ public abstract class Game {
             playerTwo.increaseLength();
             resetPowerUp = true;
         }
-        //get new power up location such that it is not occupied by a Snake
+        //get new power up location such that it is not occupied by a resources.Snake
         if(resetPowerUp) {
             do {
                 powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());

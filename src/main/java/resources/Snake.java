@@ -1,4 +1,8 @@
+package resources;
+
 import Enums.Color;
+import resources.Cell;
+import resources.Screen;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -12,7 +16,7 @@ public class Snake {
 
     private Color color;
 
-    //Holds the length of the Snake
+    //Holds the length of the resources.Snake
     private int length = 0;
 
     public Snake(Cell startPos){
@@ -21,7 +25,7 @@ public class Snake {
     }
 
     public void drawSnake(Screen screen, int cubeDimension){
-        //Should draw all elements in the Snake onto Screen
+        //Should draw all elements in the resources.Snake onto resources.Screen
     }
 
     /**
@@ -34,7 +38,7 @@ public class Snake {
     /**
      * @author: Ian Laird
      * @param moveTo
-     * This method is used to record a Snake movement
+     * This method is used to record a resources.Snake movement
      * It removes the tail of teh snake and adds a new head
      */
     public void moveLocation(Cell moveTo){
@@ -46,8 +50,8 @@ public class Snake {
     }
 
     /**
-     * This method sees if the indicated Location is present in the Snake.
-     * It is used to see check for Snake collisions
+     * This method sees if the indicated Location is present in the resources.Snake.
+     * It is used to see check for resources.Snake collisions
      * @param location
      * @return
      */

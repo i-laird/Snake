@@ -1,4 +1,4 @@
-import games.Game;
+package game_stuff;
 
 import java.io.IOException;
 import java.net.Socket;

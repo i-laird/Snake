@@ -1,4 +1,4 @@
-import games.Game;
+package game_stuff;
 
 /**
  * @author: Ian Laird
