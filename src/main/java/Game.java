@@ -1,3 +1,6 @@
+import Enums.Direct;
+import exceptions.NetworkException;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -32,7 +35,7 @@ public abstract class Game {
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public void initGame(String hostName, int portNum) throws NetworkException{
+    public void initGame(String hostName, int portNum) throws NetworkException {
         //First create the two Snakes
         Cell start1 = null, start2 = null;
         start1 = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);

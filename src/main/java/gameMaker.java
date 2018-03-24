@@ -1,3 +1,5 @@
+import games.Game;
+
 /**
  * @author: Ian Laird
  * This is the way that Games are actually generated and it allows there to be one instance of a Game in existance.

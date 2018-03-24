@@ -22,7 +22,7 @@ public class Cell {
      * @param height of the table
      * @return newly generated Cell
      */
-    static Cell createRandom(int width, int height){
+    public static Cell createRandom(int width, int height){
         return new Cell(ThreadLocalRandom.current().nextInt(0, width + 1),
                 ThreadLocalRandom.current().nextInt(0, height + 1));
     }

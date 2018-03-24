@@ -1,3 +1,5 @@
+import exceptions.NetworkException;
+
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -33,7 +35,7 @@ public class Main {
         }
         //Network error could happen
         try {
-            thisGame.initNetwork(option, PORT_NUM);
+            thisGame.initGame(option, PORT_NUM);
         }catch(NetworkException e){
             LOGGER.severe("Network failed to initialize!");
             LOGGER.info("Game is shutting down now");

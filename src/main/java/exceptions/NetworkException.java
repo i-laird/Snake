@@ -1,8 +1,10 @@
+package exceptions;
+
 public class NetworkException extends Throwable{
-    NetworkException(){
+    public NetworkException(){
         super();
     }
-    NetworkException(String message){
+    public NetworkException(String message){
         super(message);
     }
 }

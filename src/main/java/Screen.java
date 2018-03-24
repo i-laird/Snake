@@ -1,3 +1,6 @@
+import Enums.Color;
+import Enums.Direct;
+
 /**
  * This class should be a singleton b/c only one screen should exist
  */

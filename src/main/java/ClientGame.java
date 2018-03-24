@@ -1,3 +1,5 @@
+import games.Game;
+
 import java.io.IOException;
 import java.net.Socket;
 
