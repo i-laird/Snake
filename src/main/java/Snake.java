@@ -5,11 +5,18 @@ public class Snake {
     //As the snake travels to new tiles we push on
     //As snake travels we pop tiles off b/c fixed length
     private Deque<Cell> locations = new ArrayDeque<Cell>();
+    //The location of the Head should probably be in the Deque as well
+    private Cell headLocation = null;
 
     private Color color;
 
     //Holds the length of the Snake
     private int length = 0;
+
+    public Snake(Cell startPos){
+        this.headLocation = headLocation;
+        this.locations.addLast(headLocation);
+    }
 
     public void drawSnake(Screen screen, int cubeDimension){
         //Should draw all elements in the Snake onto Screen
@@ -33,6 +40,7 @@ public class Snake {
             locations.removeFirst();
         }
         locations.addLast(moveTo);
+        this.headLocation = moveTo;
     }
 
     /**
@@ -51,5 +59,9 @@ public class Snake {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public Cell getHeadLocation() {
+        return headLocation;
     }
 }

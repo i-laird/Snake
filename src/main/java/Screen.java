@@ -71,10 +71,15 @@ public class Screen {
         return this.length;
     }
 
-    public Cell readMoveFromKeyboard(){
+    /**
+     *
+     * @return direction the player wants to move
+     */
+    public Direct readMoveFromKeyboard(){
         /*TODO implement so that keystrokes from user are recorded
         This means that the input has to be unbuffered so as to not wait for ENTER
         Unsure how to do this we will have to research -Ian
         */
+        return null;
     }
 }
