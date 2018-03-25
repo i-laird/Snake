@@ -12,12 +12,22 @@ public class ClientGame extends Game {
 
     private ClientGame(){}
 
-    public static Game getClientGame(){
+    /**
+     * @author: Ian Laird
+     * @return the singleton of the class
+     */
+    static Game getClientGame(){
         if(singleGame == null)
             singleGame = new ClientGame();
         return  singleGame;
     }
 
+    /**
+     * overriden function for initializing the network socket
+     * @param hostName
+     * @param portNumber
+     * @throws IOException
+     */
     public void initializeSocket(String hostName, int portNumber) throws IOException{
         networkSocket = new Socket(hostName, portNumber);
     }

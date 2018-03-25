@@ -29,14 +29,26 @@ public class Cell {
                 ThreadLocalRandom.current().nextInt(0, height + 1));
     }
 
+    /**
+     * @authot: Ian Laird
+     * @return row
+     */
     public int getRow() {
         return row;
     }
 
+    /**
+     * @authot: Ian Laird
+     * @return column
+     */
     public int getCol() {
         return col;
     }
 
+    /**
+     * @authot: Ian Laird
+     * @return equivalence of two Objects
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

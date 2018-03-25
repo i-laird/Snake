@@ -1,9 +1,7 @@
 package game_stuff;
 import resources.*;
-
 import Enums.Direct;
 import exceptions.NetworkException;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -18,36 +16,30 @@ public abstract class Game {
     protected static final int CELLSIZE = 10;
     protected static final int SCREEN_WIDTH = 400;
     protected static final int SCREEN_HEIGHT = 400;
-
     protected static Logger LOGGER = Logger.getLogger("Game");
-
     protected Snake playerOne = null;
     protected Snake playerTwo = null;
     protected Screen gameScreen = null;
     protected Socket networkSocket = null;
-
     //For sending mopves over network
     protected PrintWriter moveSender = null;
-
     //for receiving moves over network
     protected Scanner moveReader = null;
-
     private boolean gameOver = false;
 
     Cell powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * @author:Ian Laird
+     * @param hostName name of the server
+     * @param portNum port of the server
+     * @throws NetworkException if error connecting to the server
+     */
     public void initGame(String hostName, int portNum) throws NetworkException {
-        //First create the two Snakes
-        Cell start1 = null, start2 = null;
-        start1 = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
-        do{
-            start2 = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
-        }while(start1.equals(start2));
-        this.playerOne = new Snake(start1);
-        this.playerTwo = new Snake(start2);
-        LOGGER.info("Snakes were generated");
+        initSnakes();
+        initScreen();
         //Now initialize the network
         try {
             initializeSocket(hostName, portNum);
@@ -61,17 +53,48 @@ public abstract class Game {
         }
     }
 
+    protected void initSnakes(){
+        //First create the two Snakes
+        Cell start1 = null, start2 = null;
+        start1 = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
+        do{
+            start2 = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
+        }while(start1.equals(start2));
+        this.playerOne = new Snake(start1);
+        this.playerTwo = new Snake(start2);
+        LOGGER.info("Snakes were generated");
+    }
+
+    /**
+     * @author: Ian Laird
+     * @return indicates if the game is over
+     */
     public boolean isGameOver() {
         return gameOver;
     }
 
+    /**
+     * @author: Ian Laird
+     * used to reset state of the game
+     */
     public void playAgain() {
         this.gameOver = false;
+        initSnakes();
+        powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
     }
 
-    public void initScreen(){
+    /**
+     * initializes the Screen for the game
+     * @author: Ian Laird
+     */
+    protected void initScreen(){
         gameScreen = Screen.getInstance(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
+
+    /**
+     * @author: Ian Laird
+     * retrieves moves for both players and then performs those moves
+     */
     public void MovePlayers(){
         Cell playerOneMove, playerTwoMove;
         playerOneMove = getPlayerOneMove();
@@ -138,6 +161,11 @@ public abstract class Game {
                 && (move.getCol() < SCREEN_WIDTH / CELLSIZE));
     }
 
+    /**
+     * @author: Ian Laird
+     * @return indiactes success
+     * This function initializes the network input scanner
+     */
     protected boolean initNetIn(){
         try{
         moveReader = new Scanner( new BufferedReader(
@@ -149,6 +177,12 @@ public abstract class Game {
         return true;
     }
 
+
+    /**
+     * @author: Ian Laird
+     * @return indicates success
+     * This method initializes the printWriter over the network
+     */
     protected boolean initNetOut(){
         try {
             moveSender = new PrintWriter(networkSocket.getOutputStream(), true);
@@ -198,6 +232,12 @@ public abstract class Game {
 
     ////////////////////////////////////////////////////////////////
 
+    /**
+     * Method for initialzing the network socket
+     * @param hostName
+     * @param PortNumber
+     * @throws IOException
+     */
     protected abstract void initializeSocket(String hostName, int PortNumber) throws IOException;
 
 }

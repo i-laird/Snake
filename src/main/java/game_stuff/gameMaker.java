@@ -6,6 +6,13 @@ package game_stuff;
  */
 public class gameMaker {
     private static Game thisGame = null;
+
+    /**
+     * @author: Ian Laird
+     * @param isServer indicates if the generated game should be a server
+     * @return the generated Game
+     * Allows there to only be one game type in existence
+     */
     public static Game generateGame(boolean isServer){
         if(thisGame == null) {
             if (isServer) {
