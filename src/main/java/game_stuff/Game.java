@@ -53,13 +53,21 @@ public abstract class Game {
         }
     }
 
+    /**
+     * @author: Ian Laird
+     * Initializes the Snakes with independent random positions
+     */
     protected void initSnakes(){
         //First create the two Snakes
         Cell start1 = null, start2 = null;
-        start1 = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
+        //Make sure Snake 1 has independent position of powerup
+        do {
+            start1 = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
+        }while(start1.equals(powerUp));
+        //Make sure snake 2 is independent sof both power up and Snake 1
         do{
             start2 = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
-        }while(start1.equals(start2));
+        }while(start1.equals(start2) || start2.equals(powerUp));
         this.playerOne = new Snake(start1);
         this.playerTwo = new Snake(start2);
         LOGGER.info("Snakes were generated");
@@ -129,6 +137,7 @@ public abstract class Game {
                 powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
             }while(playerOne.snakeCoverMove(powerUp) || playerTwo.snakeCoverMove(powerUp));
         }
+        //Now update the scteen and Move the Snakes
         gameScreen.plotBackground();
         gameScreen.plotPowerUp(powerUp.getRow(), powerUp.getCol());
         playerOne.moveLocation(playerOneMove);
@@ -167,8 +176,9 @@ public abstract class Game {
      * This function initializes the network input scanner
      */
     protected boolean initNetIn(){
+        //I chose to use Data Input Stream instead of Reader, because it should be more efficient
         try{
-        moveReader = new DataInputStream((networkSocket.getInputStream()));
+            moveReader = new DataInputStream((networkSocket.getInputStream()));
         }catch(IOException e){
             LOGGER.severe("Network input stream unable to be opened!");
             return false;
@@ -183,6 +193,7 @@ public abstract class Game {
      * This method initializes the printWriter over the network
      */
     protected boolean initNetOut(){
+        //I chose to use Data Output Stream instead of PrintWriter because it should be more efficient
         try {
             moveSender = new DataOutputStream(networkSocket.getOutputStream());
         }
@@ -200,6 +211,7 @@ public abstract class Game {
      */
     protected Cell getPlayerOneMove(){
         Direct readMove = gameScreen.readMoveFromKeyboard();
+        //Calculate new position based on direction read from the keyboard
         switch (readMove){
             case UP:
                return new Cell(playerOne.getHeadLocation().getRow() + 1, playerOne.getHeadLocation().getCol());
