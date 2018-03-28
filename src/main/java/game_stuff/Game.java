@@ -22,9 +22,9 @@ public abstract class Game {
     protected Screen gameScreen = null;
     protected Socket networkSocket = null;
     //For sending mopves over network
-    protected PrintWriter moveSender = null;
+    protected DataOutputStream moveSender = null;
     //for receiving moves over network
-    protected Scanner moveReader = null;
+    protected DataInputStream moveReader = null;
     private boolean gameOver = false;
 
     Cell powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
@@ -95,7 +95,7 @@ public abstract class Game {
      * @author: Ian Laird
      * retrieves moves for both players and then performs those moves
      */
-    public void MovePlayers(){
+    public void MovePlayers() throws IOException{
         Cell playerOneMove, playerTwoMove;
         playerOneMove = getPlayerOneMove();
         //Send the move read from keyboard over TCP
@@ -168,8 +168,7 @@ public abstract class Game {
      */
     protected boolean initNetIn(){
         try{
-        moveReader = new Scanner( new BufferedReader(
-                new InputStreamReader(networkSocket.getInputStream())));
+        moveReader = new DataInputStream((networkSocket.getInputStream()));
         }catch(IOException e){
             LOGGER.severe("Network input stream unable to be opened!");
             return false;
@@ -185,7 +184,7 @@ public abstract class Game {
      */
     protected boolean initNetOut(){
         try {
-            moveSender = new PrintWriter(networkSocket.getOutputStream(), true);
+            moveSender = new DataOutputStream(networkSocket.getOutputStream());
         }
         catch(IOException e){
             LOGGER.severe("network output stream unable to be initialized!");
@@ -217,17 +216,17 @@ public abstract class Game {
      * This should get a move from player 2 from over the network
      * @return
      */
-    protected Cell getPlayerTwoMove(){
-        return new Cell(moveReader.nextInt(), moveReader.nextInt());
+    protected Cell getPlayerTwoMove() throws IOException{
+        return new Cell(moveReader.readInt(), moveReader.readInt());
     }
 
     /**
      * This should send the move over the network
      * @param move
      */
-    protected void sendPlayerOneMove(Cell move){
-        moveSender.println(move.getRow());
-        moveSender.println(move.getCol());
+    protected void sendPlayerOneMove(Cell move) throws IOException{
+        moveSender.writeInt(move.getRow());
+        moveSender.writeInt(move.getCol());
     }
 
     ////////////////////////////////////////////////////////////////
