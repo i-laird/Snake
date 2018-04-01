@@ -3,22 +3,37 @@ package resources;
 import Enums.Color;
 import Enums.Direct;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+
 /**
  * This class should be a singleton b/c only one screen should exist
  */
 //TODO Most of this class is unfinished...We need to implement Swing stuff
     //-Ian
-public class Screen {
+public class Screen extends JPanel {
     private int width;
     private int length;
     private static Screen thisInstance = null;
+    private int cellWidth;
+    private JFrame frame;
 
     /**
-     * @author: Ian Laird
+     * @author: Andrew Walker
      * Because singleton the constructor is private
      */
     private Screen(int width, int length)
     {
+        frame = new JFrame("Snake");
+        frame.setResizable(false);
+        frame.setVisible(true);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setFocusable(true);
+        frame.requestFocus();
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
     }
     public static Screen getInstance(int width, int length)
     {
@@ -74,6 +89,10 @@ public class Screen {
 
     public int getHeight(){
         return this.length;
+    }
+
+    public void setCellWidth(int cellWidth){
+        this.cellWidth = cellWidth;
     }
 
     /**
