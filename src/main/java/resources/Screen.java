@@ -58,7 +58,7 @@ public class Screen extends JPanel {
      */
     public void updateScreen()
     {
-
+        frame.repaint();
     }
 
     /**
@@ -70,19 +70,19 @@ public class Screen extends JPanel {
     }
 
     public void plotWinScreen(){
-
+        //TODO
     }
 
     public void plotDefeatScreen(){
-
+        //TODO
     }
 
     public void plotBackground(){
-
+        //TODO
     }
 
     public void plotPowerUp(int row, int col){
-
+        board.colorLocation(row, col, Color.BLUE);
     }
 
     @Override
