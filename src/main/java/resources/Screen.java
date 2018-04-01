@@ -14,10 +14,11 @@ import java.awt.event.ActionListener;
     //-Ian
 public class Screen extends JPanel {
     private int width;
-    private int length;
+    private int height;
     private static Screen thisInstance = null;
     private int cellWidth;
     private JFrame frame;
+    private GameBoard board;
 
     /**
      * @author: Andrew Walker
@@ -32,7 +33,13 @@ public class Screen extends JPanel {
         frame.setFocusable(true);
         frame.requestFocus();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
 
+    public void initBoard(int width, int height, int cellWidth){
+        this.width = width;
+        this.height = height;
+        this.cellWidth = cellWidth;
+        this.board = new GameBoard(this.width, this.height, this.cellWidth);
     }
 
     /**
@@ -95,15 +102,29 @@ public class Screen extends JPanel {
 
     }
 
-    public int getWidth(){
-        return this.width;
+    @Override
+    public int getWidth() {
+        return width;
     }
 
-    public int getHeight(){
-        return this.length;
+    public void setWidth(int width) {
+        this.width = width;
     }
 
-    public void setCellWidth(int cellWidth){
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getCellWidth() {
+        return cellWidth;
+    }
+
+    public void setCellWidth(int cellWidth) {
         this.cellWidth = cellWidth;
     }
 
