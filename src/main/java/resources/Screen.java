@@ -27,7 +27,6 @@ public class Screen extends JPanel {
     {
         frame = new JFrame("Snake");
         frame.setResizable(false);
-        frame.setVisible(true);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setFocusable(true);
@@ -35,6 +34,11 @@ public class Screen extends JPanel {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
+
+    /**
+     * @author: Andrew Walker
+     * This function uses the singleton design pattern to return the instance of the screen
+     */
     public static Screen getInstance(int width, int length)
     {
         return (thisInstance == null ? thisInstance = new Screen(width, length) : thisInstance);
@@ -47,6 +51,14 @@ public class Screen extends JPanel {
     public void updateScreen()
     {
 
+    }
+
+    /**
+     * @author: Andrew Walker
+     * This function will toggle the display of the screen
+     */
+    public void showScreen(boolean show){
+        frame.setVisible(show);
     }
 
     /**
