@@ -24,10 +24,12 @@ public class Screen extends JPanel {
      * @author: Andrew Walker
      * Because singleton the constructor is private
      */
-    private Screen(int width, int length)
-    {
+    private Screen(int width, int height) {
+        this.width = width;
+        this.height = height;
         frame = new JFrame("Snake");
-        frame.setResizable(false);
+        frame.setPreferredSize(new Dimension(width, height));
+        frame.setResizable(true);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setFocusable(true);
@@ -35,11 +37,10 @@ public class Screen extends JPanel {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    public void initBoard(int width, int height, int cellWidth){
-        this.width = width;
-        this.height = height;
+    public void initBoard(int cellWidth){
         this.cellWidth = cellWidth;
         this.board = new GameBoard(this.width, this.height, this.cellWidth);
+        frame.getContentPane().add(BorderLayout.CENTER, board);
     }
 
     /**

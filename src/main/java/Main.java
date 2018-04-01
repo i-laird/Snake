@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String [] args){
         Screen screen = Screen.getInstance(400, 400);
-        screen.initBoard(400,400,10);
+        screen.initBoard(10);
         screen.showScreen(true);
     }
 
