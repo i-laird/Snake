@@ -61,10 +61,18 @@ public class Screen extends JPanel {
 
     /**
      * @author: Andrew Walker
-     * This function will toggle the display of the screen
+     * This function will toggle the display of the screen on
      */
-    public void showScreen(boolean show){
-        frame.setVisible(show);
+    public void showScreen(){
+        frame.setVisible(true);
+    }
+
+    /**
+     * @author: Andrew Walker
+     * This function will toggle the display of the screen off
+     */
+    public void hideScreen(){
+        frame.setVisible(false);
     }
 
     public void plotWinScreen(){
