@@ -1,6 +1,7 @@
 import game_stuff.Game;
 import game_stuff.gameMaker;
 import exceptions.NetworkException;
+import resources.Screen;
 
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -11,7 +12,9 @@ public class Main {
     private static Logger LOGGER = Logger.getLogger("Main Class");
 
     public static void main(String [] args){
-
+        Screen screen = Screen.getInstance(400, 400);
+        screen.initBoard(10);
+        screen.showScreen(true);
     }
 
     /**

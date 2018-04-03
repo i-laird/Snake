@@ -21,7 +21,7 @@ public abstract class Game {
     protected Snake playerTwo = null;
     protected Screen gameScreen = null;
     protected Socket networkSocket = null;
-    //For sending mopves over network
+    //For sending moves over network
     protected DataOutputStream moveSender = null;
     //for receiving moves over network
     protected DataInputStream moveReader = null;
