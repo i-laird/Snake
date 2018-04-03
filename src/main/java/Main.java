@@ -3,18 +3,25 @@ import game_stuff.gameMaker;
 import exceptions.NetworkException;
 import resources.Screen;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Main {
     //RANDOM PORT NUM PROBABLY OK
-    public final static int PORT_NUM = 45;
+    public final static int PORT_NUM = 8888;
     private static Logger LOGGER = Logger.getLogger("Main Class");
 
     public static void main(String [] args){
-        Screen screen = Screen.getInstance(400, 400);
-        screen.initBoard(10);
-        screen.showScreen(true);
+        //This creates the Screen in Game makeScreen
+        Game ourGame = initgame();
+        try {
+            while (!ourGame.isGameOver()) {
+                ourGame.MovePlayers();
+            }
+        }catch(IOException e){
+            LOGGER.severe("Network error occurred while playing the game");
+        }
     }
 
     /**
@@ -22,7 +29,7 @@ public class Main {
      * @author Ian Laird
      * @return initialized Game
      */
-    public Game initgame(){
+    public static Game initgame(){
         Scanner cin = new Scanner(System.in);
         boolean isServer = false;
         String option;
@@ -35,7 +42,7 @@ public class Main {
         Game thisGame =  gameMaker.generateGame(isServer);
         //If client we need to find out host name
         if(!isServer){
-            System.out.println("Please enter the host name.");
+            System.out.println("Please enter the host ip.");
             option = cin.next();
         }
         //Network error could happen

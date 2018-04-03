@@ -97,6 +97,8 @@ public abstract class Game {
      */
     protected void initScreen(){
         gameScreen = Screen.getInstance(SCREEN_WIDTH, SCREEN_HEIGHT);
+        gameScreen.initBoard(10);
+        gameScreen.showScreen(true);
     }
 
     /**
