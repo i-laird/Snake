@@ -16,7 +16,6 @@ public class Screen extends JPanel {
     private int width;
     private int height;
     private static Screen thisInstance = null;
-    private int cellWidth;
     private JFrame frame;
     private GameBoard board;
 
@@ -37,9 +36,8 @@ public class Screen extends JPanel {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    public void initBoard(int cellWidth){
-        this.cellWidth = cellWidth;
-        this.board = new GameBoard(this.width, this.height, this.cellWidth);
+    public void initBoard(){
+        this.board = new GameBoard(this.width, this.height);
         frame.getContentPane().add(BorderLayout.CENTER, board);
     }
 
@@ -101,14 +99,6 @@ public class Screen extends JPanel {
 
     public void setHeight(int height) {
         this.height = height;
-    }
-
-    public int getCellWidth() {
-        return cellWidth;
-    }
-
-    public void setCellWidth(int cellWidth) {
-        this.cellWidth = cellWidth;
     }
 
     /**

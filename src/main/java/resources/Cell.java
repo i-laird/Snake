@@ -6,6 +6,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Cell {
     private int row;
     private int col;
+    private static int CELLSIZE = 10;
+
 
     /**
      * @author: Ian Laird
@@ -61,5 +63,9 @@ public class Cell {
     @Override
     public int hashCode() {
         return Objects.hash(row, col);
+    }
+
+    public static int getCellSize(){
+        return CELLSIZE;
     }
 }
