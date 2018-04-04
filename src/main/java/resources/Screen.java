@@ -14,11 +14,11 @@ import static java.awt.Color.BLUE;
  */
 //TODO Most of this class is unfinished...We need to implement Swing stuff
     //-Ian
-public class Screen extends JPanel {
+public class Screen extends JFrame {
     private int width;
     private int height;
     private static Screen thisInstance = null;
-    private JFrame frame;
+    //private JFrame frame;
     private GameBoard board;
 
     /**
@@ -28,19 +28,19 @@ public class Screen extends JPanel {
     private Screen(int width, int height) {
         this.width = width;
         this.height = height;
-        frame = new JFrame("Snake");
-        frame.setPreferredSize(new Dimension(width, height));
-        frame.setResizable(true);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setFocusable(true);
-        frame.requestFocus();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //super = new JFrame("Snake");
+        super.setPreferredSize(new Dimension(width, height));
+        super.setResizable(true);
+        super.pack();
+        super.setLocationRelativeTo(null);
+        super.setFocusable(true);
+        super.requestFocus();
+        super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public void initBoard(){
         this.board = new GameBoard(this.width, this.height);
-        frame.getContentPane().add(BorderLayout.CENTER, board);
+        super.getContentPane().add(BorderLayout.CENTER, board);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Screen extends JPanel {
      */
     public void updateScreen() {
         board.repaint();
-        frame.repaint();
+        super.repaint();
     }
 
     /**
@@ -66,7 +66,7 @@ public class Screen extends JPanel {
      * This function will toggle the display of the screen on
      */
     public void showScreen(){
-        frame.setVisible(true);
+        super.setVisible(true);
     }
 
     /**
@@ -74,7 +74,7 @@ public class Screen extends JPanel {
      * This function will toggle the display of the screen off
      */
     public void hideScreen(){
-        frame.setVisible(false);
+        super.setVisible(false);
     }
 
     public void plotWinScreen(){
