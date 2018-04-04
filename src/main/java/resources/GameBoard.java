@@ -7,7 +7,7 @@ public class GameBoard extends JPanel {
     private int width;
     private int height;
     private Color[][] plot;
-    private Color DEFAULT = Color.BLACK;
+    private Color BACKGROUND = Color.BLACK;
 
     public GameBoard(int width, int height){
         this.width = width;
@@ -38,8 +38,6 @@ public class GameBoard extends JPanel {
      * that space.
      */
     public void unColorLocation(int row, int col){
-        //This might not be a necessary function
-        //COuld just plot background and redraw snake instead
-        //Probably Unncessary
+        this.plot[row][col] = BACKGROUND;
     }
 }
