@@ -144,8 +144,10 @@ public abstract class Game {
         gameScreen.plotPowerUp(powerUp.getRow(), powerUp.getCol());
         playerOne.moveLocation(playerOneMove);
         playerTwo.moveLocation(playerTwoMove);
-        playerOne.drawSnake(gameScreen, CELLSIZE);
-        playerTwo.drawSnake(gameScreen, CELLSIZE);
+        gameScreen.drawSnake(playerOne);
+        gameScreen.drawSnake(playerTwo);
+        //playerOne.drawSnake(gameScreen, CELLSIZE);
+        //playerTwo.drawSnake(gameScreen, CELLSIZE);
     }
 
     /**
