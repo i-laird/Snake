@@ -41,4 +41,8 @@ public class GameBoard extends JPanel {
     public void unColorLocation(int row, int col){
         this.plot[row][col] = BACKGROUND;
     }
+
+    public void refresh(){
+        this.repaint();
+    }
 }

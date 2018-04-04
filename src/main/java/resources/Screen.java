@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+import static java.awt.Color.BLUE;
+
 /**
  * This class should be a singleton b/c only one screen should exist
  */
@@ -92,7 +94,7 @@ public class Screen extends JPanel {
     }
 
     public void plotPowerUp(int row, int col){
-        board.colorLocation(row, col, Color.BLUE);
+        board.colorLocation(row, col, BLUE);
     }
 
     @Override
@@ -123,5 +125,9 @@ public class Screen extends JPanel {
         Unsure how to do this we will have to research -Ian
         */
         return null;
+    }
+
+    public void refresh(){
+        board.refresh();
     }
 }
