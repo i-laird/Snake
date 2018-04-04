@@ -1,11 +1,9 @@
 package resources;
 
-import Enums.Color;
 import Enums.Direct;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -14,13 +12,10 @@ import static java.awt.Color.BLUE;
 /**
  * This class should be a singleton b/c only one screen should exist
  */
-//TODO Most of this class is unfinished...We need to implement Swing stuff
-    //-Ian
 public class Screen extends JFrame implements KeyListener {
     private int width;
     private int height;
     private static Screen thisInstance = null;
-    //private JFrame frame;
     private GameBoard board;
     private Direct direct;
 
@@ -31,7 +26,6 @@ public class Screen extends JFrame implements KeyListener {
     private Screen(int width, int height) {
         this.width = width;
         this.height = height;
-        //super = new JFrame("Snake");
         super.setPreferredSize(new Dimension(width, height));
         super.setResizable(true);
         super.pack();
