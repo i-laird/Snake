@@ -139,10 +139,11 @@ public abstract class Game {
             }while(playerOne.snakeCoverMove(powerUp) || playerTwo.snakeCoverMove(powerUp));
         }
 
+        // Moves the snakes
         playerOne.moveLocation(playerOneMove);
         playerTwo.moveLocation(playerTwoMove);
 
-        //Now update the scteen and Move the Snakes
+        // Update the screen
         gameScreen.plotBackground();
         gameScreen.plotPowerUp(powerUp);
         gameScreen.plotSnake(playerOne);
