@@ -24,10 +24,6 @@ public class Snake {
         this.locations.addLast(headLocation);
     }
 
-    public void drawSnake(Screen screen, int cubeDimension){
-        //Should draw all elements in the resources.Snake onto resources.Screen
-    }
-
     /**
      * When token is picked up the length increases by one
      */

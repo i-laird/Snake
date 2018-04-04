@@ -130,4 +130,8 @@ public class Screen extends JPanel {
     public void refresh(){
         board.refresh();
     }
+
+    public void drawSnake(Snake s){
+        
+    }
 }
