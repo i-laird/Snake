@@ -148,7 +148,7 @@ public abstract class Game {
         gameScreen.plotPowerUp(powerUp);
         gameScreen.drawSnake(playerOne);
         gameScreen.drawSnake(playerTwo);
-        gameScreen.refresh();
+        gameScreen.updateScreen();
     }
 
     /**

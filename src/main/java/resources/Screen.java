@@ -56,8 +56,8 @@ public class Screen extends JPanel {
      * @author: Ian Laird
      * This function will simply update the game screen. It itself does not change.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
+        board.repaint();
         frame.repaint();
     }
 
@@ -125,10 +125,6 @@ public class Screen extends JPanel {
         Unsure how to do this we will have to research -Ian
         */
         return null;
-    }
-
-    public void refresh(){
-        board.refresh();
     }
 
     public void drawSnake(Snake s){
