@@ -84,7 +84,11 @@ public class Screen extends JPanel {
     }
 
     public void plotBackground(){
-        //TODO
+        for(int x = 0; x < height / Cell.getCellSize(); x++){
+            for(int y = 0; y < width / Cell.getCellSize(); y++){
+                board.unColorLocation(x,y);
+            }
+        }
     }
 
     public void plotPowerUp(int row, int col){
