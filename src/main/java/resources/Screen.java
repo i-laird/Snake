@@ -6,6 +6,8 @@ import Enums.Direct;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import static java.awt.Color.BLUE;
 
@@ -14,12 +16,13 @@ import static java.awt.Color.BLUE;
  */
 //TODO Most of this class is unfinished...We need to implement Swing stuff
     //-Ian
-public class Screen extends JFrame {
+public class Screen extends JFrame implements KeyListener {
     private int width;
     private int height;
     private static Screen thisInstance = null;
     //private JFrame frame;
     private GameBoard board;
+    private Direct direct;
 
     /**
      * @author: Andrew Walker
@@ -119,17 +122,33 @@ public class Screen extends JFrame {
      *
      * @return direction the player wants to move
      */
-    public Direct readMoveFromKeyboard(){
-        /*TODO implement so that keystrokes from user are recorded
-        This means that the input has to be unbuffered so as to not wait for ENTER
-        Unsure how to do this we will have to research -Ian
-        */
-        return null;
+    public Direct getDirection(){
+        return direct;
     }
 
     public void plotSnake(Snake s){
         for(Cell c : s.getSnakeLocations()){
             board.colorLocation(c.getRow(), c.getCol(), s.getColor());
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        switch(e.getKeyCode()){
+            case KeyEvent.VK_RIGHT: direct = Direct.RIGHT; break;
+            case KeyEvent.VK_LEFT: direct = Direct.LEFT; break;
+            case KeyEvent.VK_UP: direct = Direct.UP; break;
+            case KeyEvent.VK_DOWN: direct = Direct.DOWN; break;
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        keyTyped(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        keyTyped(e);
     }
 }

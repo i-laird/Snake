@@ -13,7 +13,6 @@ public class Snake {
     private Deque<Cell> locations = new ArrayDeque<Cell>();
     //The location of the Head should probably be in the Deque as well
     private Cell headLocation = null;
-
     private Color color;
 
     //Holds the length of the resources.Snake
