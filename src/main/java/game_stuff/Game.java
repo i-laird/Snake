@@ -4,7 +4,6 @@ import Enums.Direct;
 import exceptions.NetworkException;
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 /**
@@ -146,8 +145,8 @@ public abstract class Game {
         //Now update the scteen and Move the Snakes
         gameScreen.plotBackground();
         gameScreen.plotPowerUp(powerUp);
-        gameScreen.drawSnake(playerOne);
-        gameScreen.drawSnake(playerTwo);
+        gameScreen.plotSnake(playerOne);
+        gameScreen.plotSnake(playerTwo);
         gameScreen.updateScreen();
     }
 
