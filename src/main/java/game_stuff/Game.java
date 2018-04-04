@@ -139,15 +139,16 @@ public abstract class Game {
                 powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
             }while(playerOne.snakeCoverMove(powerUp) || playerTwo.snakeCoverMove(powerUp));
         }
-        //Now update the scteen and Move the Snakes
-        gameScreen.plotBackground();
-        gameScreen.plotPowerUp(powerUp.getRow(), powerUp.getCol());
+
         playerOne.moveLocation(playerOneMove);
         playerTwo.moveLocation(playerTwoMove);
+
+        //Now update the scteen and Move the Snakes
+        gameScreen.plotBackground();
+        gameScreen.plotPowerUp(powerUp);
         gameScreen.drawSnake(playerOne);
         gameScreen.drawSnake(playerTwo);
-        //playerOne.drawSnake(gameScreen, CELLSIZE);
-        //playerTwo.drawSnake(gameScreen, CELLSIZE);
+        gameScreen.refresh();
     }
 
     /**

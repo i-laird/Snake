@@ -93,8 +93,8 @@ public class Screen extends JPanel {
         }
     }
 
-    public void plotPowerUp(int row, int col){
-        board.colorLocation(row, col, BLUE);
+    public void plotPowerUp(Cell c){
+        board.colorLocation(c.getRow(), c.getCol(), BLUE);
     }
 
     @Override
