@@ -98,7 +98,7 @@ public abstract class Game {
         gameScreen = Screen.getInstance(SCREEN_WIDTH, SCREEN_HEIGHT);
         gameScreen.initBoard();
         gameScreen.showScreen();
-        //gameScreen.plotBackground();
+        gameScreen.plotBackground();
         gameScreen.plotPowerUp(powerUp);
         gameScreen.plotSnake(playerOne);
         gameScreen.plotSnake(playerTwo);

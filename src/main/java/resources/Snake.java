@@ -14,7 +14,6 @@ public class Snake {
     //The location of the Head should probably be in the Deque as well
     private Cell headLocation = null;
     private Color color;
-
     //Holds the length of the resources.Snake
     private int length = 0;
 
@@ -25,7 +24,8 @@ public class Snake {
     }
 
     /**
-     * When token is picked up the length increases by one
+     * @author: Andrew Walker
+     * This method increments the length of the snake
      */
     public void increaseLength(){
         this.length+=1;
