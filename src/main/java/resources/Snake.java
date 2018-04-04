@@ -19,7 +19,7 @@ public class Snake {
     private int length = 0;
 
     public Snake(Cell startPos){
-        this.headLocation = headLocation;
+        this.headLocation = startPos;
         this.locations.addLast(headLocation);
     }
 

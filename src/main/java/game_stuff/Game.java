@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 public abstract class Game {
 
     //TODO figure out if this is a good size or not
-    protected static final int CELLSIZE = 10;
     protected static final int SCREEN_WIDTH = 400;
     protected static final int SCREEN_HEIGHT = 400;
     protected static Logger LOGGER = Logger.getLogger("Game");
@@ -26,7 +25,7 @@ public abstract class Game {
     protected DataInputStream moveReader = null;
     private boolean gameOver = false;
 
-    Cell powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
+    Cell powerUp = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -171,8 +170,8 @@ public abstract class Game {
      * @return indicates if move is within frame
      */
     protected boolean isMoveInBounds(Cell move){
-        return((move.getRow() < SCREEN_HEIGHT / CELLSIZE)
-                && (move.getCol() < SCREEN_WIDTH / CELLSIZE));
+        return((move.getRow() < SCREEN_HEIGHT / Cell.getCellSize())
+                && (move.getCol() < SCREEN_WIDTH / Cell.getCellSize()));
     }
 
     /**
