@@ -132,6 +132,8 @@ public class Screen extends JPanel {
     }
 
     public void drawSnake(Snake s){
-        
+        for(Cell c : s.getSnakeLocations()){
+            board.colorLocation(c.getRow(), c.getCol(), s.getColor());
+        }
     }
 }

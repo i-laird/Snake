@@ -1,9 +1,9 @@
 package resources;
 
-import Enums.Color;
 import resources.Cell;
 import resources.Screen;
 
+import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -65,5 +65,9 @@ public class Snake {
 
     public Cell getHeadLocation() {
         return headLocation;
+    }
+
+    public Deque<Cell> getSnakeLocations(){
+        return this.locations;
     }
 }
