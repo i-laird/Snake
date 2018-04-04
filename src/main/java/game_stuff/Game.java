@@ -25,7 +25,7 @@ public abstract class Game {
     protected DataInputStream moveReader = null;
     private boolean gameOver = false;
 
-    Cell powerUp = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
+    Cell powerUp = Cell.createRandom(SCREEN_WIDTH / Cell.getCellSize(), SCREEN_HEIGHT / Cell.getCellSize());
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -41,6 +41,7 @@ public abstract class Game {
         //Now initialize the network
         try {
             initializeSocket(hostName, portNum);
+            LOGGER.info("Initialized Socket");
         }catch(IOException e){
             LOGGER.severe("Socket failed to open!");
             throw new NetworkException("Socket Error");
@@ -60,11 +61,11 @@ public abstract class Game {
         Cell start1 = null, start2 = null;
         //Make sure Snake 1 has independent position of powerup
         do {
-            start1 = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
+            start1 = Cell.createRandom(SCREEN_WIDTH / Cell.getCellSize(), SCREEN_HEIGHT / Cell.getCellSize());
         }while(start1.equals(powerUp));
         //Make sure snake 2 is independent sof both power up and Snake 1
         do{
-            start2 = Cell.createRandom(SCREEN_WIDTH, SCREEN_HEIGHT);
+            start2 = Cell.createRandom(SCREEN_WIDTH / Cell.getCellSize(), SCREEN_HEIGHT / Cell.getCellSize());
         }while(start1.equals(start2) || start2.equals(powerUp));
         this.playerOne = new Snake(start1);
         this.playerTwo = new Snake(start2);
@@ -97,6 +98,12 @@ public abstract class Game {
         gameScreen = Screen.getInstance(SCREEN_WIDTH, SCREEN_HEIGHT);
         gameScreen.initBoard();
         gameScreen.showScreen();
+        //gameScreen.plotBackground();
+        gameScreen.plotPowerUp(powerUp);
+        gameScreen.plotSnake(playerOne);
+        gameScreen.plotSnake(playerTwo);
+        gameScreen.updateScreen();
+
     }
 
     /**

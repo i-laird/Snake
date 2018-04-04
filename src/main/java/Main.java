@@ -16,11 +16,13 @@ public class Main {
         //This creates the Screen in Game makeScreen
         Game ourGame = initgame();
         try {
+            LOGGER.info("Initializing Game Loop");
             while (!ourGame.isGameOver()) {
                 ourGame.MovePlayers();
+                Thread.sleep(250);
             }
-        }catch(IOException e){
-            LOGGER.severe("Network error occurred while playing the game");
+        }catch(Exception e){
+            LOGGER.severe("Exception occurred while playing the game: " + e.getMessage());
         }
     }
 
@@ -45,6 +47,7 @@ public class Main {
             System.out.println("Please enter the host ip.");
             option = cin.next();
         }
+
         //Network error could happen
         try {
             thisGame.initGame(option, PORT_NUM);
@@ -53,6 +56,7 @@ public class Main {
             LOGGER.info("Game is shutting down now");
             System.exit(-1);
         }
+
         return thisGame;
     }
 }

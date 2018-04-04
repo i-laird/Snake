@@ -21,6 +21,7 @@ public class Snake {
     public Snake(Cell startPos){
         this.headLocation = startPos;
         this.locations.addLast(headLocation);
+        color = Color.RED;
     }
 
     /**

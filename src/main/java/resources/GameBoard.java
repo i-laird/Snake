@@ -12,16 +12,14 @@ public class GameBoard extends JPanel {
     public GameBoard(int width, int height){
         this.width = width;
         this.height = height;
-        plot = new Color[this.height][this.width];
+        plot = new Color[this.height / Cell.getCellSize()][this.width / Cell.getCellSize()];
     }
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
         for(int x = 0; x < height / Cell.getCellSize(); x++){
             for(int y = 0; y < width / Cell.getCellSize(); y++){
                 g.setColor(plot[x][y]);
-                g.drawRect(x * Cell.getCellSize(), y * Cell.getCellSize(), height / Cell.getCellSize(), width / Cell.getCellSize());
+                g.fillRect(x * Cell.getCellSize(), y * Cell.getCellSize(), height / Cell.getCellSize(), width / Cell.getCellSize());
             }
         }
     }

@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Logger;
 
 import static java.awt.Color.BLUE;
 
@@ -17,7 +18,8 @@ public class Screen extends JFrame implements KeyListener {
     private int height;
     private static Screen thisInstance = null;
     private GameBoard board;
-    private Direct direct;
+    private Direct direct = Direct.UP;
+    protected static Logger LOGGER = Logger.getLogger("Screen");
 
     /**
      * @author: Andrew Walker
@@ -26,18 +28,20 @@ public class Screen extends JFrame implements KeyListener {
     private Screen(int width, int height) {
         this.width = width;
         this.height = height;
-        super.setPreferredSize(new Dimension(width, height));
+        super.setPreferredSize(new Dimension(width + 20, height + 20));
         super.setResizable(true);
         super.pack();
         super.setLocationRelativeTo(null);
         super.setFocusable(true);
         super.requestFocus();
         super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        LOGGER.info("Initialized Screen");
     }
 
     public void initBoard(){
         this.board = new GameBoard(this.width, this.height);
         super.getContentPane().add(BorderLayout.CENTER, board);
+        LOGGER.info("Initialized Board");
     }
 
     /**
@@ -46,6 +50,7 @@ public class Screen extends JFrame implements KeyListener {
      */
     public static Screen getInstance(int width, int length)
     {
+        LOGGER.info("Fetching Instance");
         return (thisInstance == null ? thisInstance = new Screen(width, length) : thisInstance);
     }
 
