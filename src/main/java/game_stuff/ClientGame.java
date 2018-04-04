@@ -1,5 +1,7 @@
 package game_stuff;
 
+import resources.Cell;
+
 import java.io.IOException;
 import java.net.Socket;
 
@@ -30,5 +32,9 @@ public class ClientGame extends Game {
      */
     public void initializeSocket(String hostName, int portNumber) throws IOException{
         networkSocket = new Socket(hostName, portNumber);
+    }
+
+    protected void resetPowerUp() throws IOException{
+        powerUp = new Cell(moveReader.readInt(), moveReader.readInt());
     }
 }

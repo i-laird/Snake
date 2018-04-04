@@ -25,8 +25,8 @@ public abstract class Game {
     protected DataInputStream moveReader = null;
     private boolean gameOver = false;
 
-    Cell powerUp = Cell.createRandom(SCREEN_WIDTH / Cell.getCellSize(), SCREEN_HEIGHT / Cell.getCellSize());
-
+    //Power up location is communicated over network through server to client
+    Cell powerUp = null;
     //////////////////////////////////////////////////////////////////////////////////////
 
     /**
@@ -35,10 +35,8 @@ public abstract class Game {
      * @param portNum port of the server
      * @throws NetworkException if error connecting to the server
      */
-    public void initGame(String hostName, int portNum) throws NetworkException {
-        initSnakes();
-        initScreen();
-        //Now initialize the network
+    public void initGame(String hostName, int portNum) throws NetworkException, IOException {
+        //initialize the network
         try {
             initializeSocket(hostName, portNum);
             LOGGER.info("Initialized Socket");
@@ -50,26 +48,29 @@ public abstract class Game {
             LOGGER.severe("Network initialization failed");
             throw new NetworkException("Network Init error");
         }
+        initSnakes();
+        initScreen();
     }
 
     /**
      * @author: Ian Laird
      * Initializes the Snakes with independent random positions
      */
-    protected void initSnakes(){
+    protected void initSnakes() throws IOException{
         //First create the two Snakes
         Cell start1 = null, start2 = null;
-        //Make sure Snake 1 has independent position of powerup
         do {
             start1 = Cell.createRandom(SCREEN_WIDTH / Cell.getCellSize(), SCREEN_HEIGHT / Cell.getCellSize());
-        }while(start1.equals(powerUp));
-        //Make sure snake 2 is independent sof both power up and Snake 1
-        do{
-            start2 = Cell.createRandom(SCREEN_WIDTH / Cell.getCellSize(), SCREEN_HEIGHT / Cell.getCellSize());
-        }while(start1.equals(start2) || start2.equals(powerUp));
+            moveSender.writeInt(start1.getRow());
+            moveSender.writeInt(start1.getCol());
+            //Make sure snake 2 is independent of Snake 1
+            start2 = new Cell(moveReader.readInt(), moveReader.readInt());
+        }while(start1.equals(start2));
+
         this.playerOne = new Snake(start1);
         this.playerTwo = new Snake(start2);
         LOGGER.info("Snakes were generated");
+        resetPowerUp();
     }
 
     /**
@@ -84,10 +85,10 @@ public abstract class Game {
      * @author: Ian Laird
      * used to reset state of the game
      */
-    public void playAgain() {
+    public void playAgain() throws IOException{
         this.gameOver = false;
         initSnakes();
-        powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
+        resetPowerUp();
     }
 
     /**
@@ -129,20 +130,21 @@ public abstract class Game {
             gameOver = true;
             gameScreen.plotWinScreen();
         }
-        boolean resetPowerUp = false;
+        boolean powerUpEaten = false;
         if(powerUp.equals(playerOneMove)){
             playerOne.increaseLength();
-            resetPowerUp = true;
+            powerUpEaten = true;
         }
         if(powerUp.equals(playerTwoMove)){
             playerTwo.increaseLength();
-            resetPowerUp = true;
+            powerUpEaten = true;
         }
         //get new power up location such that it is not occupied by a resources.Snake
-        if(resetPowerUp) {
-            do {
-                powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
-            }while(playerOne.snakeCoverMove(powerUp) || playerTwo.snakeCoverMove(powerUp));
+        if(powerUpEaten) {
+            resetPowerUp();
+            //do {
+              //  powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
+            //}while(playerOne.snakeCoverMove(powerUp) || playerTwo.snakeCoverMove(powerUp));
         }
 
         // Moves the snakes
@@ -261,5 +263,7 @@ public abstract class Game {
      * @throws IOException
      */
     protected abstract void initializeSocket(String hostName, int PortNumber) throws IOException;
+
+    protected abstract void resetPowerUp() throws IOException;
 
 }

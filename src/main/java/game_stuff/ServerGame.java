@@ -1,5 +1,7 @@
 package game_stuff;
 
+import resources.Cell;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 
@@ -33,5 +35,13 @@ public class ServerGame extends Game {
     public void initializeSocket(String hostName, int portNumber) throws IOException{
         ServerSocket serverSocket = new ServerSocket(portNumber);
         networkSocket = serverSocket.accept();
+    }
+
+    protected void resetPowerUp() throws IOException{
+        do {
+            powerUp = Cell.createRandom(SCREEN_WIDTH / Cell.getCellSize(), SCREEN_HEIGHT / Cell.getCellSize());
+        }while(playerOne.snakeCoverMove(powerUp) || playerTwo.snakeCoverMove(powerUp));
+        moveSender.writeInt(powerUp.getRow());
+        moveSender.writeInt(powerUp.getCol());
     }
 }

@@ -40,7 +40,10 @@ public class Main {
             System.out.println("Will you be a server? (y n)");
             option = cin.next();
             isServer = option.matches("[yY]");
-        }while(!isServer && !option.matches("nN"));
+        }while(!isServer && !option.matches("[nN]"));
+        if(isServer) {
+            System.out.println("Now waiting for second player to connect!");
+        }
         Game thisGame =  gameMaker.generateGame(isServer);
         //If client we need to find out host name
         if(!isServer){
@@ -53,6 +56,10 @@ public class Main {
             thisGame.initGame(option, PORT_NUM);
         }catch(NetworkException e){
             LOGGER.severe("Network failed to initialize!");
+            LOGGER.info("Game is shutting down now");
+            System.exit(-1);
+        }catch(IOException f){
+            LOGGER.severe("Network write/ read error");
             LOGGER.info("Game is shutting down now");
             System.exit(-1);
         }
