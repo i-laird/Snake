@@ -6,10 +6,13 @@ import java.awt.*;
 public class GameBoard extends JPanel {
     private int width;
     private int height;
+    private Color[][] plot;
+    private Color DEFAULT = Color.BLACK;
 
     public GameBoard(int width, int height){
         this.width = width;
         this.height = height;
+        plot = new Color[this.height][this.width];
     }
 
     public void paintComponent(Graphics g) {
@@ -26,8 +29,8 @@ public class GameBoard extends JPanel {
      * this function should color the rectangle at a certain location in the game the desired color.
      * This indicates that the player currently has visited there
      */
-    public void colorLocation(int row, int col, Enums.Color color){
-
+    public void colorLocation(int row, int col, Color color){
+        this.plot[row][col] = color;
     }
 
     /**
