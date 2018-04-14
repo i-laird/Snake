@@ -38,6 +38,9 @@ public class Screen extends JFrame implements KeyListener {
         super.requestFocus();
         super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         super.setTitle("Snake");
+        super.addKeyListener(this);
+        super.setFocusTraversalKeysEnabled(false);
+
         LOGGER.info("Initialized Screen");
     }
 
@@ -196,7 +199,12 @@ public class Screen extends JFrame implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        keyTyped(e);
+        switch(e.getKeyCode()){
+            case KeyEvent.VK_RIGHT: direct = Direct.RIGHT; break;
+            case KeyEvent.VK_LEFT: direct = Direct.LEFT; break;
+            case KeyEvent.VK_UP: direct = Direct.UP; break;
+            case KeyEvent.VK_DOWN: direct = Direct.DOWN; break;
+        }
     }
 
     /**
@@ -206,6 +214,11 @@ public class Screen extends JFrame implements KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        keyTyped(e);
+        switch(e.getKeyCode()){
+            case KeyEvent.VK_RIGHT: direct = Direct.RIGHT; break;
+            case KeyEvent.VK_LEFT: direct = Direct.LEFT; break;
+            case KeyEvent.VK_UP: direct = Direct.UP; break;
+            case KeyEvent.VK_DOWN: direct = Direct.DOWN; break;
+        }
     }
 }
