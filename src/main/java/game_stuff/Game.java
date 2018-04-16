@@ -87,10 +87,16 @@ public abstract class Game {
      * @author: Ian Laird
      * used to reset state of the game
      */
-    public void playAgain() throws IOException{
+    public boolean playAgain(boolean player1Status) throws IOException{
         this.gameOver = false;
-        initSnakes();
-        resetPowerUp();
+        moveSender.writeBoolean(player1Status);
+        boolean player2Status = moveReader.readBoolean();
+        if(player1Status && player2Status) {
+            initSnakes();
+            resetPowerUp();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -126,13 +132,14 @@ public abstract class Game {
             gameOver = true;
             gameScreen.plotDefeatScreen();
             LOGGER.info("Sorry you lost");
-            //Should this return IDK yet
+            return;
         }
         //See if player 1 just won
         if(playerDeadAfterMove(playerOne, playerTwoMove)){
             gameOver = true;
             gameScreen.plotWinScreen();
             LOGGER.info("Yay you just won");
+            return;
         }
         boolean powerUpEaten = false;
         if(powerUp.equals(playerOneMove)){

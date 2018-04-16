@@ -1,7 +1,6 @@
 import game_stuff.Game;
 import game_stuff.gameMaker;
 import exceptions.NetworkException;
-import resources.Screen;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -12,16 +11,18 @@ public class Main {
     public final static int PORT_NUM = 8888;
     private static Logger LOGGER = Logger.getLogger("Main Class");
 
-    public static void main(String [] args){
+    public static void main(String [] args) {
         //This creates the Screen in Game makeScreen
+        LOGGER.info("Initializing Game Loop");
         Game ourGame = initgame();
         try {
-            LOGGER.info("Initializing Game Loop");
-            while (!ourGame.isGameOver()) {
-                ourGame.MovePlayers();
-                Thread.sleep(250);
-            }
-        }catch(Exception e){
+            do {
+                while (!ourGame.isGameOver()) {
+                    ourGame.MovePlayers();
+                    Thread.sleep(250);
+                }
+            } while (playAgain(ourGame));
+        } catch (Exception e) {
             LOGGER.severe("Exception occurred while playing the game: " + e.getMessage());
         }
     }
@@ -65,5 +66,10 @@ public class Main {
         }
 
         return thisGame;
+    }
+    public static boolean playAgain(Game toReset) throws IOException{
+        System.out.println("Would you like to play again? (y | n)");
+        Scanner cin = new Scanner(System.in);
+        return toReset.playAgain(cin.next().matches("[yY]"));
     }
 }
