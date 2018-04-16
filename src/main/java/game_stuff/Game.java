@@ -125,12 +125,14 @@ public abstract class Game {
         if(playerDeadAfterMove(playerTwo, playerOneMove)){
             gameOver = true;
             gameScreen.plotDefeatScreen();
+            LOGGER.info("Sorry you lost");
             //Should this return IDK yet
         }
         //See if player 1 just won
         if(playerDeadAfterMove(playerOne, playerTwoMove)){
             gameOver = true;
             gameScreen.plotWinScreen();
+            LOGGER.info("Yay you just won");
         }
         boolean powerUpEaten = false;
         if(powerUp.equals(playerOneMove)){
@@ -167,12 +169,10 @@ public abstract class Game {
      * @return
      */
     protected boolean playerDeadAfterMove(Snake otherPlayer, Cell moveTo){
-        boolean moveKills = false;
-        moveKills = otherPlayer.snakeCoverMove(moveTo);
-        if(moveKills) {
-            return true;
+        if(!isMoveInBounds(moveTo)){
+            return false;
         }
-        return isMoveInBounds(moveTo);
+        return otherPlayer.snakeCoverMove(moveTo);
     }
 
     /**
