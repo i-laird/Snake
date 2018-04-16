@@ -2,6 +2,8 @@ package game_stuff;
 import resources.*;
 import Enums.Direct;
 import exceptions.NetworkException;
+
+import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 import java.util.logging.Logger;
@@ -19,6 +21,7 @@ public abstract class Game {
     protected Snake playerTwo = null;
     protected Screen gameScreen = null;
     protected Socket networkSocket = null;
+    protected SnakeBuilder snakeMaker = new SnakeBuilder();
     //For sending moves over network
     protected DataOutputStream moveSender = null;
     //for receiving moves over network
@@ -66,9 +69,8 @@ public abstract class Game {
             //Make sure snake 2 is independent of Snake 1
             start2 = new Cell(moveReader.readInt(), moveReader.readInt());
         }while(start1.equals(start2));
-
-        this.playerOne = new Snake(start1);
-        this.playerTwo = new Snake(start2);
+        this.playerOne = snakeMaker.init().setColor(Color.RED).setStart(start1).collectSnakeBuilder();
+        this.playerTwo = snakeMaker.init().setColor(Color.BLACK).setStart(start2).collectSnakeBuilder();
         LOGGER.info("Snakes were generated");
         resetPowerUp();
     }

@@ -17,10 +17,15 @@ public class Snake {
     //Holds the length of the resources.Snake
     private int length = 0;
 
-    public Snake(Cell startPos){
+    private Snake(){
+    }
+
+    static Snake makeSnake(){
+        return new Snake();
+    }
+    void setHeadLocation(Cell startPos){
         this.headLocation = startPos;
         this.locations.addLast(headLocation);
-        color = Color.RED;
     }
 
     /**
