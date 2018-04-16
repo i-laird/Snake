@@ -22,6 +22,7 @@ public abstract class Game {
     protected Screen gameScreen = null;
     protected Socket networkSocket = null;
     protected SnakeBuilder snakeMaker = new SnakeBuilder();
+    private int score = 0;
     //For sending moves over network
     protected DataOutputStream moveSender = null;
     //for receiving moves over network
@@ -132,6 +133,7 @@ public abstract class Game {
             gameOver = true;
             gameScreen.plotDefeatScreen();
             LOGGER.info("Sorry you lost");
+            this.gameOver = true;
             return;
         }
         //See if player 1 just won
@@ -139,11 +141,15 @@ public abstract class Game {
             gameOver = true;
             gameScreen.plotWinScreen();
             LOGGER.info("Yay you just won");
+            this.score+=5;
+
+            this.gameOver = true;
             return;
         }
         boolean powerUpEaten = false;
         if(powerUp.equals(playerOneMove)){
             playerOne.increaseLength();
+            score+=1;
             powerUpEaten = true;
         }
         if(powerUp.equals(playerTwoMove)){
@@ -262,6 +268,10 @@ public abstract class Game {
         moveSender.writeInt(move.getRow());
         moveSender.writeInt(move.getCol());
     }
+    public int getScore() {
+        return score;
+    }
+
 
     ////////////////////////////////////////////////////////////////
 
