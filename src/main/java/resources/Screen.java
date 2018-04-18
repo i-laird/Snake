@@ -173,6 +173,9 @@ public class Screen extends JFrame implements KeyListener {
      * @param s the Snake to plot
      */
     public void plotSnake(Snake s){
+        if(s.getPrevTail() != null){
+            board.unColorLocation(s.getPrevTail().getRow(), s.getPrevTail().getCol());
+        }
         for(Cell c : s.getSnakeLocations()){
             board.colorLocation(c.getRow(), c.getCol(), s.getColor());
         }

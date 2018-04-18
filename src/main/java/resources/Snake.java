@@ -13,6 +13,7 @@ public class Snake {
     private Deque<Cell> locations = new ArrayDeque<Cell>();
     //The location of the Head should probably be in the Deque as well
     private Cell headLocation = null;
+    private Cell prevTail = null;
     private Color color;
     //Holds the length of the resources.Snake
     private int length = 0;
@@ -25,7 +26,7 @@ public class Snake {
     }
     void setHeadLocation(Cell startPos){
         this.headLocation = startPos;
-        this.locations.addLast(headLocation);
+        this.locations.addFirst(headLocation);
     }
 
     /**
@@ -44,9 +45,10 @@ public class Snake {
      */
     public void moveLocation(Cell moveTo){
         if(locations.size() == this.length){
-            locations.removeFirst();
+            prevTail = locations.getLast();
+            locations.removeLast();
         }
-        locations.addLast(moveTo);
+        locations.addFirst(moveTo);
         this.headLocation = moveTo;
     }
 
@@ -74,5 +76,9 @@ public class Snake {
 
     public Deque<Cell> getSnakeLocations(){
         return this.locations;
+    }
+
+    public Cell getPrevTail(){
+        return this.prevTail;
     }
 }
