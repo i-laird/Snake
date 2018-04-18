@@ -16,7 +16,7 @@ public class Snake {
     private Cell prevTail = null;
     private Color color;
     //Holds the length of the resources.Snake
-    private int length = 0;
+    private int length = 3;
 
     private Snake(){
     }
