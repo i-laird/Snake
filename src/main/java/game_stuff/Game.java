@@ -194,8 +194,8 @@ public abstract class Game {
      * @return indicates if move is within frame
      */
     protected boolean isMoveInBounds(Cell move){
-        return((move.getRow() < SCREEN_HEIGHT / Cell.getCellSize())
-                && (move.getCol() < SCREEN_WIDTH / Cell.getCellSize()));
+        return((move.getRow() >= 0) && (move.getRow() < SCREEN_HEIGHT / Cell.getCellSize())
+                && (move.getCol() >= 0) && (move.getCol() < SCREEN_WIDTH / Cell.getCellSize()));
     }
 
     /**
@@ -242,13 +242,15 @@ public abstract class Game {
         //Calculate new position based on direction read from the keyboard
         switch (readMove){
             case UP:
-               return new Cell(playerOne.getHeadLocation().getRow() + 1, playerOne.getHeadLocation().getCol());
+               return new Cell(playerOne.getHeadLocation().getRow() - 1, playerOne.getHeadLocation().getCol());
             case DOWN:
-                return new Cell(playerOne.getHeadLocation().getRow() - 1, playerOne.getHeadLocation().getCol());
+                return new Cell(playerOne.getHeadLocation().getRow() + 1, playerOne.getHeadLocation().getCol());
             case LEFT:
                 return new Cell(playerOne.getHeadLocation().getRow(), playerOne.getHeadLocation().getCol() - 1);
-            default:
+            case RIGHT:
                 return new Cell(playerOne.getHeadLocation().getRow(), playerOne.getHeadLocation().getCol() + 1);
+            default:
+                return new Cell(playerOne.getHeadLocation().getRow(), playerOne.getHeadLocation().getCol());
         }
     }
 
