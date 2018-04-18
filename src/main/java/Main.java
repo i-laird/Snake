@@ -23,6 +23,7 @@ public class Main {
                 }
             } while (playAgain(ourGame));
         } catch (Exception e) {
+            e.printStackTrace();
             LOGGER.severe("Exception occurred while playing the game: " + e.getMessage());
         }
     }
