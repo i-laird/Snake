@@ -1,0 +1,51 @@
+\documentclass[titlepage]{article}
+
+\title{{\Huge Multiplayer Snake}}
+\date{\today}
+\author{by\\{\large Ian Laird \& Andrew Walker}}
+
+\begin{document}
+	\maketitle
+	\section{Outline}
+	This game implements a 2 player version of the popular game Snake. Communication between the host and client is done using TCP. Players can pick up power ups and kill the other player to increase their score. The top 10 high scores are stored in a file.
+	
+	\section{Vision Statement}
+	The next step in this game will be making it so that more than 2 players can play at the same time.
+	
+	\section{Gantt}
+	
+	\section{Requirements}
+	
+	\section{Business Rules}
+	
+	\section{Use Cases}
+	
+	\section{Use Case Diagram}
+	
+	\section{System Sequence Diagram}
+	
+	\section{System Operations}
+	
+	\section{Domain Model}
+	
+	\section{Operational Contracts}
+	
+	\section{Sequence Diagrams}
+	
+	\section{Design model}
+	
+	\section{GRASP}
+	
+	\section{Design Patterns}
+		\begin{enumerate}
+			\item \textbf{Singleton:}\\
+				Singleton was the most used design pattern in this project. Many of the objects used lent themselves to only letting one instance exist at any
+				time. The game screen and the game itself were both singletons.
+			\item \textbf{Factory method:}
+				Factory method was used to remove the need to use new to create instances of a Snake. The Cell method also had a getRandom method that functioned much like a factory.
+			\item \textbf{Abstract Factory:}
+				Abstract factory was used to create instances of a Game Object. Because there were multiple subtypes of the Game Object the abstract factory made it simpler to create an instance. Also the abstract factory allowed only one instance of any of game's subtypes to exist.
+			\item \textbf{Builder:}
+				A Builder is used to create instances of a Snake. Because the snake is a complex object builder lets the application customize them. It allows Snake location and color to be both be customized.
+		\end{enumerate}
+\end{document}
