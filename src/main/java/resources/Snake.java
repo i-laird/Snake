@@ -56,7 +56,7 @@ public class Snake {
      * @param location
      * @return
      */
-    public boolean snakeCoverMove(Cell location){
+    public boolean containsMove(Cell location){
         return this.locations.contains(location);
     }
 

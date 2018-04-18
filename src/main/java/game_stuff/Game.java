@@ -121,12 +121,14 @@ public abstract class Game {
      * retrieves moves for both players and then performs those moves
      */
     public void MovePlayers() throws IOException{
-        Cell playerOneMove, playerTwoMove;
-        playerOneMove = getPlayerOneMove();
+        Cell playerOneMove = getPlayerOneMove();
+
         //Send the move read from keyboard over TCP
         sendPlayerOneMove(playerOneMove);
+
         //read other players move over TCp
-        playerTwoMove = getPlayerTwoMove();
+        Cell playerTwoMove = getPlayerTwoMove();
+
         //See if player one  just lost
         //Seeing if playerOne cell exists in Player 2!!!
         if(playerDeadAfterMove(playerTwo, playerOneMove)){
@@ -161,7 +163,7 @@ public abstract class Game {
             resetPowerUp();
             //do {
               //  powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
-            //}while(playerOne.snakeCoverMove(powerUp) || playerTwo.snakeCoverMove(powerUp));
+            //}while(playerOne.containsMove(powerUp) || playerTwo.containsMove(powerUp));
         }
 
         // Moves the snakes
@@ -183,9 +185,9 @@ public abstract class Game {
      */
     protected boolean playerDeadAfterMove(Snake otherPlayer, Cell moveTo){
         if(!isMoveInBounds(moveTo)){
-            return false;
+            return true;
         }
-        return otherPlayer.snakeCoverMove(moveTo);
+        return otherPlayer.containsMove(moveTo);
     }
 
     /**
