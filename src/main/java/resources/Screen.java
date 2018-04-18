@@ -31,16 +31,16 @@ public class Screen extends JFrame implements KeyListener {
     private Screen(int width, int height) {
         this.width = width;
         this.height = height;
-        super.setPreferredSize(new Dimension(width + 40, height + 40));
-        super.setResizable(true);
-        super.pack();
-        super.setLocationRelativeTo(null);
-        super.setFocusable(true);
-        super.requestFocus();
-        super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        super.setTitle("Snake");
-        super.addKeyListener(this);
-        super.setFocusTraversalKeysEnabled(false);
+        this.setPreferredSize(new Dimension(width + 40, height + 40));
+        this.setResizable(true);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setFocusable(true);
+        this.requestFocus();
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setTitle("Snake");
+        this.addKeyListener(this);
+        this.setFocusTraversalKeysEnabled(false);
 
         LOGGER.info("Initialized Screen");
     }

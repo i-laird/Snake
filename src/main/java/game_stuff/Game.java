@@ -96,8 +96,11 @@ public abstract class Game {
             initSnakes();
             resetPowerUp();
             return true;
+        } else {
+            this.gameScreen.dispose();
+            return false;
         }
-        return false;
+
     }
 
     /**
