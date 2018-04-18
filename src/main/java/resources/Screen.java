@@ -20,6 +20,7 @@ public class Screen extends JFrame implements KeyListener {
     private GameBoard board;
     private Direct direct = Direct.UP;
     protected static Logger LOGGER = Logger.getLogger("Screen");
+    private boolean debugging = true;
 
     /**
      * @author: Andrew Walker
@@ -184,6 +185,7 @@ public class Screen extends JFrame implements KeyListener {
      */
     @Override
     public void keyTyped(KeyEvent e) {
+        if(debugging) System.out.println("keyTyped: " + e.getKeyCode());
         switch(e.getKeyCode()){
             case KeyEvent.VK_RIGHT: direct = Direct.RIGHT; break;
             case KeyEvent.VK_LEFT: direct = Direct.LEFT; break;
@@ -199,6 +201,7 @@ public class Screen extends JFrame implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
+        if(debugging) System.out.println("keyPressed: " + e.getKeyCode());
         switch(e.getKeyCode()){
             case KeyEvent.VK_RIGHT: direct = Direct.RIGHT; break;
             case KeyEvent.VK_LEFT: direct = Direct.LEFT; break;
@@ -214,6 +217,7 @@ public class Screen extends JFrame implements KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
+        if(debugging) System.out.println("keyReleased: " + e.getKeyCode());
         switch(e.getKeyCode()){
             case KeyEvent.VK_RIGHT: direct = Direct.RIGHT; break;
             case KeyEvent.VK_LEFT: direct = Direct.LEFT; break;
