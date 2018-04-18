@@ -68,9 +68,15 @@ public class Main {
 
         return thisGame;
     }
-    public static boolean playAgain(Game toReset) throws IOException{
+    public static boolean playAgain(Game toReset){
         System.out.println("Would you like to play again? (y | n)");
         Scanner cin = new Scanner(System.in);
-        return toReset.playAgain(cin.next().matches("[yY]"));
+        boolean ret;
+        try {
+            ret = toReset.playAgain(cin.next().matches("[yY]"));
+        } catch (IOException e){
+            ret = false;
+        }
+        return ret;
     }
 }

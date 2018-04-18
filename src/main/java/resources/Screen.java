@@ -31,7 +31,7 @@ public class Screen extends JFrame implements KeyListener {
     private Screen(int width, int height) {
         this.width = width;
         this.height = height;
-        super.setPreferredSize(new Dimension(width + 20, height + 20));
+        super.setPreferredSize(new Dimension(width + 40, height + 40));
         super.setResizable(true);
         super.pack();
         super.setLocationRelativeTo(null);
@@ -190,10 +190,10 @@ public class Screen extends JFrame implements KeyListener {
     public void keyTyped(KeyEvent e) {
         if(debugging) System.out.println("keyTyped: " + e.getKeyCode());
         switch(e.getKeyCode()){
-            case KeyEvent.VK_RIGHT: direct = Direct.RIGHT; break;
-            case KeyEvent.VK_LEFT: direct = Direct.LEFT; break;
-            case KeyEvent.VK_UP: direct = Direct.UP; break;
-            case KeyEvent.VK_DOWN: direct = Direct.DOWN; break;
+            case KeyEvent.VK_RIGHT: if(direct != Direct.LEFT) direct = Direct.RIGHT; break;
+            case KeyEvent.VK_LEFT: if(direct != Direct.RIGHT) direct = Direct.LEFT; break;
+            case KeyEvent.VK_UP: if(direct != Direct.DOWN) direct = Direct.UP; break;
+            case KeyEvent.VK_DOWN: if(direct != Direct.UP) direct = Direct.DOWN; break;
         }
     }
 
@@ -206,10 +206,10 @@ public class Screen extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if(debugging) System.out.println("keyPressed: " + e.getKeyCode());
         switch(e.getKeyCode()){
-            case KeyEvent.VK_RIGHT: direct = Direct.RIGHT; break;
-            case KeyEvent.VK_LEFT: direct = Direct.LEFT; break;
-            case KeyEvent.VK_UP: direct = Direct.UP; break;
-            case KeyEvent.VK_DOWN: direct = Direct.DOWN; break;
+            case KeyEvent.VK_RIGHT: if(direct != Direct.LEFT) direct = Direct.RIGHT; break;
+            case KeyEvent.VK_LEFT: if(direct != Direct.RIGHT) direct = Direct.LEFT; break;
+            case KeyEvent.VK_UP: if(direct != Direct.DOWN) direct = Direct.UP; break;
+            case KeyEvent.VK_DOWN: if(direct != Direct.UP) direct = Direct.DOWN; break;
         }
     }
 
@@ -222,10 +222,10 @@ public class Screen extends JFrame implements KeyListener {
     public void keyReleased(KeyEvent e) {
         if(debugging) System.out.println("keyReleased: " + e.getKeyCode());
         switch(e.getKeyCode()){
-            case KeyEvent.VK_RIGHT: direct = Direct.RIGHT; break;
-            case KeyEvent.VK_LEFT: direct = Direct.LEFT; break;
-            case KeyEvent.VK_UP: direct = Direct.UP; break;
-            case KeyEvent.VK_DOWN: direct = Direct.DOWN; break;
+            case KeyEvent.VK_RIGHT: if(direct != Direct.LEFT) direct = Direct.RIGHT; break;
+            case KeyEvent.VK_LEFT: if(direct != Direct.RIGHT) direct = Direct.LEFT; break;
+            case KeyEvent.VK_UP: if(direct != Direct.DOWN) direct = Direct.UP; break;
+            case KeyEvent.VK_DOWN: if(direct != Direct.UP) direct = Direct.DOWN; break;
         }
     }
 }

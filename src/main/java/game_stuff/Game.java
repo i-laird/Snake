@@ -132,6 +132,7 @@ public abstract class Game {
         //See if player one  just lost
         //Seeing if playerOne cell exists in Player 2!!!
         if(playerDeadAfterMove(playerTwo, playerOneMove)){
+            System.out.println(playerOne.getHeadLocation().getRow() + " " + playerOne.getHeadLocation().getCol());
             gameOver = true;
             gameScreen.plotDefeatScreen();
             LOGGER.info("Sorry you lost");
@@ -140,6 +141,7 @@ public abstract class Game {
         }
         //See if player 1 just won
         if(playerDeadAfterMove(playerOne, playerTwoMove)){
+            System.out.println(playerTwo.getHeadLocation().getRow() + " " + playerTwo.getHeadLocation().getCol());
             gameOver = true;
             gameScreen.plotWinScreen();
             LOGGER.info("Yay you just won");

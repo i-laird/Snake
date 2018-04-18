@@ -30,7 +30,7 @@ public class GameBoard extends JPanel {
         for(int x = 0; x < height / Cell.getCellSize(); x++){
             for(int y = 0; y < width / Cell.getCellSize(); y++){
                 g.setColor(plot[x][y]);
-                g.fillRect(y * Cell.getCellSize(), x * Cell.getCellSize(), height / Cell.getCellSize(), width / Cell.getCellSize());
+                g.drawRect(y * Cell.getCellSize(), x * Cell.getCellSize(), height / Cell.getCellSize(), width / Cell.getCellSize());
             }
         }
     }
