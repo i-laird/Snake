@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class Main {
     //RANDOM PORT NUM PROBABLY OK
-    public final static int PORT_NUM = 8888;
+    public final static int PORT_NUM = 2000;
     private static Logger LOGGER = Logger.getLogger("Main Class");
 
     public static void main(String [] args) {
