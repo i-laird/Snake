@@ -71,7 +71,7 @@ public abstract class Game {
             start2 = new Cell(moveReader.readInt(), moveReader.readInt());
         }while(start1.equals(start2));
         this.playerOne = snakeMaker.init().setColor(Color.RED).setStart(start1).collectSnakeBuilder();
-        this.playerTwo = snakeMaker.init().setColor(Color.BLACK).setStart(start2).collectSnakeBuilder();
+        this.playerTwo = snakeMaker.init().setColor(Color.GREEN).setStart(start2).collectSnakeBuilder();
         LOGGER.info("Snakes were generated");
         resetPowerUp();
     }
