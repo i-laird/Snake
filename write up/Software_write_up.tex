@@ -1,4 +1,7 @@
 \documentclass[titlepage]{article}
+\usepackage[top=2cm,left=2.5cm,right=2.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
 
 \title{{\Huge Multiplayer Snake}}
 \date{\today}
@@ -15,20 +18,177 @@
 	\section{Gantt}
 	
 	\section{Requirements}
+	\begin{enumerate}
+		\item 
+	\end{enumerate}
 	
 	\section{Business Rules}
 	
+	\begin{enumerate}
+		\item Client must know the ip address of the server.
+		\item Each game must have two players.
+		\item High scores are remembered.
+	\end{enumerate}
+	
 	\section{Use Cases}
+	\subsection{Use Case 1}
+	\itemsep0em 
+
+			\textbf{\makebox[4 cm]{Name:\hfill}} UC1--Initialize game\\
+			\textbf{\makebox[4 cm]{Primary Actor:\hfill}} Local user\\
+			\textbf{\makebox[4 cm]{Secondary Actor:\hfill}} Secondary user\\
+			\textbf{\makebox[4 cm]{Trigger:\hfill}} Game is created\\
+			\textbf{Main Success Scenario}
+				\begin{enumerate}
+					\itemsep0em 
+					\item[1] Primary and secondary users both want to play the game.
+					\item[2] Network connection is established to secondary player.
+					\item[3] Snakes and Tokens are generated with random locations.
+					\item[4] Screen is created.
+					\item[5] Game is now ready to be played.
+				\end{enumerate}
+			\textbf{Alternate Scenarios}
+			\begin{enumerate}
+									\itemsep0em 
+				\item[1a]There is no secondary player to play with the primary player.
+				\begin{enumerate}
+										\itemsep0em 
+					\item[1]System will wait until another player connects or user closes the application.
+				\end{enumerate}
+				\item[2a]network connection fails to establish.
+				\begin{enumerate}
+										\itemsep0em 
+					\item[1]System will inform the user and then terminate.
+				\end{enumerate}
+				\item[3a]There is a collision where random locations are identical or very close to each other.
+				\begin{enumerate}
+										\itemsep0em 
+					\item[1]Snake and Token Locations will be recalculated.
+					\item[2]This process will be repeated until all positions are distinct and valid.
+				\end{enumerate}
+			\end{enumerate}
+		
+	\subsection{Use Case 2}
+	\itemsep0em 
+	
+	\textbf{\makebox[4 cm]{Name:\hfill}} UC2--Play Game\\
+	\textbf{\makebox[4 cm]{Primary Actor:\hfill}} Local user\\
+	\textbf{\makebox[4 cm]{Secondary Actor:\hfill}} Secondary user\\
+	\textbf{\makebox[4 cm]{Pre-condition:\hfill}} Game is created\\
+	\textbf{Main Success Scenario}
+	\begin{enumerate}
+		\itemsep0em 
+		\item[1] Primary user makes and sends move.
+		\item[2] Primary user receives secondary users move.
+		\item[3] Each snake is replotted with the new position as the head.
+	\end{enumerate}
+	\textbf{Alternate Scenarios}
+	\begin{enumerate}
+		\itemsep0em 
+		\item[a]Connection to other player is lost.
+		\begin{enumerate}
+			\itemsep0em 
+			\item[1]System will notify player and terminate.
+		\end{enumerate}
+		\item[3a]Player is dead after move.
+		\begin{enumerate}
+			\itemsep0em 
+			\item[1]Defeat screen is displayed.
+			\item[2]Both players choose to play again and play resumes.
+		\end{enumerate}
+		\item[3b]Secondary player is dead after move.
+		\begin{enumerate}
+			\itemsep0em 
+			\item[1]Victory screen is displayed.
+			\item[2]Both players may choose to play again.
+		\end{enumerate}
+				\item[3ab.2a]Player chooses to not play again.
+				\begin{enumerate}
+					\itemsep0em 
+					\item[1]High scores are updated.
+					\item[2]Game terminates.
+				\end{enumerate}
+				\item[3ab.2b]Player 2 chooses to not play again.
+				\begin{enumerate}
+					\itemsep0em 
+					\item[1]High scores are updated.
+					\item[2]Game terminates.
+				\end{enumerate}
+	\end{enumerate}
+		
+	\subsection{Use Case 3}
+	\itemsep0em 
+	
+	\textbf{\makebox[4 cm]{Name:\hfill}} UC3--play Again\\
+	\textbf{\makebox[4 cm]{Primary Actor:\hfill}} Local user\\
+	\textbf{\makebox[4 cm]{Secondary Actor:\hfill}} Secondary user\\
+	\textbf{\makebox[4 cm]{Pre-condition:\hfill}} Game over\\
+	\textbf{\makebox[4 cm]{Post-condition:\hfill}} Game is not over\\
+	\textbf{Main Success Scenario}
+	\begin{enumerate}
+		\itemsep0em 
+		\item[1] Snakes and Tokens are generated with random locations.
+		\item[2] Screen is redrawn.
+	\end{enumerate}
+	\textbf{Alternate Scenarios}
+	\begin{enumerate}
+		\itemsep0em 
+		\item[a]Connection to other player is lost.
+		\begin{enumerate}
+			\itemsep0em 
+			\item[1]System will notify player and terminate.
+		\end{enumerate}
+	\item[1.a]Tokens and Snakes do not have independent positions.
+			\begin{enumerate}
+		\itemsep0em 
+		\item[1]System will recalculate positions.
+		\item[2]This will be repeated until all positions are independent of each other.
+	\end{enumerate}
+		
+	\end{enumerate}
 	
 	\section{Use Case Diagram}
+	\includegraphics[scale=.75]{UCD}
 	
 	\section{System Sequence Diagram}
+	\includegraphics[scale=.75]{SSD}
 	
 	\section{System Operations}
+	\begin{enumerate}
+		\item $initGame()$
+		\item $server\_or\_client(boolean mode)$
+		\item $sendMove(Direction move)$
+	\end{enumerate}
 	
 	\section{Domain Model}
+		\includegraphics[scale=.75]{DM}
 	
 	\section{Operational Contracts}
+	\subsection{Contract 1}
+	\itemsep0em 
+	
+	\textbf{\makebox[4 cm]{Operation:\hfill}} initGame\\
+	\textbf{\makebox[4 cm]{Cross References:\hfill}} UC1\\
+	\textbf{\makebox[4 cm]{Pre-conditions:\hfill}} No instance of a Game exists\\
+		\textbf{\makebox[4 cm]{Post-conditions:\hfill}} 
+				\begin{itemize} 
+				\item A Game is initialized.
+				\end{itemize}
+		
+	\subsection{Contract 2}
+	\itemsep0em 
+	
+	\textbf{\makebox[4 cm]{Operation:\hfill}} server\_or\_client(boolean status)\\
+	\textbf{\makebox[4 cm]{Cross References:\hfill}} UC1\\
+	\textbf{\makebox[4 cm]{Pre-conditions:\hfill}} Game network has not been initialized previously.\\
+	\textbf{\makebox[4 cm]{Post-conditions:\hfill}}
+		\begin{itemize} 
+			\item A socket has been initialized and connected to.
+			\item If client, a connection will be made to server.
+			\item If server, a client will be accepted.
+		\end{itemize}
+	
+	
 	
 	\section{Sequence Diagrams}
 	
@@ -47,5 +207,14 @@
 				Abstract factory was used to create instances of a Game Object. Because there were multiple subtypes of the Game Object the abstract factory made it simpler to create an instance. Also the abstract factory allowed only one instance of any of game's subtypes to exist.
 			\item \textbf{Builder:}
 				A Builder is used to create instances of a Snake. Because the snake is a complex object builder lets the application customize them. It allows Snake location and color to be both be customized.
+			\item \textbf{State:}\\
+				State is used in relation to represent the direction that the Snake is moving. It uses polymorphism to avoid using a switch statement to calculate the new position after each move.
 		\end{enumerate}
+	\section{Stats}
+	\subsection{Hours Spent per User}
+	\textbf{Ian:} ~~~~~20 hours\\
+	\textbf{Andrew:}~5 hours
+	\subsection{Logical Lines from Each User}
+	\textbf{Ian:} ~~~~~ lines\\
+	\textbf{Andrew:}~ lines
 \end{document}
