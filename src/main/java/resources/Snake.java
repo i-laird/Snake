@@ -1,8 +1,5 @@
 package resources;
 
-import resources.Cell;
-import resources.Screen;
-
 import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Deque;

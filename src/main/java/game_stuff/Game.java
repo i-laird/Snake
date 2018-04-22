@@ -1,7 +1,7 @@
 package game_stuff;
 import Directions.Direction;
+import display.Screen;
 import resources.*;
-import Enums.Direct;
 import exceptions.NetworkException;
 
 import java.awt.*;

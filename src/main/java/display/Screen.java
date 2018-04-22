@@ -1,8 +1,10 @@
-package resources;
+package display;
 
 import Directions.Direction;
 import Enums.Direct;
 import Directions.DirectionFactory;
+import resources.Cell;
+import resources.Snake;
 
 import javax.swing.*;
 import java.awt.*;
