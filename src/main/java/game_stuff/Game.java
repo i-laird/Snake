@@ -1,4 +1,5 @@
 package game_stuff;
+import display.Screen;
 import resources.*;
 import Enums.Direct;
 import exceptions.NetworkException;

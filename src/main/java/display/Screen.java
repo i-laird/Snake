@@ -1,6 +1,8 @@
-package resources;
+package display;
 
 import Enums.Direct;
+import resources.Cell;
+import resources.Snake;
 
 import javax.swing.*;
 import java.awt.*;

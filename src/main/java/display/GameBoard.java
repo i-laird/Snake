@@ -1,4 +1,6 @@
-package resources;
+package display;
+
+import resources.Cell;
 
 import javax.swing.*;
 import java.awt.*;
