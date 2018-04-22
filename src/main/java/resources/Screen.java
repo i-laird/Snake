@@ -1,6 +1,8 @@
 package resources;
 
+import Directions.Direction;
 import Enums.Direct;
+import Directions.DirectionFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -163,8 +165,8 @@ public class Screen extends JFrame implements KeyListener {
      * This method returns the current direction
      * @return direction the player wants to move
      */
-    public Direct getDirection(){
-        return direct;
+    public Direction getDirection(){
+        return DirectionFactory.make(direct);
     }
 
     /**
