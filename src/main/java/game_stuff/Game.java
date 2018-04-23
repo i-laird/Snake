@@ -6,7 +6,9 @@ import exceptions.NetworkException;
 
 import java.awt.*;
 import java.io.*;
+import java.net.Inet4Address;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.logging.Logger;
 
 /**
@@ -295,6 +297,10 @@ public abstract class Game {
     }
     public int getScore() {
         return score;
+    }
+
+    public String getIP() throws UnknownHostException {
+        return Inet4Address.getLocalHost().getHostAddress();
     }
 
 
