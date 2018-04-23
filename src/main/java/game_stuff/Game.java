@@ -64,7 +64,7 @@ public abstract class Game {
     }
 
     /**
-     * @author: Ian Laird
+     * @author Ian Laird
      * Initializes the Snakes with independent random positions
      */
     protected void initSnakes() throws IOException{
@@ -362,5 +362,21 @@ public abstract class Game {
         }
         else
             return false;
+    }
+
+    public static void setLOGGER(Logger LOGGER) {
+        Game.LOGGER = LOGGER;
+    }
+
+    public void setPlayerOne(Snake playerOne) {
+        this.playerOne = playerOne;
+    }
+
+    public void setPlayerTwo(Snake playerTwo) {
+        this.playerTwo = playerTwo;
+    }
+
+    public void setPowerUp(Cell powerUp) {
+        this.powerUp = powerUp;
     }
 }

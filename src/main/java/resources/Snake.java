@@ -3,6 +3,7 @@ package resources;
 import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Objects;
 
 public class Snake {
     //As the snake travels to new tiles we push on
@@ -32,7 +33,8 @@ public class Snake {
         this.headLocation = other.headLocation;
         this.color = other.color;
         this.prevTail = other.prevTail;
-        this.locations = new ArrayDeque<>(other.locations);
+        this.locations = new ArrayDeque<>();
+        other.locations.stream().forEach(x->this.locations.add(new Cell(x)));
     }
 
     /**
@@ -131,5 +133,24 @@ public class Snake {
      */
     public Cell getPrevTail(){
         return this.prevTail;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Snake snake = (Snake) o;
+        boolean status = false;
+        if(length == snake.length &&
+                Objects.equals(getHeadLocation(), snake.getHeadLocation()) &&
+                ( getPrevTail() != null ? Objects.equals(getPrevTail(), snake.getPrevTail()) : true) &&
+                Objects.equals(getColor(), snake.getColor())) {
+             status = true;
+            for(Cell location : this.locations){
+                if(!snake.locations.contains(location))
+                    status = false;
+            }
+        }
+        return status;
     }
 }

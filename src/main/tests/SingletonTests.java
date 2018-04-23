@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
  * @author  Ian laird
  */
 public class SingletonTests {
+    private static boolean IS_SERVER = true, IS_CLIENT  = false;
     /**
      * tests if more than one screen are generated
      * @author Ian laird
@@ -26,7 +27,7 @@ public class SingletonTests {
      */
     @Test
     void testServer(){
-        assertSame(gameMaker.generateGame(true), gameMaker.generateGame(true));
+        assertSame(gameMaker.generateGame(IS_SERVER), gameMaker.generateGame(IS_SERVER));
     }
     /**
      * tests if more than one client are generated are generated
@@ -34,7 +35,7 @@ public class SingletonTests {
      */
     @Test
     void testClient(){
-        assertSame(gameMaker.generateGame(false), gameMaker.generateGame(false));
+        assertSame(gameMaker.generateGame(IS_CLIENT), gameMaker.generateGame(IS_CLIENT));
     }
     /**
      * tests if more than one Game  are generated if one is server and one is client from factory
@@ -42,6 +43,6 @@ public class SingletonTests {
      */
     @Test
     void serverAndClient(){
-        assertSame(gameMaker.generateGame(true), gameMaker.generateGame(false));
+        assertSame(gameMaker.generateGame(IS_SERVER), gameMaker.generateGame(IS_CLIENT));
     }
 }

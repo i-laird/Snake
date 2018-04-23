@@ -3,6 +3,8 @@ package game_stuff;
 import resources.Cell;
 import resources.Snake;
 
+import java.util.Objects;
+
 public class GameRecord {
     private Snake SnakeOneRecord, SnakeTwoRecord;
     private Cell powerUpLocation;
@@ -42,5 +44,15 @@ public class GameRecord {
      */
     public Cell getPowerUpLocation() {
         return powerUpLocation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GameRecord that = (GameRecord) o;
+        return Objects.equals(getSnakeOneRecord(), that.getSnakeOneRecord()) &&
+                Objects.equals(getSnakeTwoRecord(), that.getSnakeTwoRecord()) &&
+                Objects.equals(getPowerUpLocation(), that.getPowerUpLocation());
     }
 }
