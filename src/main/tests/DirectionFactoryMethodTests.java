@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * {@link DirectionFactoryTests} will tests the various Direction factory methods present.
+ * {@link DirectionFactoryMethodTests} will tests the various Direction factory methods present.
  * @author Ian laird
  */
-public class DirectionFactoryTests {
+public class DirectionFactoryMethodTests {
     private Direction dir;
 
     /**

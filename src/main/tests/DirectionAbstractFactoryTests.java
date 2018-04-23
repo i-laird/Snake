@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DirectionAbstractFactory {
+public class DirectionAbstractFactoryTests {
     private Direct dirEnum;
     private Direction generated;
 
