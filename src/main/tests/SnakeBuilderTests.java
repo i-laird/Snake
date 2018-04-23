@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * {@link BuilderTests} tests the Snake Builder to make sure that it functions properly.
+ * {@link SnakeBuilderTests} tests the Snake Builder to make sure that it functions properly.
  * @author Ian Laird
  */
-public class BuilderTests {
+public class SnakeBuilderTests {
 
     private Snake testSnake;
     private SnakeBuilder sb;
