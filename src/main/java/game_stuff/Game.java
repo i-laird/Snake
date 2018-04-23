@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  * @author Ian Laird
  */
 public abstract class Game {
-    protected static final int SCREEN_WIDTH = 400;
+
+    protected static final int SCREEN_WIDTH = 800;
     protected static final int SCREEN_HEIGHT = 400;
     protected static Logger LOGGER = Logger.getLogger("Game");
     protected Snake playerOne = null;
@@ -32,6 +33,7 @@ public abstract class Game {
 
     //Power up location is communicated over network through server to client
     Cell powerUp = null;
+    private boolean hasBegun = false;
     //////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -66,7 +68,7 @@ public abstract class Game {
         //First create the two Snakes
         Cell start1 = null, start2 = null;
         do {
-            start1 = Cell.createRandom(SCREEN_WIDTH / Cell.getCellSize(), SCREEN_HEIGHT / Cell.getCellSize());
+            start1 = Cell.createRandom(SCREEN_WIDTH / (2 * Cell.getCellSize()), SCREEN_HEIGHT / Cell.getCellSize());
             moveSender.writeInt(start1.getRow());
             moveSender.writeInt(start1.getCol());
             //Make sure snake 2 is independent of Snake 1
@@ -135,14 +137,13 @@ public abstract class Game {
      */
     protected void initScreen(){
         gameScreen = Screen.getInstance(SCREEN_WIDTH, SCREEN_HEIGHT);
-        gameScreen.initBoard();
-        gameScreen.showScreen();
+        gameScreen.init();
         gameScreen.plotBackground();
         gameScreen.plotPowerUp(powerUp);
         gameScreen.plotSnake(playerOne);
         gameScreen.plotSnake(playerTwo);
         gameScreen.updateScreen();
-
+        gameScreen.showScreen();
     }
 
     /**
@@ -164,6 +165,7 @@ public abstract class Game {
             System.out.println(playerOne.getHeadLocation().getRow() + " " + playerOne.getHeadLocation().getCol());
             gameOver = true;
             gameScreen.plotDefeatScreen();
+            gameScreen.addMessage("Sorry you lost");
             LOGGER.info("Sorry you lost");
             this.gameOver = true;
             return;
@@ -173,6 +175,7 @@ public abstract class Game {
             System.out.println(playerTwo.getHeadLocation().getRow() + " " + playerTwo.getHeadLocation().getCol());
             gameOver = true;
             gameScreen.plotWinScreen();
+            gameScreen.addMessage("Yay you just won");
             LOGGER.info("Yay you just won");
             this.score+=5;
 
@@ -184,10 +187,13 @@ public abstract class Game {
             playerOne.increaseLength();
             score+=1;
             powerUpEaten = true;
+            gameScreen.addMessage("You've just eaten a Power-Up");
+
         }
         if(powerUp.equals(playerTwoMove)){
             playerTwo.increaseLength();
             powerUpEaten = true;
+            gameScreen.addMessage("Player 2 has just eaten a Power-Up");
         }
         //get new power up location such that it is not occupied by a resources.Snake
         if(powerUpEaten) {
@@ -336,6 +342,14 @@ public abstract class Game {
     public Cell getPowerUp() {
         return powerUp;
     }
+    public boolean hasBegun() throws IOException{
 
-
+        if(this.gameScreen.isHasBegun()) {
+            moveSender.writeBoolean(this.gameScreen.isHasBegun());
+            boolean player2Status = moveReader.readBoolean();
+            return true;
+        }
+        else
+            return false;
+    }
 }

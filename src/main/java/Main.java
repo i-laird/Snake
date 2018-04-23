@@ -20,6 +20,9 @@ public class Main {
         GameRecord initialGame = ourGame.createRecord();
         try {
             do {
+                while(!ourGame.hasBegun()){
+                    Thread.sleep(250);
+                }
                 while (!ourGame.isGameOver()) {
                     ourGame.MovePlayers();
                     Thread.sleep(500);
