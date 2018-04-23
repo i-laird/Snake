@@ -1,3 +1,13 @@
+Overview of Progress 4/22/2018
+====
++ Game is running
++ Need 1 more design pattern(we have 6)
++ polishing up Swing stuff( Andrew)
++ Diagramming
+    + Design Model
+    + Sequence Diagrams
++ High Scores
+
 Overview of Progress 3/22/2018 Ian Laird
 =====
 + I have made good progress
