@@ -27,8 +27,8 @@ public class Cell {
      * @return newly generated resources.Cell
      */
     public static Cell createRandom(int width, int height){
-        return new Cell(ThreadLocalRandom.current().nextInt(0, width),
-                ThreadLocalRandom.current().nextInt(0, height));
+        return new Cell(ThreadLocalRandom.current().nextInt(5, width - 5),
+                ThreadLocalRandom.current().nextInt(5, height - 5));
     }
 
     /**

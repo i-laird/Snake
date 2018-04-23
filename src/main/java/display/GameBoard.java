@@ -20,8 +20,9 @@ public class GameBoard extends JPanel {
     public GameBoard(int width, int height){
         this.width = width;
         this.height = height;
-        super.setPreferredSize(new Dimension(width + 40, height + 40));
+        super.setPreferredSize(new Dimension(width, height));
         plot = new Color[this.height / Cell.getCellSize()][this.width / Cell.getCellSize()];
+        super.setVisible(true);
     }
 
     /**
@@ -57,5 +58,13 @@ public class GameBoard extends JPanel {
      */
     public void unColorLocation(int row, int col){
         this.plot[row][col] = BACKGROUND;
+    }
+
+    public void plotBackground() {
+        for(int x = 0; x < height / Cell.getCellSize(); x++){
+            for(int y = 0; y < width / Cell.getCellSize(); y++){
+                plot[x][y] = Color.BLACK;
+            }
+        }
     }
 }

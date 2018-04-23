@@ -19,10 +19,11 @@ public class Screen extends JFrame implements KeyListener {
     private int width;
     private int height;
     private static Screen thisInstance = null;
-    private GameBoard board;
+    Wrapper wrapper;
     private Direct direct = Direct.UP;
     protected static Logger LOGGER = Logger.getLogger("Screen");
     private boolean debugging = true;
+    private boolean hasBegun = false;
 
     /**
      * @author: Andrew Walker
@@ -33,13 +34,14 @@ public class Screen extends JFrame implements KeyListener {
     private Screen(int width, int height) {
         this.width = width;
         this.height = height;
-        this.setPreferredSize(new Dimension(width + 40, height + 40));
-        this.setResizable(true);
+        this.setPreferredSize(new Dimension(this.width, this.height));
+        this.setResizable(false);
         this.pack();
+        this.setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
         this.setFocusable(true);
         this.requestFocus();
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.setTitle("Snake");
         this.addKeyListener(this);
         this.setFocusTraversalKeysEnabled(false);
@@ -47,14 +49,12 @@ public class Screen extends JFrame implements KeyListener {
         LOGGER.info("Initialized Screen");
     }
 
-    /**
-     * @author: Andrew Walker
-     * This method initializes the gameBoard and adds it to the panel
-     */
-    public void initBoard(){
-        this.board = new GameBoard(this.width, this.height);
-        super.getContentPane().add(BorderLayout.CENTER, board);
-        LOGGER.info("Initialized Board");
+    public void init(){
+        this.wrapper = new Wrapper(this.width, this.height);
+        wrapper.initBoard();
+        wrapper.initText();
+        super.add(this.wrapper);
+        LOGGER.info("Initialized Wrapper");
     }
 
     /**
@@ -73,7 +73,7 @@ public class Screen extends JFrame implements KeyListener {
      * This function will simply update the game screen. It itself does not change.
      */
     public void updateScreen() {
-        board.repaint();
+        wrapper.update();
         super.repaint();
     }
 
@@ -101,17 +101,6 @@ public class Screen extends JFrame implements KeyListener {
         //TODO
     }
 
-    /**
-     * @author: Andrew Walker
-     * This method is plots the whole screen the default color
-     */
-    public void plotBackground(){
-        for(int x = 0; x < height / Cell.getCellSize(); x++){
-            for(int y = 0; y < width / Cell.getCellSize(); y++){
-                board.unColorLocation(x,y);
-            }
-        }
-    }
 
     /**
      * @author: Andrew Walker
@@ -119,7 +108,7 @@ public class Screen extends JFrame implements KeyListener {
      * @param c the Cell to plot
      */
     public void plotPowerUp(Cell c){
-        board.colorLocation(c.getRow(), c.getCol(), BLUE);
+        wrapper.getBoard().colorLocation(c.getRow(), c.getCol(), BLUE);
     }
 
     /**
@@ -176,10 +165,10 @@ public class Screen extends JFrame implements KeyListener {
      */
     public void plotSnake(Snake s){
         if(s.getPrevTail() != null){
-            board.unColorLocation(s.getPrevTail().getRow(), s.getPrevTail().getCol());
+            wrapper.getBoard().unColorLocation(s.getPrevTail().getRow(), s.getPrevTail().getCol());
         }
         for(Cell c : s.getSnakeLocations()){
-            board.colorLocation(c.getRow(), c.getCol(), s.getColor());
+            wrapper.getBoard().colorLocation(c.getRow(), c.getCol(), s.getColor());
         }
     }
 
@@ -196,6 +185,7 @@ public class Screen extends JFrame implements KeyListener {
             case KeyEvent.VK_LEFT: if(direct != Direct.RIGHT) direct = Direct.LEFT; break;
             case KeyEvent.VK_UP: if(direct != Direct.DOWN) direct = Direct.UP; break;
             case KeyEvent.VK_DOWN: if(direct != Direct.UP) direct = Direct.DOWN; break;
+            case KeyEvent.VK_SPACE: if(!hasBegun) hasBegun = true; break;
         }
     }
 
@@ -212,6 +202,7 @@ public class Screen extends JFrame implements KeyListener {
             case KeyEvent.VK_LEFT: if(direct != Direct.RIGHT) direct = Direct.LEFT; break;
             case KeyEvent.VK_UP: if(direct != Direct.DOWN) direct = Direct.UP; break;
             case KeyEvent.VK_DOWN: if(direct != Direct.UP) direct = Direct.DOWN; break;
+            case KeyEvent.VK_SPACE: if(!hasBegun) hasBegun = true; break;
         }
     }
 
@@ -228,6 +219,19 @@ public class Screen extends JFrame implements KeyListener {
             case KeyEvent.VK_LEFT: if(direct != Direct.RIGHT) direct = Direct.LEFT; break;
             case KeyEvent.VK_UP: if(direct != Direct.DOWN) direct = Direct.UP; break;
             case KeyEvent.VK_DOWN: if(direct != Direct.UP) direct = Direct.DOWN; break;
+            case KeyEvent.VK_SPACE: if(!hasBegun) hasBegun = true; break;
         }
+    }
+
+    public void plotBackground() {
+        wrapper.getBoard().plotBackground();
+    }
+
+    public void addMessage(String s) {
+        this.wrapper.getTextBox().addText(s);
+    }
+
+    public boolean isHasBegun() {
+        return this.hasBegun;
     }
 }

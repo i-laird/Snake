@@ -17,6 +17,9 @@ public class Main {
         Game ourGame = initgame();
         try {
             do {
+                while(!ourGame.hasBegun()){
+                    Thread.sleep(250);
+                }
                 while (!ourGame.isGameOver()) {
                     ourGame.MovePlayers();
                     Thread.sleep(250);

@@ -39,7 +39,7 @@ public class ServerGame extends Game {
 
     protected void resetPowerUp() throws IOException{
         do {
-            powerUp = Cell.createRandom(SCREEN_WIDTH / Cell.getCellSize(), SCREEN_HEIGHT / Cell.getCellSize());
+            powerUp = Cell.createRandom(SCREEN_WIDTH / (2 * Cell.getCellSize()), SCREEN_HEIGHT / Cell.getCellSize());
         }while(playerOne.containsMove(powerUp) || playerTwo.containsMove(powerUp));
         moveSender.writeInt(powerUp.getRow());
         moveSender.writeInt(powerUp.getCol());
