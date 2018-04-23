@@ -1,6 +1,7 @@
 package game_stuff;
 import Directions.Direction;
 import display.Screen;
+import exceptions.BuilderException;
 import resources.*;
 import exceptions.NetworkException;
 
@@ -76,8 +77,12 @@ public abstract class Game {
             //Make sure snake 2 is independent of Snake 1
             start2 = new Cell(moveReader.readInt(), moveReader.readInt());
         }while(start1.equals(start2));
-        this.playerOne = snakeMaker.init().setColor(Color.RED).setStart(start1).collectSnakeBuilder();
-        this.playerTwo = snakeMaker.init().setColor(Color.GREEN).setStart(start2).collectSnakeBuilder();
+        try {
+            this.playerOne = snakeMaker.init().setColor(Color.RED).setStart(start1).collectSnakeBuilder();
+            this.playerTwo = snakeMaker.init().setColor(Color.GREEN).setStart(start2).collectSnakeBuilder();
+        }catch(BuilderException e){
+            LOGGER.severe("Builder Exception caught");
+        }
         LOGGER.info("Snakes were generated");
         resetPowerUp();
     }

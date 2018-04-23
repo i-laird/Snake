@@ -1,5 +1,7 @@
 package resources;
 
+import exceptions.BuilderException;
+
 import java.awt.*;
 
 public class SnakeBuilder {
@@ -22,7 +24,9 @@ public class SnakeBuilder {
      * @param wantedColor-the color that is desired
      * @return this for chaining
      */
-    public SnakeBuilder setColor(Color wantedColor){
+    public SnakeBuilder setColor(Color wantedColor) throws BuilderException{
+        if(mySnake == null)
+            throw new BuilderException("need to init before setting color");
         mySnake.setColor(wantedColor);
         return this;
     }
@@ -33,7 +37,9 @@ public class SnakeBuilder {
      * @param startPos-the initial position of the Snake
      * @return this for chaining
      */
-    public SnakeBuilder setStart(Cell startPos){
+    public SnakeBuilder setStart(Cell startPos) throws BuilderException{
+        if(mySnake == null)
+            throw new BuilderException("need to init before can set Cell");
         mySnake.setHeadLocation(startPos);
         return this;
     }
@@ -43,7 +49,9 @@ public class SnakeBuilder {
      * @author Ian Laird
      * @return created Snake
      */
-    public Snake collectSnakeBuilder(){
+    public Snake collectSnakeBuilder() throws BuilderException{
+        if(mySnake == null)
+            throw new BuilderException("need to init before collection");
         Snake returnSnake = mySnake;
         mySnake = null;
         return returnSnake;
