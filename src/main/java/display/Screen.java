@@ -15,7 +15,8 @@ import java.util.logging.Logger;
 import static java.awt.Color.BLUE;
 
 /**
- * This class should be a singleton b/c only one screen should exist
+ * {@link Screen} is a singleton and controls Swing Graphics
+ * @author Andrew Walker
  */
 public class Screen extends JFrame implements KeyListener {
     private int width;
@@ -71,7 +72,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Ian Laird
+     * @author Andrew Walker
      * This function will simply update the game screen. It itself does not change.
      */
     public void updateScreen() {
@@ -104,7 +105,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method is plots the whole screen the default color
      */
     public void plotBackground(){
@@ -116,7 +117,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method is plots certain cell blue for a powerup
      * @param c the Cell to plot
      */
@@ -125,7 +126,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method returns the width of the frame
      * @return the width
      */
@@ -135,7 +136,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method sets the width of the frame
      * @param width the new width of the frame
      */
@@ -144,7 +145,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method returns the height of the frame
      * @return the height
      */
@@ -154,7 +155,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method sets the height of the frame
      * @param height the new height of the frame
      */
@@ -163,7 +164,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method returns the current direction
      * @return direction the player wants to move
      */
@@ -172,7 +173,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method is plots a snake on the gameBoard
      * @param s the Snake to plot
      */
@@ -186,7 +187,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method gets the keyPressed and sets the direction
      * @param e the KeyEvent to pull the key from
      */
@@ -202,7 +203,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method gets the keyPressed and sets the direction through delegation to keyTyped
      * @param e the KeyEvent to pull the key from
      */
@@ -218,7 +219,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method gets the keyPressed and sets the direction through delegation to keyTyped
      * @param e the KeyEvent to pull the key from
      */

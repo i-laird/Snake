@@ -1,4 +1,5 @@
 import game_stuff.Game;
+import game_stuff.GameRecord;
 import game_stuff.gameMaker;
 import exceptions.NetworkException;
 
@@ -15,13 +16,15 @@ public class Main {
         //This creates the Screen in Game makeScreen
         LOGGER.info("Initializing Game Loop");
         Game ourGame = initgame();
+        //Save the game state
+        GameRecord initialGame = ourGame.createRecord();
         try {
             do {
                 while (!ourGame.isGameOver()) {
                     ourGame.MovePlayers();
-                    Thread.sleep(250);
+                    Thread.sleep(500);
                 }
-            } while (playAgain(ourGame));
+            } while (playAgain(ourGame, initialGame));
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.severe("Exception occurred while playing the game: " + e.getMessage());
@@ -68,12 +71,12 @@ public class Main {
 
         return thisGame;
     }
-    public static boolean playAgain(Game toReset){
+    public static boolean playAgain(Game toReset, GameRecord record){
         System.out.println("Would you like to play again? (y | n)");
         Scanner cin = new Scanner(System.in);
         boolean ret;
         try {
-            ret = toReset.playAgain(cin.next().matches("[yY]"));
+            ret = toReset.playAgain(cin.next().matches("[yY]"), record);
         } catch (IOException e){
             ret = false;
         }

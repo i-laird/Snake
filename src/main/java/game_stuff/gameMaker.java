@@ -1,14 +1,15 @@
 package game_stuff;
 
 /**
- * @author: Ian Laird
- * This is the way that Games are actually generated and it allows there to be one instance of a Game in existance.
+ * @author Ian Laird
+ * {@link gameMaker}is the way that Games are actually generated and it allows there to be one instance of a Game in existance.
+ * Server or Client can be returned.
  */
 public class gameMaker {
     private static Game thisGame = null;
 
     /**
-     * @author: Ian Laird
+     * @author Ian Laird
      * @param isServer indicates if the generated game should be a server
      * @return the generated Game
      * Allows there to only be one game type in existence

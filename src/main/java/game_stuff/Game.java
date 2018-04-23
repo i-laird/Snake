@@ -10,11 +10,11 @@ import java.net.Socket;
 import java.util.logging.Logger;
 
 /**
- * @author: Ian Laird
+ * {@link Game} represents the Game of Snake. It contains a Screen, Snakes,
+ *  and the location of the power up.
+ * @author Ian Laird
  */
 public abstract class Game {
-
-    //TODO figure out if this is a good size or not
     protected static final int SCREEN_WIDTH = 400;
     protected static final int SCREEN_HEIGHT = 400;
     protected static Logger LOGGER = Logger.getLogger("Game");
@@ -34,8 +34,9 @@ public abstract class Game {
     Cell powerUp = null;
     //////////////////////////////////////////////////////////////////////////////////////
 
+
     /**
-     * @author:Ian Laird
+     * @author Ian Laird
      * @param hostName name of the server
      * @param portNum port of the server
      * @throws NetworkException if error connecting to the server
@@ -89,13 +90,15 @@ public abstract class Game {
      * @author: Ian Laird
      * used to reset state of the game
      */
-    public boolean playAgain(boolean player1Status) throws IOException{
+    public boolean playAgain(boolean player1Status, GameRecord record) throws IOException{
         this.gameOver = false;
         moveSender.writeBoolean(player1Status);
         boolean player2Status = moveReader.readBoolean();
+        //See if both players want to restart the game
         if(player1Status && player2Status) {
-            initSnakes();
-            resetPowerUp();
+            this.restoreFromOldState(record);
+//            initSnakes();
+//            resetPowerUp();
             return true;
         } else {
             this.gameScreen.dispose();
@@ -105,8 +108,30 @@ public abstract class Game {
     }
 
     /**
+     * This records the current game for memento
+     *
+     * @author Ian Laird
+     * @return record of this Game
+     */
+    public GameRecord createRecord(){
+        return new GameRecord(this);
+    }
+
+    /**
+     * Restoring to old State using memento
+     *
+     * @author Ian Laird
+     * @param old-The Game record that this Game will be restored to
+     */
+    public void restoreFromOldState(GameRecord old){
+        this.playerOne = Snake.makeSnake(old.getSnakeOneRecord());
+        this.playerTwo = Snake.makeSnake(old.getSnakeTwoRecord());
+        this.powerUp = old.getPowerUpLocation();
+    }
+
+    /**
      * initializes the Screen for the game
-     * @author: Ian Laird
+     * @author Ian Laird
      */
     protected void initScreen(){
         gameScreen = Screen.getInstance(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -167,9 +192,6 @@ public abstract class Game {
         //get new power up location such that it is not occupied by a resources.Snake
         if(powerUpEaten) {
             resetPowerUp();
-            //do {
-              //  powerUp = Cell.createRandom(gameScreen.getWidth(), gameScreen.getHeight());
-            //}while(playerOne.containsMove(powerUp) || playerTwo.containsMove(powerUp));
         }
 
         // Moves the snakes
@@ -186,6 +208,7 @@ public abstract class Game {
 
     /**
      * See if the move will kill the player
+     * @author Ian Laird
      * @param otherPlayer
      * @return
      */
@@ -197,7 +220,7 @@ public abstract class Game {
     }
 
     /**
-     * @author:Ian Laird
+     * @author Ian Laird
      * @param move the move to see if within the bounds of the Game
      * @return indicates if move is within frame
      */
@@ -207,7 +230,7 @@ public abstract class Game {
     }
 
     /**
-     * @author: Ian Laird
+     * @author Ian Laird
      * @return indiactes success
      * This function initializes the network input scanner
      */
@@ -222,9 +245,8 @@ public abstract class Game {
         return true;
     }
 
-
     /**
-     * @author: Ian Laird
+     * @author Ian Laird
      * @return indicates success
      * This method initializes the printWriter over the network
      */
@@ -281,5 +303,39 @@ public abstract class Game {
     protected abstract void initializeSocket(String hostName, int PortNumber) throws IOException;
 
     protected abstract void resetPowerUp() throws IOException;
+
+
+    /**
+     * @author Ian Laird
+     * @return screen width
+     */
+    public static int getScreenWidth() {
+        return SCREEN_WIDTH;
+    }
+
+    /**
+     * @author Ian Laird
+     * @return Player 1
+     */
+    public Snake getPlayerOne() {
+        return playerOne;
+    }
+
+    /**
+     * @author Ian Laird
+     * @return Player 2
+     */
+    public Snake getPlayerTwo() {
+        return playerTwo;
+    }
+
+    /**
+     * @author Ian Laird
+     * @return power up
+     */
+    public Cell getPowerUp() {
+        return powerUp;
+    }
+
 
 }

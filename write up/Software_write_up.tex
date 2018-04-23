@@ -3,9 +3,10 @@
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 
-\title{{\Huge Multiplayer Snake}}
+
+\title{{\Huge Multiplayer Snake}\\\vspace{3mm}{\large Software Engineering 1 \& Intro to Java}}
 \date{\today}
-\author{by\\{\large Ian Laird \& Andrew Walker}}
+\author{{\normalsize by}\\{\large Ian Laird \& Andrew Walker}\\ \\ {\normalsize prepared for}\\Dr. Tomas Cerny}
 
 \begin{document}
 	\maketitle
@@ -156,8 +157,8 @@
 	\section{System Operations}
 	\begin{enumerate}
 		\item $initGame()$
-		\item $server\_or\_client(boolean mode)$
-		\item $sendMove(Direction move)$
+		\item $server\_or\_client(boolean~mode)$
+		\item $sendMove(Direction~move)$
 	\end{enumerate}
 	
 	\section{Domain Model}
@@ -188,6 +189,19 @@
 			\item If server, a client will be accepted.
 		\end{itemize}
 	
+	\subsection{Contract 3}
+	\itemsep0em 
+	
+	\textbf{\makebox[4 cm]{Operation:\hfill}} sendMove(Direction move)\\
+	\textbf{\makebox[4 cm]{Cross References:\hfill}} UC2 and UC3\\
+	\textbf{\makebox[4 cm]{Pre-conditions:\hfill}} Game has been initialized, and both players are still alive.\\
+	\textbf{\makebox[4 cm]{Post-conditions:\hfill} }
+	\begin{itemize} 
+		\item Player one and player 2 are moved to new cells.
+		\item If player does not make move, their last move will be repeated.
+		\item If the received moves kill a player, that player will die. The other player will receive points.
+	\end{itemize}
+	
 	
 	
 	\section{Sequence Diagrams}
@@ -207,13 +221,13 @@
 				Abstract factory was used to create instances of a Game Object. Because there were multiple subtypes of the Game Object the abstract factory made it simpler to create an instance. Also the abstract factory allowed only one instance of any of game's subtypes to exist.
 			\item \textbf{Builder:}
 				A Builder is used to create instances of a Snake. Because the snake is a complex object builder lets the application customize them. It allows Snake location and color to be both be customized.
-			\item \textbf{State:}\\
-				State is used in relation to represent the direction that the Snake is moving. It uses polymorphism to avoid using a switch statement to calculate the new position after each move.
+			\item \textbf{State:}
+				State is used in the Screen to represent movement direction as determined by user keystrokes. It uses polymorphism to avoid using a switch statement in calculating the new snake position.
 		\end{enumerate}
 	\section{Stats}
 	\subsection{Hours Spent per User}
 	\textbf{Ian:} ~~~~~20 hours\\
-	\textbf{Andrew:}~5 hours
+	\textbf{Andrew:}~10 hours
 	\subsection{Logical Lines from Each User}
 	\textbf{Ian:} ~~~~~ lines\\
 	\textbf{Andrew:}~ lines

@@ -5,6 +5,10 @@ import resources.Cell;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * {@link GameBoard} is used in Screen for graphics
+ * @author Andrew Walker
+ */
 public class GameBoard extends JPanel {
     private int width;
     private int height;
@@ -12,7 +16,7 @@ public class GameBoard extends JPanel {
     private Color BACKGROUND = Color.BLACK;
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method is the constructor for the GameBoard
      * @param width the width of the panel
      * @param height the height of the panel
@@ -25,7 +29,7 @@ public class GameBoard extends JPanel {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method is the overriden function to paint the panel
      * @param g Graphics object
      */
@@ -39,7 +43,7 @@ public class GameBoard extends JPanel {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method plots a new color in the master matrix
      * @param row the row of the plot to change
      * @param col the col of the plot to change
@@ -50,7 +54,7 @@ public class GameBoard extends JPanel {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method plots the default color in the master matrix
      * @param row the row of the plot to change
      * @param col the col of the plot to change

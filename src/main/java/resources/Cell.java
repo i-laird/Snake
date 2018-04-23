@@ -20,6 +20,16 @@ public class Cell {
     }
 
     /**
+     * @author Ian Laird
+     * @param other
+     * This is the copy constructor for a Cell
+     */
+    public Cell(Cell other){
+        this.col = other.col;
+        this.row = other.row;
+    }
+
+    /**
      * creates a resources.Cell in a random location in the table
      * @author: Ian Laird
      * @param width of the table
