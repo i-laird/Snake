@@ -1,6 +1,8 @@
 package display;
 
+import Directions.Direction;
 import Enums.Direct;
+import Directions.DirectionFactory;
 import resources.Cell;
 import resources.Snake;
 
@@ -20,7 +22,8 @@ public class Screen extends JFrame implements KeyListener {
     private int height;
     private static Screen thisInstance = null;
     Wrapper wrapper;
-    private Direct direct = Direct.UP;
+    private Direct state = Direct.UP;
+    private GameBoard board;
     protected static Logger LOGGER = Logger.getLogger("Screen");
     private boolean debugging = true;
     private boolean hasBegun = false;
@@ -154,8 +157,8 @@ public class Screen extends JFrame implements KeyListener {
      * This method returns the current direction
      * @return direction the player wants to move
      */
-    public Direct getDirection(){
-        return direct;
+    public Direction getDirection(){
+        return DirectionFactory.make(state);
     }
 
     /**
@@ -181,11 +184,12 @@ public class Screen extends JFrame implements KeyListener {
     public void keyTyped(KeyEvent e) {
         if(debugging) System.out.println("keyTyped: " + e.getKeyCode());
         switch(e.getKeyCode()){
-            case KeyEvent.VK_RIGHT: if(direct != Direct.LEFT) direct = Direct.RIGHT; break;
-            case KeyEvent.VK_LEFT: if(direct != Direct.RIGHT) direct = Direct.LEFT; break;
-            case KeyEvent.VK_UP: if(direct != Direct.DOWN) direct = Direct.UP; break;
-            case KeyEvent.VK_DOWN: if(direct != Direct.UP) direct = Direct.DOWN; break;
+            case KeyEvent.VK_RIGHT: if(state != Direct.LEFT) state = Direct.RIGHT; break;
+            case KeyEvent.VK_LEFT: if(state != Direct.RIGHT) state = Direct.LEFT; break;
+            case KeyEvent.VK_UP: if(state != Direct.DOWN) state = Direct.UP; break;
+            case KeyEvent.VK_DOWN: if(state != Direct.UP) state = Direct.DOWN; break;
             case KeyEvent.VK_SPACE: if(!hasBegun) hasBegun = true; break;
+
         }
     }
 
@@ -198,10 +202,10 @@ public class Screen extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if(debugging) System.out.println("keyPressed: " + e.getKeyCode());
         switch(e.getKeyCode()){
-            case KeyEvent.VK_RIGHT: if(direct != Direct.LEFT) direct = Direct.RIGHT; break;
-            case KeyEvent.VK_LEFT: if(direct != Direct.RIGHT) direct = Direct.LEFT; break;
-            case KeyEvent.VK_UP: if(direct != Direct.DOWN) direct = Direct.UP; break;
-            case KeyEvent.VK_DOWN: if(direct != Direct.UP) direct = Direct.DOWN; break;
+            case KeyEvent.VK_RIGHT: if(state != Direct.LEFT) state = Direct.RIGHT; break;
+            case KeyEvent.VK_LEFT: if(state != Direct.RIGHT) state = Direct.LEFT; break;
+            case KeyEvent.VK_UP: if(state != Direct.DOWN) state = Direct.UP; break;
+            case KeyEvent.VK_DOWN: if(state != Direct.UP) state = Direct.DOWN; break;
             case KeyEvent.VK_SPACE: if(!hasBegun) hasBegun = true; break;
         }
     }
@@ -215,11 +219,10 @@ public class Screen extends JFrame implements KeyListener {
     public void keyReleased(KeyEvent e) {
         if(debugging) System.out.println("keyReleased: " + e.getKeyCode());
         switch(e.getKeyCode()){
-            case KeyEvent.VK_RIGHT: if(direct != Direct.LEFT) direct = Direct.RIGHT; break;
-            case KeyEvent.VK_LEFT: if(direct != Direct.RIGHT) direct = Direct.LEFT; break;
-            case KeyEvent.VK_UP: if(direct != Direct.DOWN) direct = Direct.UP; break;
-            case KeyEvent.VK_DOWN: if(direct != Direct.UP) direct = Direct.DOWN; break;
-            case KeyEvent.VK_SPACE: if(!hasBegun) hasBegun = true; break;
+            case KeyEvent.VK_RIGHT: if(state != Direct.LEFT) state = Direct.RIGHT; break;
+            case KeyEvent.VK_LEFT: if(state != Direct.RIGHT) state = Direct.LEFT; break;
+            case KeyEvent.VK_UP: if(state != Direct.DOWN) state = Direct.UP; break;
+            case KeyEvent.VK_DOWN: if(state != Direct.UP) state = Direct.DOWN; break;
         }
     }
 
