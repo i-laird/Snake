@@ -10,9 +10,19 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * {@link MementoTest} tests the Memento design pattern.
+ * @author Ian laird
+ */
 public class MementoTest {
     private GameRecord gr, gr2;
     private Game g;
+
+    /**
+     * This stores a Game as a memento and then retrieves it.
+     * @author Ian laird
+     * @throws BuilderException-this will not be thrown
+     */
     @Test
     void testRestoration() throws BuilderException {
         Cell player1Cell = Cell.createRandom(100, 100);

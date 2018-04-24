@@ -250,4 +250,6 @@ public class Screen extends JFrame implements KeyListener {
     public boolean isHasBegun() {
         return this.hasBegun;
     }
+
+    public Direct getState2(){return this.state;}
 }

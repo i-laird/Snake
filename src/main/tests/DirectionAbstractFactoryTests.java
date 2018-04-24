@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * {@link DirectionAbstractFactoryTests} tests the Abstract factory for Directions.
+ * @author Ian laird
+ */
 public class DirectionAbstractFactoryTests {
     private Direct dirEnum;
     private Direction generated;
