@@ -1,3 +1,4 @@
+import display.Initializer;
 import game_stuff.Game;
 import game_stuff.GameRecord;
 import game_stuff.gameMaker;
@@ -13,6 +14,8 @@ public class Main {
     private static Logger LOGGER = Logger.getLogger("Main Class");
 
     public static void main(String [] args) {
+        Initializer.showScren();
+
         //This creates the Screen in Game makeScreen
         LOGGER.info("Initializing Game Loop");
         Game ourGame = initgame();

@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.11)  22 APR 2018 19:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.3.16)  24 APR 2018 10:43
 entering extended mode
 **./Software_write_up.tex
 (Software_write_up.tex
 LaTeX2e <2017-04-15>
-Babel <3.15> and hyphenation patterns for 75 language(s) loaded.
+Babel <3.18> and hyphenation patterns for 75 language(s) loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo"
@@ -67,7 +67,7 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
-File: pdftex.def 2017/06/24 v1.0g Graphics/color driver for pdftex
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen111
 \Gin@req@width=\dimen112
@@ -169,7 +169,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
-Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2018/01/21 v0.26 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -191,22 +191,18 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 12.
  [1
 
-{C:/Users/iancl/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [1]
+{C:/Users/Andrew/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [1]
 <images/UCD.png, id=13, 621.32124pt x 299.1175pt>
 File: images/UCD.png Graphic file (type png)
 <use images/UCD.png>
-Package pdftex.def Info: images/UCD.png  used on input line 152. on input line 
-152.
-Package pdftex.def Info: Requested size: 465.98979pt x 224.33757pt on input lin
-e 152.
+Package pdftex.def Info: images/UCD.png  used on input line 152.
+(pdftex.def)             Requested size: 465.98979pt x 224.33757pt.
  [2]
 <images/SSD.png, id=18, 637.38126pt x 355.82938pt>
 File: images/SSD.png Graphic file (type png)
 <use images/SSD.png>
-Package pdftex.def Info: images/SSD.png  used on input line 155. on input line 
-155.
-Package pdftex.def Info: Requested size: 478.03477pt x 266.87137pt on input lin
-e 155.
+Package pdftex.def Info: images/SSD.png  used on input line 155.
+(pdftex.def)             Requested size: 478.03477pt x 266.87137pt.
 
 Overfull \hbox (6.00354pt too wide) in paragraph at lines 155--156
 [] 
@@ -219,10 +215,8 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 <images/DM.png, id=19, 611.78563pt x 267.49937pt>
 File: images/DM.png Graphic file (type png)
 <use images/DM.png>
-Package pdftex.def Info: images/DM.png  used on input line 165. on input line 1
-65.
-Package pdftex.def Info: Requested size: 458.83809pt x 200.62402pt on input lin
-e 165.
+Package pdftex.def Info: images/DM.png  used on input line 165.
+(pdftex.def)             Requested size: 458.83809pt x 200.62402pt.
 [3 <./images/UCD.png> <./images/SSD.png>]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 176.
 
@@ -235,10 +229,10 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
  [4 <./images/DM.png>]
 [5] (Software_write_up.aux) ) 
 Here is how much of TeX's memory you used:
- 1951 strings out of 493312
- 28256 string characters out of 3138898
- 93637 words of memory out of 3000000
- 5490 multiletter control sequences out of 15000+200000
+ 1953 strings out of 493305
+ 28369 string characters out of 3138871
+ 94086 words of memory out of 3000000
+ 5495 multiletter control sequences out of 15000+200000
  8194 words of font info for 29 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,7n,25p,298b,212s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -249,7 +243,7 @@ m/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10
 Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
 iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Software_write_up.pdf (6 pages, 202081 bytes).
+Output written on Software_write_up.pdf (6 pages, 202978 bytes).
 PDF statistics:
  56 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
