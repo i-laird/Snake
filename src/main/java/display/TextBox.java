@@ -1,6 +1,7 @@
 package display;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -20,7 +21,9 @@ public class TextBox extends JLabel {
         this.setPreferredSize(new Dimension(this.width, this.height));
         this.setBackground(Color.WHITE);
         this.setOpaque(true);
-        this.setVerticalTextPosition(SwingConstants.TOP);
+        this.setVerticalTextPosition(SwingConstants.CENTER);
+        this.setHorizontalTextPosition(SwingConstants.CENTER);
+        this.setBorder(new EmptyBorder(0,20,0,0));
         super.setVisible(true);
     }
 
@@ -29,10 +32,11 @@ public class TextBox extends JLabel {
             this.components.removeFirst();
         }
         this.components.addLast(text);
-        String display = "";
+        String display = "<html>";
         for(String s : this.components){
-            display += s + "\n";
+            display += "\t\t\t" + s + "<br>";
         }
+        display += "</html>";
         this.setText(display);
     }
 }

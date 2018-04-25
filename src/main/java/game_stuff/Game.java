@@ -28,7 +28,7 @@ public abstract class Game {
     protected Screen gameScreen = null;
     protected Socket networkSocket = null;
     protected SnakeBuilder snakeMaker = new SnakeBuilder();
-    private int score = 0;
+    private int playerOneScore = 0, playerTwoScore = 0;
     //For sending moves over network
     protected DataOutputStream moveSender = null;
     //for receiving moves over network
@@ -100,11 +100,11 @@ public abstract class Game {
     public boolean isGameOver() {
         return gameOver;
     }
-
+/*
     /**
      * @author: Ian Laird
      * used to reset state of the game
-     */
+     *
     public boolean playAgain(boolean player1Status, GameRecord record) throws IOException{
         this.gameOver = false;
         moveSender.writeBoolean(player1Status);
@@ -120,6 +120,41 @@ public abstract class Game {
             return false;
         }
 
+    }*/
+
+    public boolean playAgain(GameRecord record){
+        LOGGER.info("playAgain");
+        this.gameScreen.addMessage("Would you like to play again? (y/n)");
+        while(!this.gameScreen.isButtonPressed()){
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        this.gameScreen.setButtonPressed(false);
+        this.gameOver = false;
+        if(gameScreen.isPlayAgain()) {
+            boolean player2Status = false;
+            try {
+                moveSender.writeBoolean(gameScreen.isPlayAgain());
+                player2Status = moveReader.readBoolean();
+            } catch (IOException e) {
+                this.gameScreen.dispose();
+                return false;
+            }
+            if(gameScreen.isPlayAgain() && player2Status) {
+                this.restoreFromOldState(record);
+                return true;
+            } else {
+                this.gameScreen.dispose();
+                return false;
+            }
+        }
+        else {
+            this.gameScreen.dispose();
+            return false;
+        }
     }
 
     /**
@@ -142,6 +177,7 @@ public abstract class Game {
         this.playerOne = Snake.makeSnake(old.getSnakeOneRecord());
         this.playerTwo = Snake.makeSnake(old.getSnakeTwoRecord());
         this.powerUp = old.getPowerUpLocation();
+        this.hasBegun = false;
     }
 
     /**
@@ -157,6 +193,10 @@ public abstract class Game {
         gameScreen.plotSnake(playerTwo);
         gameScreen.updateScreen();
         gameScreen.showScreen();
+        gameScreen.addMessage("Welcome to Snake! The rules are simple and as follows - ");
+        gameScreen.addMessage("Use the arrow keys to move and eat the power-ups(blue tiles) to increase your length.");
+        gameScreen.addMessage("Don't run into your opponent or the boundaries of the map or you will lose.");
+        gameScreen.addMessage("Please press space once you are ready to play.");
     }
 
     /**
@@ -190,7 +230,7 @@ public abstract class Game {
             gameScreen.plotWinScreen();
             gameScreen.addMessage("Yay you just won");
             LOGGER.info("Yay you just won");
-            this.score+=5;
+            this.playerOneScore+=5;
 
             this.gameOver = true;
             return;
@@ -198,15 +238,15 @@ public abstract class Game {
         boolean powerUpEaten = false;
         if(powerUp.equals(playerOneMove)){
             playerOne.increaseLength();
-            score+=1;
+            playerOneScore+=1;
             powerUpEaten = true;
-            gameScreen.addMessage("You've just eaten a Power-Up");
-
+            gameScreen.addMessage("You've just eaten a Power-Up - Your new score is " + playerOneScore);
         }
         if(powerUp.equals(playerTwoMove)){
             playerTwo.increaseLength();
             powerUpEaten = true;
-            gameScreen.addMessage("Player 2 has just eaten a Power-Up");
+            playerTwoScore+=1;
+            gameScreen.addMessage("Player 2 has just eaten a Power-Up - Their new score is " + playerTwoScore);
         }
         //get new power up location such that it is not occupied by a resources.Snake
         if(powerUpEaten) {
@@ -245,7 +285,7 @@ public abstract class Game {
      */
     protected boolean isMoveInBounds(Cell move){
         return((move.getRow() >= 0) && (move.getRow() < SCREEN_HEIGHT / Cell.getCellSize())
-                && (move.getCol() >= 0) && (move.getCol() < SCREEN_WIDTH / Cell.getCellSize()));
+                && (move.getCol() >= 0) && (move.getCol() < SCREEN_WIDTH / (2* Cell.getCellSize())));
     }
 
     /**
@@ -307,7 +347,7 @@ public abstract class Game {
         moveSender.writeInt(move.getCol());
     }
     public int getScore() {
-        return score;
+        return playerOneScore;
     }
 
     public String getIP() throws UnknownHostException {
@@ -359,6 +399,7 @@ public abstract class Game {
     public Cell getPowerUp() {
         return powerUp;
     }
+
     public boolean hasBegun() throws IOException{
 
         if(this.gameScreen.isHasBegun()) {

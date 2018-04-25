@@ -28,6 +28,8 @@ public class Screen extends JFrame implements KeyListener {
     protected static Logger LOGGER = Logger.getLogger("Screen");
     private boolean debugging = true;
     private boolean hasBegun = false;
+    private boolean isPlayAgain = false;
+    private boolean buttonPressed;
 
     /**
      * @author: Andrew Walker
@@ -184,7 +186,8 @@ public class Screen extends JFrame implements KeyListener {
             wrapper.getBoard().unColorLocation(s.getPrevTail().getRow(), s.getPrevTail().getCol());
         }
         for(Cell c : s.getSnakeLocations()){
-            wrapper.getBoard().colorLocation(c.getRow(), c.getCol(), s.getColor());
+            if(c.getCol() >= 0 && c.getCol() < this.width / (2 * Cell.getCellSize()) && c.getRow() >= 0 && c.getRow() < this.height / Cell.getCellSize())
+                wrapper.getBoard().colorLocation(c.getRow(), c.getCol(), s.getColor());
         }
     }
 
@@ -202,7 +205,8 @@ public class Screen extends JFrame implements KeyListener {
             case KeyEvent.VK_UP: if(state != Direct.DOWN) state = Direct.UP; break;
             case KeyEvent.VK_DOWN: if(state != Direct.UP) state = Direct.DOWN; break;
             case KeyEvent.VK_SPACE: if(!hasBegun) hasBegun = true; break;
-
+            case KeyEvent.VK_Y: if(!isPlayAgain) isPlayAgain = true; buttonPressed = true; break;
+            case KeyEvent.VK_N: if(isPlayAgain) isPlayAgain = false; buttonPressed = true; break;
         }
     }
 
@@ -220,6 +224,8 @@ public class Screen extends JFrame implements KeyListener {
             case KeyEvent.VK_UP: if(state != Direct.DOWN) state = Direct.UP; break;
             case KeyEvent.VK_DOWN: if(state != Direct.UP) state = Direct.DOWN; break;
             case KeyEvent.VK_SPACE: if(!hasBegun) hasBegun = true; break;
+            case KeyEvent.VK_Y: if(!isPlayAgain) isPlayAgain = true; buttonPressed = true; break;
+            case KeyEvent.VK_N: if(isPlayAgain) isPlayAgain = false; buttonPressed = true; break;
         }
     }
 
@@ -236,6 +242,8 @@ public class Screen extends JFrame implements KeyListener {
             case KeyEvent.VK_LEFT: if(state != Direct.RIGHT) state = Direct.LEFT; break;
             case KeyEvent.VK_UP: if(state != Direct.DOWN) state = Direct.UP; break;
             case KeyEvent.VK_DOWN: if(state != Direct.UP) state = Direct.DOWN; break;
+            case KeyEvent.VK_Y: if(!isPlayAgain) isPlayAgain = true; break;
+            case KeyEvent.VK_N: if(isPlayAgain) isPlayAgain = false; break;
         }
     }
 
@@ -252,4 +260,16 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     public Direct getState2(){return this.state;}
+
+    public boolean isPlayAgain(){
+        return this.isPlayAgain;
+    }
+
+    public boolean isButtonPressed(){
+        return buttonPressed;
+    }
+
+    public void setButtonPressed(boolean buttonPressed){
+        this.buttonPressed = buttonPressed;
+    }
 }

@@ -35,7 +35,6 @@ public class Wrapper extends JPanel {
 
     public void initText(){
         this.textBox = new TextBox(this.width / numComponents, this.height);
-        this.textBox.addText("This is a test");
         super.add(BorderLayout.LINE_END, this.textBox);
         LOGGER.info("Initialized TextBox");
     }

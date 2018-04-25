@@ -57,7 +57,7 @@ public class Main {
                     ourGame.MovePlayers();
                     Thread.sleep(500);
                 }
-            } while (playAgain(ourGame, initialGame));
+            } while (ourGame.playAgain(initialGame));
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.severe("Exception occurred while playing the game: " + e.getMessage());
@@ -103,7 +103,8 @@ public class Main {
         }
 
         return thisGame;
-    }*/
+    }
+
     public static boolean playAgain(Game toReset, GameRecord record){
         System.out.println("Would you like to play again? (y | n)");
         Scanner cin = new Scanner(System.in);
@@ -114,5 +115,5 @@ public class Main {
             ret = false;
         }
         return ret;
-    }
+    }*/
 }
