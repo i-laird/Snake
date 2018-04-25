@@ -14,11 +14,38 @@ public class Main {
     private static Logger LOGGER = Logger.getLogger("Main Class");
 
     public static void main(String [] args) {
-        Initializer.showScren();
+        boolean isServer;
+        String host;
+
+        Initializer i = new Initializer();
+        i.startModal();
+        isServer = Initializer.getIsServer();
+        host = Initializer.getHost();
+        LOGGER.info("Generated Game Data");
 
         //This creates the Screen in Game makeScreen
-        LOGGER.info("Initializing Game Loop");
-        Game ourGame = initgame();
+        LOGGER.info("Generating Game");
+        Game ourGame =  gameMaker.generateGame(isServer);
+
+        try {
+            LOGGER.info("Initializing Game");
+            if(ourGame.initConnection(host, PORT_NUM))
+                i.close();
+        } catch(NetworkException e){
+            LOGGER.severe("Network failed to initialize!");
+            LOGGER.info("Game is shutting down now");
+            System.exit(-1);
+        }
+
+        try{
+            ourGame.initGame();
+        }
+        catch(IOException f){
+            LOGGER.severe("Network write/ read error");
+            LOGGER.info("Game is shutting down now");
+            System.exit(-1);
+        }
+
         //Save the game state
         GameRecord initialGame = ourGame.createRecord();
         try {
@@ -42,7 +69,7 @@ public class Main {
      * @author Ian Laird
      * @return initialized Game
      */
-    public static Game initgame(){
+    /*public static Game initgame(){
         Scanner cin = new Scanner(System.in);
         boolean isServer = false;
         String option;
@@ -76,7 +103,7 @@ public class Main {
         }
 
         return thisGame;
-    }
+    }*/
     public static boolean playAgain(Game toReset, GameRecord record){
         System.out.println("Would you like to play again? (y | n)");
         Scanner cin = new Scanner(System.in);

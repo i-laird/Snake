@@ -1,5 +1,6 @@
 package game_stuff;
 import Directions.Direction;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import display.Screen;
 import exceptions.BuilderException;
 import resources.*;
@@ -39,14 +40,13 @@ public abstract class Game {
     private boolean hasBegun = false;
     //////////////////////////////////////////////////////////////////////////////////////
 
-
     /**
      * @author Ian Laird
      * @param hostName name of the server
      * @param portNum port of the server
      * @throws NetworkException if error connecting to the server
      */
-    public void initGame(String hostName, int portNum) throws NetworkException, IOException {
+    public boolean initConnection(String hostName, int portNum) throws NetworkException {
         //initialize the network
         try {
             initializeSocket(hostName, portNum);
@@ -57,8 +57,14 @@ public abstract class Game {
         }
         if(!initNetIn() || !initNetOut()){
             LOGGER.severe("Network initialization failed");
-            throw new NetworkException("Network Init error");
+            return false;
+            //throw new NetworkException("Network Init error");
+        } else {
+            return true;
         }
+    }
+
+    public void initGame() throws IOException {
         initSnakes();
         initScreen();
     }
