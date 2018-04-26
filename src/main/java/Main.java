@@ -1,11 +1,16 @@
 import display.Initializer;
-import game_stuff.Game;
-import game_stuff.GameRecord;
-import game_stuff.gameMaker;
+import game.*;
 import exceptions.NetworkException;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class Main {
@@ -16,21 +21,37 @@ public class Main {
     public static void main(String [] args) {
         boolean isServer;
         String host;
+        String username;
 
-        Initializer i = new Initializer();
-        i.startModal();
+        //Initializer i = new Initializer();
+        Initializer.startModal();
         isServer = Initializer.getIsServer();
         host = Initializer.getHost();
+        username = Initializer.getUsername();
         LOGGER.info("Generated Game Data");
 
         //This creates the Screen in Game makeScreen
         LOGGER.info("Generating Game");
         Game ourGame =  gameMaker.generateGame(isServer);
+        ourGame.setUsername(username);
+
+        GameReport gameReport = null;
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(GameReport.class);
+            Unmarshaller um = context.createUnmarshaller();
+            gameReport = (GameReport) um.unmarshal(new FileReader(
+                    "./gameReport.xml"));
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException fnfe){
+            gameReport = new GameReport();
+        }
 
         try {
             LOGGER.info("Initializing Game");
             if(ourGame.initConnection(host, PORT_NUM))
-                i.close();
+                Initializer.close();
         } catch(NetworkException e){
             LOGGER.severe("Network failed to initialize!");
             LOGGER.info("Game is shutting down now");
@@ -57,10 +78,20 @@ public class Main {
                     ourGame.MovePlayers();
                     Thread.sleep(500);
                 }
+                gameReport.ammend(ourGame);
             } while (ourGame.playAgain(initialGame));
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.severe("Exception occurred while playing the game: " + e.getMessage());
+        }
+
+        try{
+            context = JAXBContext.newInstance(GameReport.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            m.marshal(gameReport, new File("./gameReport.xml"));
+        } catch(JAXBException e){
+            e.printStackTrace();
         }
     }
 

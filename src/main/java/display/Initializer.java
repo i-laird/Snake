@@ -9,27 +9,35 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import java.awt.event.*;
 import java.net.InetAddress;
 
-
+/**
+ * This class creates a popup to prompt for imput from the user to
+ * initialize the {@link game.Game}
+ */
 public class Initializer extends Application{
     private static boolean isServer;
     private static String host, username;
-    private static boolean done;
     private static Stage stage;
 
-    public Initializer() {
-
-    }
-
-    public void startModal(){
+    /**
+     * This function launches the modal
+     */
+    public static void startModal(){
         launch();
     }
 
+    /**
+     * This is the main function for building and displaying the popup
+     * @param initStage the initial stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage initStage) throws Exception {
 
@@ -45,7 +53,7 @@ public class Initializer extends Application{
 
         Text initialPrompt = new Text("Will you be a server or a client?");
         InetAddress localhost = InetAddress.getLocalHost();
-        Text ipPrompt = new Text("You IP Address is - " + (localhost.getHostAddress()).trim() + "\nCopy down the IP Address for the client and then click OK");
+        Text ipPrompt = new Text("You IP Address is - " + (localhost.getHostAddress()).trim() + "\nCopy down the IP Address for the client and then click OK \n(This window will close)");
         ipPrompt.setVisible(false);
 
         TextField hostField = new TextField();
@@ -61,10 +69,8 @@ public class Initializer extends Application{
         Button submitButton = new Button("Submit");
         submitButton.setMinWidth(80);
         submitButton.setOnMouseClicked(e -> {
-            done = true;
             username = usernameField.getText();
             host = hostField.getText();
-            //stage.hide();
             if(isServer) {
                 ipPrompt.setVisible(true);
                 submitButton.setDisable(true);
@@ -121,9 +127,14 @@ public class Initializer extends Application{
         initialPromptBox.setPadding(new Insets(10, 10, 10, 10));
         clientServer.setAlignment(Pos.CENTER);
 
+        StackPane ipRoot = new StackPane();
+        ipPrompt.setTextAlignment(TextAlignment.CENTER);
+        ipRoot.getChildren().addAll(ipPrompt);
+        StackPane.setAlignment(ipPrompt, Pos.CENTER);
+
         VBox vbox = new VBox();
         vbox.setSpacing(5);
-        vbox.getChildren().addAll(initialPromptBox, usernameField, hostField, submitButton, ipPrompt, closeButton);
+        vbox.getChildren().addAll(initialPromptBox, usernameField, hostField, submitButton, ipRoot, closeButton);
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 10, 10, 10));
         vbox.setAlignment(Pos.CENTER);
@@ -134,24 +145,34 @@ public class Initializer extends Application{
         stage.show();
     }
 
+    /**
+     * Returns if it is going to be a server game
+     * @return if it is going to be a server game
+     */
     public static boolean getIsServer(){
         return isServer;
     }
 
+    /**
+     * Gets the hostname for the connection
+     * @return the hostname for the connection
+     */
     public static String getHost(){
         return host;
     }
 
-    public static boolean getIsDone(){
-        return done;
-    }
-
+    /**
+     * This function returns the username of the player
+     * @return
+     */
     public static String getUsername(){
         return username;
     }
 
-    public void close(){
-        //stage.hide();
+    /**
+     * This function closes the popup
+     */
+    public static void close(){
         Platform.exit();
     }
 }

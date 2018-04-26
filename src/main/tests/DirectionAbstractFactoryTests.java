@@ -1,12 +1,12 @@
-import Directions.*;
-import Enums.Direct;
+import directions.*;
+import enums.Direct;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * {@link DirectionAbstractFactoryTests} tests the Abstract factory for Directions.
+ * {@link DirectionAbstractFactoryTests} tests the Abstract factory for directions.
  * @author Ian laird
  */
 public class DirectionAbstractFactoryTests {

@@ -1,6 +1,4 @@
-package game_stuff;
-import Directions.Direction;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+package game;
 import display.Screen;
 import exceptions.BuilderException;
 import resources.*;
@@ -23,17 +21,25 @@ public abstract class Game {
     protected static final int SCREEN_WIDTH = 800;
     protected static final int SCREEN_HEIGHT = 400;
     protected static Logger LOGGER = Logger.getLogger("Game");
+
+    protected SnakeBuilder snakeMaker = new SnakeBuilder();
     protected Snake playerOne = null;
     protected Snake playerTwo = null;
-    protected Screen gameScreen = null;
+    protected int playerOneScore = 0;
+    protected int playerTwoScore = 0;
+    private String username;
+    private String player2Username;
+
     protected Socket networkSocket = null;
-    protected SnakeBuilder snakeMaker = new SnakeBuilder();
-    private int playerOneScore = 0, playerTwoScore = 0;
     //For sending moves over network
     protected DataOutputStream moveSender = null;
     //for receiving moves over network
     protected DataInputStream moveReader = null;
+
+    protected Screen gameScreen = null;
+
     private boolean gameOver = false;
+
 
     //Power up location is communicated over network through server to client
     Cell powerUp = null;
@@ -65,6 +71,9 @@ public abstract class Game {
     }
 
     public void initGame() throws IOException {
+        moveSender.writeUTF(this.username);
+        this.player2Username = moveReader.readUTF();
+        LOGGER.info("Initialized Username");
         initSnakes();
         initScreen();
     }
@@ -100,27 +109,6 @@ public abstract class Game {
     public boolean isGameOver() {
         return gameOver;
     }
-/*
-    /**
-     * @author: Ian Laird
-     * used to reset state of the game
-     *
-    public boolean playAgain(boolean player1Status, GameRecord record) throws IOException{
-        this.gameOver = false;
-        moveSender.writeBoolean(player1Status);
-        boolean player2Status = moveReader.readBoolean();
-        //See if both players want to restart the game
-        if(player1Status && player2Status) {
-            this.restoreFromOldState(record);
-//            initSnakes();
-//            resetPowerUp();
-            return true;
-        } else {
-            this.gameScreen.dispose();
-            return false;
-        }
-
-    }*/
 
     public boolean playAgain(GameRecord record){
         LOGGER.info("playAgain");
@@ -133,6 +121,7 @@ public abstract class Game {
             }
         }
         this.gameScreen.setButtonPressed(false);
+        this.gameScreen.setHasBegun(false);
         this.gameOver = false;
         if(gameScreen.isPlayAgain()) {
             boolean player2Status = false;
@@ -145,6 +134,7 @@ public abstract class Game {
             }
             if(gameScreen.isPlayAgain() && player2Status) {
                 this.restoreFromOldState(record);
+                this.gameScreen.addMessage("Press space when you are ready!");
                 return true;
             } else {
                 this.gameScreen.dispose();
@@ -185,7 +175,7 @@ public abstract class Game {
      * @author Ian Laird
      */
     protected void initScreen(){
-        gameScreen = Screen.getInstance(SCREEN_WIDTH, SCREEN_HEIGHT);
+        gameScreen = Screen.getInstance(SCREEN_WIDTH, SCREEN_HEIGHT + 50);
         gameScreen.init();
         gameScreen.plotBackground();
         gameScreen.plotPowerUp(powerUp);
@@ -217,7 +207,6 @@ public abstract class Game {
         if(playerDeadAfterMove(playerTwo, playerOneMove)){
             System.out.println(playerOne.getHeadLocation().getRow() + " " + playerOne.getHeadLocation().getCol());
             gameOver = true;
-            gameScreen.plotDefeatScreen();
             gameScreen.addMessage("Sorry you lost");
             LOGGER.info("Sorry you lost");
             this.gameOver = true;
@@ -227,7 +216,6 @@ public abstract class Game {
         if(playerDeadAfterMove(playerOne, playerTwoMove)){
             System.out.println(playerTwo.getHeadLocation().getRow() + " " + playerTwo.getHeadLocation().getCol());
             gameOver = true;
-            gameScreen.plotWinScreen();
             gameScreen.addMessage("Yay you just won");
             LOGGER.info("Yay you just won");
             this.playerOneScore+=5;
@@ -240,13 +228,15 @@ public abstract class Game {
             playerOne.increaseLength();
             playerOneScore+=1;
             powerUpEaten = true;
-            gameScreen.addMessage("You've just eaten a Power-Up - Your new score is " + playerOneScore);
+            gameScreen.addMessage("You have just eaten a Power-Up");
+            gameScreen.addMessage("Your new score is " + playerOneScore);
         }
         if(powerUp.equals(playerTwoMove)){
             playerTwo.increaseLength();
             powerUpEaten = true;
             playerTwoScore+=1;
-            gameScreen.addMessage("Player 2 has just eaten a Power-Up - Their new score is " + playerTwoScore);
+            gameScreen.addMessage(player2Username + " has just eaten a Power-Up");
+            gameScreen.addMessage(player2Username + "'s new score is " + playerTwoScore);
         }
         //get new power up location such that it is not occupied by a resources.Snake
         if(powerUpEaten) {
@@ -425,5 +415,37 @@ public abstract class Game {
 
     public void setPowerUp(Cell powerUp) {
         this.powerUp = powerUp;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getPlayerOneScore() {
+        return playerOneScore;
+    }
+
+    public void setPlayerOneScore(int playerOneScore) {
+        this.playerOneScore = playerOneScore;
+    }
+
+    public int getPlayerTwoScore() {
+        return playerTwoScore;
+    }
+
+    public void setPlayerTwoScore(int playerTwoScore) {
+        this.playerTwoScore = playerTwoScore;
+    }
+
+    public void amendReport(GameReport gr){
+        gr.ammend(this);
+    }
+
+    public String getPlayer2Username(){
+        return player2Username;
     }
 }

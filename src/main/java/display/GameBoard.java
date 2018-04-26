@@ -64,6 +64,11 @@ public class GameBoard extends JPanel {
         this.plot[row][col] = BACKGROUND;
     }
 
+
+    /**
+     * @author Andrew Walker
+     * This method plots the default color in the entire master matrix
+     */
     public void plotBackground() {
         for(int x = 0; x < height / Cell.getCellSize(); x++){
             for(int y = 0; y < width / Cell.getCellSize(); y++){

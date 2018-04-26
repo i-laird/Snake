@@ -1,4 +1,4 @@
-package Enums;
+package enums;
 
 /**
  * @author Ian Laird

@@ -1,7 +1,7 @@
 import exceptions.BuilderException;
-import game_stuff.Game;
-import game_stuff.GameRecord;
-import game_stuff.gameMaker;
+import game.Game;
+import game.GameRecord;
+import game.gameMaker;
 import org.junit.jupiter.api.Test;
 import resources.Cell;
 import resources.SnakeBuilder;

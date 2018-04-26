@@ -1,6 +1,6 @@
-package Directions;
+package directions;
 
-import Enums.Direct;
+import enums.Direct;
 
 /**
  * @author Ian Laird

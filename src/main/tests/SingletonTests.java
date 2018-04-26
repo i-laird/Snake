@@ -1,6 +1,6 @@
 import display.Screen;
-import game_stuff.ServerGame;
-import game_stuff.gameMaker;
+import game.ServerGame;
+import game.gameMaker;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertSame;

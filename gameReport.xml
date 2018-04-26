@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<report>
+    <game>
+        <Player 1>Andrew</Player 1>
+        <Player 2>Andrew</Player 2>
+        <Player 1 Score>0</Player 1 Score>
+        <Player 2 Score>1</Player 2 Score>
+    </game>
+</report>

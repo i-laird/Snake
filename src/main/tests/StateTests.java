@@ -1,7 +1,7 @@
-import Enums.Direct;
+import enums.Direct;
 import display.Screen;
-import game_stuff.Game;
-import game_stuff.gameMaker;
+import game.Game;
+import game.gameMaker;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -1,4 +1,4 @@
-package game_stuff;
+package game;
 
 /**
  * @author Ian Laird

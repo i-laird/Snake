@@ -1,4 +1,4 @@
-package game_stuff;
+package game;
 
 import resources.Cell;
 import resources.Snake;

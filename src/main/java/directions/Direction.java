@@ -1,4 +1,4 @@
-package Directions;
+package directions;
 
 import resources.Cell;
 import resources.Snake;

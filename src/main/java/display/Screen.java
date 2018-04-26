@@ -1,8 +1,8 @@
 package display;
 
-import Directions.Direction;
-import Enums.Direct;
-import Directions.DirectionFactory;
+import directions.Direction;
+import enums.Direct;
+import directions.DirectionFactory;
 import resources.Cell;
 import resources.Snake;
 
@@ -19,17 +19,17 @@ import static java.awt.Color.BLUE;
  * @author Andrew Walker
  */
 public class Screen extends JFrame implements KeyListener {
+    protected static Logger LOGGER = Logger.getLogger("Screen");
+    private static Screen thisInstance = null;
     private int width;
     private int height;
-    private static Screen thisInstance = null;
-    Wrapper wrapper;
+
     private Direct state = Direct.UP;
-    private GameBoard board;
-    protected static Logger LOGGER = Logger.getLogger("Screen");
-    private boolean debugging = true;
     private boolean hasBegun = false;
     private boolean isPlayAgain = false;
     private boolean buttonPressed;
+
+    private Wrapper wrapper;
 
     /**
      * @author: Andrew Walker
@@ -55,8 +55,12 @@ public class Screen extends JFrame implements KeyListener {
         LOGGER.info("Initialized Screen");
     }
 
+    /**
+     * This function inits the inner wrapper of the components and adds it to the
+     * Screen
+     */
     public void init(){
-        this.wrapper = new Wrapper(this.width, this.height);
+        this.wrapper = new Wrapper();
         wrapper.initBoard();
         wrapper.initText();
         super.add(this.wrapper);
@@ -98,27 +102,6 @@ public class Screen extends JFrame implements KeyListener {
     public void hideScreen(){
         super.setVisible(false);
     }
-
-    public void plotWinScreen(){
-        //TODO
-    }
-
-    public void plotDefeatScreen(){
-        //TODO
-    }
-//
-//    /**
-//     * @author Andrew Walker
-//     * This method is plots the whole screen the default color
-//     */
-//    public void plotBackground(){
-//        for(int x = 0; x < height / Cell.getCellSize(); x++){
-//            for(int y = 0; y < width / Cell.getCellSize(); y++){
-//                board.unColorLocation(x,y);
-//            }
-//        }
-//    }
-
 
     /**
      * @author Andrew Walker
@@ -198,7 +181,6 @@ public class Screen extends JFrame implements KeyListener {
      */
     @Override
     public void keyTyped(KeyEvent e) {
-        if(debugging) System.out.println("keyTyped: " + e.getKeyCode());
         switch(e.getKeyCode()){
             case KeyEvent.VK_RIGHT: if(state != Direct.LEFT) state = Direct.RIGHT; break;
             case KeyEvent.VK_LEFT: if(state != Direct.RIGHT) state = Direct.LEFT; break;
@@ -217,7 +199,6 @@ public class Screen extends JFrame implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        if(debugging) System.out.println("keyPressed: " + e.getKeyCode());
         switch(e.getKeyCode()){
             case KeyEvent.VK_RIGHT: if(state != Direct.LEFT) state = Direct.RIGHT; break;
             case KeyEvent.VK_LEFT: if(state != Direct.RIGHT) state = Direct.LEFT; break;
@@ -236,7 +217,6 @@ public class Screen extends JFrame implements KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        if(debugging) System.out.println("keyReleased: " + e.getKeyCode());
         switch(e.getKeyCode()){
             case KeyEvent.VK_RIGHT: if(state != Direct.LEFT) state = Direct.RIGHT; break;
             case KeyEvent.VK_LEFT: if(state != Direct.RIGHT) state = Direct.LEFT; break;
@@ -247,14 +227,25 @@ public class Screen extends JFrame implements KeyListener {
         }
     }
 
+    /**
+     * This function plots the background on the game board
+     */
     public void plotBackground() {
         wrapper.getBoard().plotBackground();
     }
 
+    /**
+     * This function adds a message to the text box
+     * @param s the message to add to the text box
+     */
     public void addMessage(String s) {
         this.wrapper.getTextBox().addText(s);
     }
 
+    /**
+     * returns if the game has begun
+     * @return if the game has begun
+     */
     public boolean isHasBegun() {
         return this.hasBegun;
     }
@@ -272,4 +263,6 @@ public class Screen extends JFrame implements KeyListener {
     public void setButtonPressed(boolean buttonPressed){
         this.buttonPressed = buttonPressed;
     }
+
+    public void setHasBegun(boolean hasBegun){ this.hasBegun = hasBegun;}
 }
