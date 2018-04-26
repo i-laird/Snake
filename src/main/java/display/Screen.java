@@ -19,7 +19,7 @@ import static java.awt.Color.BLUE;
  * {@link Screen} is a singleton and controls Swing Graphics
  */
 public class Screen extends JFrame implements KeyListener {
-    private static Logger LOGGER = Logger.getLogger("Screen");
+    final private static Logger LOGGER = Logger.getLogger("Screen");
     private static Screen thisInstance = null;
     private int width;
     private int height;
@@ -164,6 +164,7 @@ public class Screen extends JFrame implements KeyListener {
             case KeyEvent.VK_SPACE: if(!hasBegun) hasBegun = true; break;
             case KeyEvent.VK_Y: if(!isPlayAgain) isPlayAgain = true; buttonPressed = true; break;
             case KeyEvent.VK_N: if(isPlayAgain) isPlayAgain = false; buttonPressed = true; break;
+            default: state = Direct.UP; break;
         }
     }
 
@@ -182,6 +183,7 @@ public class Screen extends JFrame implements KeyListener {
             case KeyEvent.VK_SPACE: if(!hasBegun) hasBegun = true; break;
             case KeyEvent.VK_Y: if(!isPlayAgain) isPlayAgain = true; buttonPressed = true; break;
             case KeyEvent.VK_N: if(isPlayAgain) isPlayAgain = false; buttonPressed = true; break;
+            default: state = Direct.UP; break;
         }
     }
 
@@ -199,6 +201,7 @@ public class Screen extends JFrame implements KeyListener {
             case KeyEvent.VK_DOWN: if(state != Direct.UP) state = Direct.DOWN; break;
             case KeyEvent.VK_Y: if(!isPlayAgain) isPlayAgain = true; break;
             case KeyEvent.VK_N: if(isPlayAgain) isPlayAgain = false; break;
+            default: state = Direct.UP; break;
         }
     }
 

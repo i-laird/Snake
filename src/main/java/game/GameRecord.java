@@ -67,4 +67,10 @@ public class GameRecord {
                 Objects.equals(getSnakeTwoRecord(), that.getSnakeTwoRecord()) &&
                 Objects.equals(getPowerUpLocation(), that.getPowerUpLocation());
     }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getSnakeOneRecord(), getSnakeTwoRecord(), getPowerUpLocation());
+    }
 }

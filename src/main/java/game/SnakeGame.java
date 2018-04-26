@@ -1,7 +1,7 @@
 package game;
 
 import display.Initializer;
-import exceptions.NetworkException;
+import exceptions.NetworkError;
 import reporting.GameReport;
 
 import javax.xml.bind.JAXBContext;
@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 public class SnakeGame {
 
     public final static int PORT_NUM = 2000;
-    private static Logger LOGGER = Logger.getLogger("command.SnakeRunner Class");
+    private static final Logger LOGGER = Logger.getLogger("command.SnakeRunner Class");
 
     /**
      * @author Andrew Walker
@@ -40,28 +41,43 @@ public class SnakeGame {
 
         //This creates the Screen in Game makeScreen
         LOGGER.info("Generating Game");
-        Game ourGame =  gameMaker.generateGame(isServer);
+        Game ourGame =  GameMaker.generateGame(isServer);
         ourGame.setPlayerOneUsername(username);
 
         GameReport gameReport = null;
         JAXBContext context = null;
+        FileReader readFrom = null;
         try {
             context = JAXBContext.newInstance(GameReport.class);
             Unmarshaller um = context.createUnmarshaller();
-            gameReport = (GameReport) um.unmarshal(new FileReader(
-                    "./gameReport.xml"));
-        } catch (Exception e){
-            gameReport = new GameReport();
+            File toRead = new File("./gameReport.xml");
+            if(toRead.exists()) {
+                readFrom = new FileReader(toRead);
+                gameReport = (GameReport) um.unmarshal(readFrom);
+            }
+            else{
+                gameReport = new GameReport();
+            }
+        } catch (FileNotFoundException e){
+            LOGGER.severe("FIle not found");
+        }catch(JAXBException f){
+            LOGGER.severe("JAXB error caught");
+        }finally{
+            try {
+                if (readFrom != null) {
+                    readFrom.close();
+                }
+            }catch(IOException e){}
         }
 
         try {
             LOGGER.info("Initializing Game");
             if(ourGame.initConnection(host, PORT_NUM))
                 Initializer.close();
-        } catch(NetworkException e){
+        } catch(NetworkError e){
             LOGGER.severe("Network failed to initialize!");
             LOGGER.info("Game is shutting down now");
-            System.exit(-1);
+            throw new RuntimeException();
         }
 
         try{
@@ -70,7 +86,7 @@ public class SnakeGame {
         catch(IOException f){
             LOGGER.severe("Network write/ read error");
             LOGGER.info("Game is shutting down now");
-            System.exit(-1);
+            throw new RuntimeException();
         }
 
         //Save the game state
@@ -81,7 +97,7 @@ public class SnakeGame {
                     Thread.sleep(250);
                 }
                 while (!ourGame.isGameOver()) {
-                    ourGame.MovePlayers();
+                    ourGame.movePlayers();
                     Thread.sleep(500);
                 }
                 gameReport.ammend(ourGame);

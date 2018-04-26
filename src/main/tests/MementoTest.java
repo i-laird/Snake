@@ -1,7 +1,7 @@
-import exceptions.BuilderException;
+import exceptions.SnakeBuilderError;
 import game.Game;
 import game.GameRecord;
-import game.gameMaker;
+import game.GameMaker;
 import org.junit.jupiter.api.Test;
 import resources.Cell;
 import resources.SnakeBuilder;
@@ -21,14 +21,14 @@ public class MementoTest {
     /**
      * This stores a Game as a memento and then retrieves it.
      * @author Ian laird
-     * @throws BuilderException-this will not be thrown
+     * @throws SnakeBuilderError -this will not be thrown
      */
     @Test
-    void testRestoration() throws BuilderException {
+    void testRestoration() throws SnakeBuilderError {
         Cell player1Cell = Cell.createRandom(100, 100);
         Cell player2Cell = Cell.createRandom(100, 100);
         Cell puCell = Cell.createRandom(100, 100);
-        g = gameMaker.generateGame(true);
+        g = GameMaker.generateGame(true);
         g.setPlayerOne(new SnakeBuilder().init().setColor(Color.BLACK).setStart(player1Cell).collectSnakeBuilder());
         g.setPlayerTwo(new SnakeBuilder().init().setColor(Color.GREEN).setStart(player2Cell).collectSnakeBuilder());
         g.setPowerUp(puCell);

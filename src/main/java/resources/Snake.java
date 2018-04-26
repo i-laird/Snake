@@ -169,4 +169,10 @@ public class Snake {
         }
         return status;
     }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(locations, getHeadLocation(), getPrevTail(), getColor(), length);
+    }
 }

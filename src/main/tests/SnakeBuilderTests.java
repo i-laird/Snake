@@ -1,4 +1,4 @@
-import exceptions.BuilderException;
+import exceptions.SnakeBuilderError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import resources.Cell;
@@ -31,10 +31,10 @@ public class SnakeBuilderTests {
     /**
      * tests Builder setting color
      * @author Ian laird
-     * @throws BuilderException if Builder is not initialized
+     * @throws SnakeBuilderError if Builder is not initialized
      */
     @Test
-    public void colorTest() throws BuilderException{
+    public void colorTest() throws SnakeBuilderError {
         testSnake = sb.init().setColor(Color.BLUE).collectSnakeBuilder();
         assertEquals(testSnake.getColor(), Color.BLUE);
     }
@@ -42,10 +42,10 @@ public class SnakeBuilderTests {
     /**
      * tests Builder setting start Location
      * @author Ian laird
-     * @throws BuilderException if Builder is not initialized
+     * @throws SnakeBuilderError if Builder is not initialized
      */
     @Test
-    public void locationTest() throws BuilderException{
+    public void locationTest() throws SnakeBuilderError {
         testSnake = sb.init().setStart(new Cell(0, 0)).collectSnakeBuilder();
         assertEquals(testSnake.getHeadLocation(), new Cell(0, 0));
     }
@@ -53,10 +53,10 @@ public class SnakeBuilderTests {
     /**
      * tests Builder setting color and start location
      * @author Ian laird
-     * @throws BuilderException if Builder is not initialized
+     * @throws SnakeBuilderError if Builder is not initialized
      */
     @Test
-    public void bothTest() throws BuilderException{
+    public void bothTest() throws SnakeBuilderError {
         testSnake = sb.init().setColor(Color.BLACK).setStart(new Cell(5, 5)).collectSnakeBuilder();
         assertEquals(Color.BLACK, testSnake.getColor());
         assertEquals(testSnake.getHeadLocation(), new Cell(5, 5));
@@ -68,6 +68,6 @@ public class SnakeBuilderTests {
      */
     @Test
     public void testExceptionThrown(){
-        assertThrows(BuilderException.class, ()->sb.setColor(Color.BLACK));
+        assertThrows(SnakeBuilderError.class, ()->sb.setColor(Color.BLACK));
     }
 }

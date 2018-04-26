@@ -1,6 +1,6 @@
 package resources;
 
-import exceptions.BuilderException;
+import exceptions.SnakeBuilderError;
 
 import java.awt.*;
 
@@ -22,9 +22,9 @@ public class SnakeBuilder {
      * @param wantedColor the color that is desired
      * @return this for chaining
      */
-    public SnakeBuilder setColor(Color wantedColor) throws BuilderException{
+    public SnakeBuilder setColor(Color wantedColor) throws SnakeBuilderError {
         if(mySnake == null)
-            throw new BuilderException("need to init before setting color");
+            throw new SnakeBuilderError("need to init before setting color");
         mySnake.setColor(wantedColor);
         return this;
     }
@@ -34,9 +34,9 @@ public class SnakeBuilder {
      * @param startPos the initial position of the Snake
      * @return this for chaining
      */
-    public SnakeBuilder setStart(Cell startPos) throws BuilderException{
+    public SnakeBuilder setStart(Cell startPos) throws SnakeBuilderError {
         if(mySnake == null)
-            throw new BuilderException("need to init before can set Cell");
+            throw new SnakeBuilderError("need to init before can set Cell");
         mySnake.setHeadLocation(startPos);
         return this;
     }
@@ -45,9 +45,9 @@ public class SnakeBuilder {
      * returns the Snake that has been created.
      * @return created Snake
      */
-    public Snake collectSnakeBuilder() throws BuilderException{
+    public Snake collectSnakeBuilder() throws SnakeBuilderError {
         if(mySnake == null)
-            throw new BuilderException("need to init before collection");
+            throw new SnakeBuilderError("need to init before collection");
         Snake returnSnake = mySnake;
         mySnake = null;
         return returnSnake;

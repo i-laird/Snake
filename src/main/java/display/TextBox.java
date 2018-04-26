@@ -44,11 +44,13 @@ public class TextBox extends JLabel {
             this.components.removeFirst();
         }
         this.components.addLast(text);
-        String display = "<html>";
+        StringBuilder stringBuilt = new StringBuilder();
+        stringBuilt.append("<html>");
         for(String s : this.components){
-            display += "\t\t\t" + s + "<br>";
+            stringBuilt.append("\t\t\t").append(s).append("<br>");
         }
-        display += "</html>";
+        stringBuilt.append("</html>");
+        String display = stringBuilt.toString();
         this.setText(display);
     }
 }

@@ -24,7 +24,7 @@ public class Initializer extends Application{
     // The information needed from the user
     private static boolean isServer;
     private static String host, username;
-    private static Stage stage;
+    private Stage stage;
 
     /**
      * @author Andrew Walker

@@ -1,6 +1,5 @@
 import display.Screen;
-import game.ServerGame;
-import game.gameMaker;
+import game.GameMaker;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -27,7 +26,7 @@ public class SingletonTests {
      */
     @Test
     void testServer(){
-        assertSame(gameMaker.generateGame(IS_SERVER), gameMaker.generateGame(IS_SERVER));
+        assertSame(GameMaker.generateGame(IS_SERVER), GameMaker.generateGame(IS_SERVER));
     }
     /**
      * tests if more than one client are generated are generated
@@ -35,7 +34,7 @@ public class SingletonTests {
      */
     @Test
     void testClient(){
-        assertSame(gameMaker.generateGame(IS_CLIENT), gameMaker.generateGame(IS_CLIENT));
+        assertSame(GameMaker.generateGame(IS_CLIENT), GameMaker.generateGame(IS_CLIENT));
     }
     /**
      * tests if more than one Game  are generated if one is server and one is client from factory
@@ -43,6 +42,6 @@ public class SingletonTests {
      */
     @Test
     void serverAndClient(){
-        assertSame(gameMaker.generateGame(IS_SERVER), gameMaker.generateGame(IS_CLIENT));
+        assertSame(GameMaker.generateGame(IS_SERVER), GameMaker.generateGame(IS_CLIENT));
     }
 }

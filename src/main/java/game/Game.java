@@ -1,15 +1,13 @@
 package game;
 import display.Screen;
-import exceptions.BuilderException;
+import exceptions.SnakeBuilderError;
 import reporting.GameReport;
 import resources.*;
-import exceptions.NetworkException;
+import exceptions.NetworkError;
 
 import java.awt.*;
 import java.io.*;
-import java.net.Inet4Address;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.logging.Logger;
 
 /**
@@ -21,7 +19,7 @@ public abstract class Game {
 
     protected static final int SCREEN_WIDTH = 800;
     protected static final int SCREEN_HEIGHT = 400;
-    private static Logger LOGGER = Logger.getLogger("Game");
+    private static final Logger LOGGER = Logger.getLogger("Game");
 
     private SnakeBuilder snakeMaker = new SnakeBuilder();
     protected Snake playerOne = null;
@@ -45,21 +43,21 @@ public abstract class Game {
      * This function initializes the connnection
      * @param hostName name of the server
      * @param portNum port of the server
-     * @throws NetworkException if error connecting to the server
+     * @throws NetworkError if error connecting to the server
      */
-    public boolean initConnection(String hostName, int portNum) throws NetworkException {
+    public boolean initConnection(String hostName, int portNum) throws NetworkError {
         //initialize the network
         try {
             initializeSocket(hostName, portNum);
             LOGGER.info("Initialized Socket");
         }catch(IOException e){
             LOGGER.severe("Socket failed to open!");
-            throw new NetworkException("Socket Error");
+            throw new NetworkError("Socket Error");
         }
         if(!initNetIn() || !initNetOut()){
             LOGGER.severe("Network initialization failed");
             return false;
-            //throw new NetworkException("Network Init error");
+            //throw new NetworkError("Network Init error");
         } else {
             return true;
         }
@@ -95,7 +93,7 @@ public abstract class Game {
         try {
             this.playerOne = snakeMaker.init().setColor(Color.RED).setStart(start1).collectSnakeBuilder();
             this.playerTwo = snakeMaker.init().setColor(Color.GREEN).setStart(start2).collectSnakeBuilder();
-        }catch(BuilderException e){
+        }catch(SnakeBuilderError e){
             LOGGER.severe("Builder Exception caught");
         }
         LOGGER.info("Snakes were generated");
@@ -172,7 +170,8 @@ public abstract class Game {
         this.playerOne = Snake.makeSnake(old.getSnakeOneRecord());
         this.playerTwo = Snake.makeSnake(old.getSnakeTwoRecord());
         this.powerUp = old.getPowerUpLocation();
-        this.gameScreen.setHasBegun(false);
+        if(this.gameScreen != null)
+            this.gameScreen.setHasBegun(false);
     }
 
     /**
@@ -198,7 +197,7 @@ public abstract class Game {
      * @author: Ian Laird
      * This function retrieves moves for both players and then performs those moves
      */
-    public void MovePlayers() throws IOException{
+    public void movePlayers() throws IOException{
         Cell playerOneMove = getPlayerOneMove();
 
         //Send the move read from keyboard over TCP
@@ -418,7 +417,8 @@ public abstract class Game {
 
         if(this.gameScreen.isHasBegun()) {
             moveSender.writeBoolean(this.gameScreen.isHasBegun());
-            boolean player2Status = moveReader.readBoolean();
+            //Move being read means it is time to begin
+            moveReader.readBoolean();
             return true;
         }
         else
@@ -477,5 +477,17 @@ public abstract class Game {
      */
     public String getPlayerTwoUsername() {
         return playerTwoUsername;
+    }
+
+    public void setPlayerOne(Snake playerOne) {
+        this.playerOne = playerOne;
+    }
+
+    public void setPlayerTwo(Snake playerTwo) {
+        this.playerTwo = playerTwo;
+    }
+
+    public void setPowerUp(Cell powerUp) {
+        this.powerUp = powerUp;
     }
 }

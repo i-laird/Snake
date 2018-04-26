@@ -7,6 +7,5 @@ import command.SnakeRunner;
 public class Main {
     public static void main(String[] args) {
         GameRunner sn = new SnakeRunner();
-        sn.execute();
-    }
+        sn.execute(); }
 }

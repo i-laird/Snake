@@ -1,7 +1,6 @@
-import enums.Direct;
 import display.Screen;
 import game.Game;
-import game.gameMaker;
+import game.GameMaker;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,7 +16,7 @@ public class StateTests {
     void test1(){
         screenInstance = Screen.getInstance(100, 100);
         //this is the default state
-        assertEquals(Direct.UP, screenInstance.getState2());
-        g = gameMaker.generateGame(true);
+        assertEquals(0,  screenInstance.getState());
+        g = GameMaker.generateGame(true);
     }
 }

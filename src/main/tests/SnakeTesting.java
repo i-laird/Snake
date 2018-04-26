@@ -1,4 +1,4 @@
-import exceptions.BuilderException;
+import exceptions.SnakeBuilderError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import resources.Cell;
@@ -21,10 +21,10 @@ public class SnakeTesting {
     /**
      * This initialzes the two {@link Snake}
      * @author Ian laird
-     * @throws BuilderException-should never be thrown
+     * @throws SnakeBuilderError -should never be thrown
      */
     @BeforeEach
-    void init() throws BuilderException {
+    void init() throws SnakeBuilderError {
         ms = new SnakeBuilder().init().setColor(Color.BLACK).setStart(new Cell(0, 0)).collectSnakeBuilder();
         ms2 = new SnakeBuilder().init().setColor(Color.GREEN).setStart(new Cell(5, 5)).collectSnakeBuilder();
 
