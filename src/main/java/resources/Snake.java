@@ -34,9 +34,9 @@ public class Snake {
      * @param other the other Snake to copy from
      */
     private Snake(Snake other){
-        this.headLocation = other.headLocation;
+        this.headLocation = new Cell(other.headLocation);
         this.color = other.color;
-        this.prevTail = other.prevTail;
+        this.prevTail = (other.prevTail != null ? new Cell(other.prevTail) : null);
         this.locations = new ArrayDeque<>();
         other.locations.stream().forEach(x->this.locations.add(new Cell(x)));
     }
