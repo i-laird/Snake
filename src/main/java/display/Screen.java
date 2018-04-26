@@ -266,4 +266,8 @@ public class Screen extends JFrame implements KeyListener {
     public void setButtonPressed(boolean buttonPressed) {
         this.buttonPressed = buttonPressed;
     }
+
+    public Direct getState2(){
+        return this.state;
+    }
 }
