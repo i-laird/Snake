@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<report>
+    <game>
+        <Player1>Ian</Player1>
+        <Player2>Andrew</Player2>
+        <Player1Score>1</Player1Score>
+        <Player2Score>1</Player2Score>
+    </game>
+    <game>
+        <Player1>Andrew</Player1>
+        <Player2>Ian</Player2>
+        <Player1Score>0</Player1Score>
+        <Player2Score>0</Player2Score>
+    </game>
+    <game>
+        <Player1>Andrew</Player1>
+        <Player2>Ian</Player2>
+        <Player1Score>7</Player1Score>
+        <Player2Score>0</Player2Score>
+    </game>
+</report>

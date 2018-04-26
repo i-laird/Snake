@@ -221,6 +221,16 @@
 	\includegraphics[scale=.75]{DesignModel_better}
 	
 	\section{GRASP}
+		\begin{enumerate}
+			\item \textbf{High Cohesion:}\\
+			For high cohesion we focused on making sure the functions were delegated to the proper functions. For example the Game will handle all of the game logic and delegates display features, like printing to the screen, to the Screen object.
+			\item \textbf{Pure Fabrication:}\\
+			An example of pure fabrication in our project is our Wrapper class which is a container around the components and is then slotted into the Screen object.
+			\item \textbf{Information Expert:}\\
+			We delegated the creation of objects to the classes who know the required information. For example, the Wrapper is created by the Screen since the Screen knows what the width and height of the Wrapper need to be.
+			\item \textbf{Polymorphism:}\\
+			The Game uses polymorphism for if it is a client game or a server game.
+		\end{enumerate}
 	
 	\section{Design Patterns}
 		\begin{enumerate}
@@ -236,15 +246,15 @@
 			\item \textbf{State:}
 				State is used in the Screen to represent movement direction as determined by user keystrokes. It uses polymorphism to avoid using a switch statement in calculating the new snake position.
 			\item \textbf{Command:}\\
-				Command is used to represent the Game being executed. In this project there is only class that implements the GameCommand interface but it makes it so that new games you could easily be added to the project.
+				Command is used to represent the Game being executed. In this project there is only class that implements the GameRunner interface but it makes it so that new games you could easily be added to the project. The Main class runs a SnakeRunner which extends the abstract class GameRunner, and starts the SnakeGame;
 			\item \textbf{Memento:}\\
 				The memento design pattern is used when the players wish to restart the Game. It allows a version of the Game to be saved even though the Game is a singleton.
 		\end{enumerate}
 	\section{Stats}
 	\subsection{Hours Spent per User}
 	\textbf{Ian Laird:} ~~~~~20 hours\\
-	\textbf{Andrew Walker:}~10 hours
+	\textbf{Andrew Walker:}~23 hours
 	\subsection{Logical Lines from Each User}
-	\textbf{Ian Laird:} ~~~~~ lines\\
-	\textbf{Andrew Walker:}~ lines
+	\textbf{Ian Laird:} ~~~~~ 604 lines\\
+	\textbf{Andrew Walker:}~ 493 lines
 \end{document}

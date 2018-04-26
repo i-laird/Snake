@@ -98,7 +98,7 @@ public class SnakeGame {
                 }
                 while (!ourGame.isGameOver()) {
                     ourGame.movePlayers();
-                    Thread.sleep(500);
+                    Thread.sleep(150);
                 }
                 gameReport.ammend(ourGame);
             } while (ourGame.playAgain(initialGame));

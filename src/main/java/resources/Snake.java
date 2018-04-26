@@ -6,7 +6,7 @@ import java.util.Deque;
 import java.util.Objects;
 
 /**
- * @author Andrew Walker
+ * @author Ian Laird
  * This class implements the idea of the Snake
  */
 public class Snake {
@@ -67,7 +67,7 @@ public class Snake {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method increments the length of the snake
      */
     public void increaseLength(){
@@ -75,7 +75,7 @@ public class Snake {
     }
 
     /**
-     * @author: Ian Laird
+     * @author Ian Laird
      * @param moveTo
      * This method is used to record a resources.Snake movement
      * It removes the tail of teh snake and adds a new head

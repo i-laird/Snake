@@ -2,6 +2,7 @@ import command.GameRunner;
 import command.SnakeRunner;
 
 /**
+ * @author Andrew Walker
  * This is the main class for running the GameRunner
  */
 public class Main {
