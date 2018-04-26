@@ -4,17 +4,16 @@ import resources.Cell;
 import resources.Snake;
 
 /**
+ * @author Ian laird
  * implmentation of the {@link Direction} interface that generates a
  * Cell one below the current.
- *
- * @author Ian laird
  */
 public class Down implements Direction {
     /**
-     * moves the Snake to new position down
+     * @author Ian Laird
+     * This function moves the Snake to new position down
      * @param s-the Snake to be modified
      * @return the position
-     * @author Ian laird
      */
     @Override
     public Cell performUpdate(Snake s) {
@@ -22,9 +21,8 @@ public class Down implements Direction {
     }
 
     /**
-     * This is a factory method.
-     *
      * @author Ian laird
+     * This is a factory method.
      * @return new instance of {@link Down}
      */
     public static Direction create(){

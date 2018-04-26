@@ -4,17 +4,17 @@ import resources.Cell;
 import resources.Snake;
 
 /**
+ * @author Ian laird
  * implmentation of the {@link Direction} interface that generates a
  * Cell to the right of current location.
- *
- * @author Ian laird
  */
 public class Right implements Direction {
+
     /**
-     * moves the Snake to new position to the right
+     * @author Ian laird
+     * This function moves the Snake to new position to the right
      * @param s-the Snake to be modified
      * @return the position
-     * @author Ian laird
      */
     @Override
     public Cell performUpdate(Snake s) {

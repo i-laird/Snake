@@ -2,7 +2,6 @@ package display;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,19 +13,21 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import java.awt.event.*;
 import java.net.InetAddress;
 
 /**
- * This class creates a popup to prompt for imput from the user to
+ * @author Andrew Walker
+ * This class creates a popup to prompt for input from the user to
  * initialize the {@link game.Game}
  */
 public class Initializer extends Application{
+    // The information needed from the user
     private static boolean isServer;
     private static String host, username;
     private static Stage stage;
 
     /**
+     * @author Andrew Walker
      * This function launches the modal
      */
     public static void startModal(){
@@ -34,9 +35,10 @@ public class Initializer extends Application{
     }
 
     /**
+     * @author Andrew Walker
      * This is the main function for building and displaying the popup
      * @param initStage the initial stage
-     * @throws Exception
+     * @throws Exception if there is an issue generating the stage
      */
     @Override
     public void start(Stage initStage) throws Exception {
@@ -86,9 +88,7 @@ public class Initializer extends Application{
 
 
         closeButton.setMinWidth(80);
-        closeButton.setOnMouseClicked(e -> {
-            Platform.exit();
-        });
+        closeButton.setOnMouseClicked(e -> Platform.exit());
         closeButton.setVisible(false);
 
         serverButton.setMinWidth(80);
@@ -106,8 +106,6 @@ public class Initializer extends Application{
             hostField.setVisible(true);
             submitButton.setVisible(true);
         });
-
-
 
         HBox clientServer = new HBox();
         clientServer.getChildren().addAll(serverButton, clientButton);
@@ -146,6 +144,7 @@ public class Initializer extends Application{
     }
 
     /**
+     * @author Andrew Walker
      * Returns if it is going to be a server game
      * @return if it is going to be a server game
      */
@@ -154,6 +153,7 @@ public class Initializer extends Application{
     }
 
     /**
+     * @author Andrew Walker
      * Gets the hostname for the connection
      * @return the hostname for the connection
      */
@@ -162,14 +162,16 @@ public class Initializer extends Application{
     }
 
     /**
+     * @author Andrew Walker
      * This function returns the username of the player
-     * @return
+     * @return the username of the player
      */
     public static String getUsername(){
         return username;
     }
 
     /**
+     * @author Andrew Walker
      * This function closes the popup
      */
     public static void close(){

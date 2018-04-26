@@ -10,9 +10,9 @@ public class gameMaker {
 
     /**
      * @author Ian Laird
+     * Allows there to only be one game type in existence
      * @param isServer indicates if the generated game should be a server
      * @return the generated Game
-     * Allows there to only be one game type in existence
      */
     public static Game generateGame(boolean isServer){
         if(thisGame == null) {

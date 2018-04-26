@@ -15,11 +15,11 @@ import java.util.logging.Logger;
 import static java.awt.Color.BLUE;
 
 /**
- * {@link Screen} is a singleton and controls Swing Graphics
  * @author Andrew Walker
+ * {@link Screen} is a singleton and controls Swing Graphics
  */
 public class Screen extends JFrame implements KeyListener {
-    protected static Logger LOGGER = Logger.getLogger("Screen");
+    private static Logger LOGGER = Logger.getLogger("Screen");
     private static Screen thisInstance = null;
     private int width;
     private int height;
@@ -32,7 +32,7 @@ public class Screen extends JFrame implements KeyListener {
     private Wrapper wrapper;
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This method is the singleton constructor for the Screen
      * @param width the width of the frame
      * @param height the height of the frame
@@ -56,6 +56,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
+     * @author Andrew Walker
      * This function inits the inner wrapper of the components and adds it to the
      * Screen
      */
@@ -68,7 +69,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This function uses the singleton design pattern to return the instance of the screen
      * @return the instance of the Screen
      */
@@ -88,19 +89,11 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @author: Andrew Walker
+     * @author Andrew Walker
      * This function will toggle the display of the screen on
      */
     public void showScreen(){
         super.setVisible(true);
-    }
-
-    /**
-     * @author: Andrew Walker
-     * This function will toggle the display of the screen off
-     */
-    public void hideScreen(){
-        super.setVisible(false);
     }
 
     /**
@@ -124,30 +117,12 @@ public class Screen extends JFrame implements KeyListener {
 
     /**
      * @author Andrew Walker
-     * This method sets the width of the frame
-     * @param width the new width of the frame
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    /**
-     * @author Andrew Walker
      * This method returns the height of the frame
      * @return the height
      */
     @Override
     public int getHeight() {
         return height;
-    }
-
-    /**
-     * @author Andrew Walker
-     * This method sets the height of the frame
-     * @param height the new height of the frame
-     */
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     /**
@@ -228,6 +203,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
+     * @author Andrew Walker
      * This function plots the background on the game board
      */
     public void plotBackground() {
@@ -235,6 +211,7 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
+     * @author Andrew Walker
      * This function adds a message to the text box
      * @param s the message to add to the text box
      */
@@ -243,26 +220,47 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * returns if the game has begun
-     * @return if the game has begun
+     * @author Andrew Walker
+     * This function returns if the user has indicated they want to begin the game
+     * @return if the user has indicated they want to begin the game
      */
     public boolean isHasBegun() {
-        return this.hasBegun;
+        return hasBegun;
     }
 
-    public Direct getState2(){return this.state;}
-
-    public boolean isPlayAgain(){
-        return this.isPlayAgain;
+    /**
+     * @author Andrew Walker
+     * Resets if the user wants the game to start or not
+     * @param hasBegun a boolean dictating if the game should start
+     */
+    public void setHasBegun(boolean hasBegun) {
+        this.hasBegun = hasBegun;
     }
 
-    public boolean isButtonPressed(){
+    /**
+     * @author Andrew Walker
+     * This function returns if the user wants to play again
+     * @return if the user wants to play again
+     */
+    public boolean isPlayAgain() {
+        return isPlayAgain;
+    }
+
+    /**
+     * @author Andrew Walker
+     * This function returns if the user has puposefully indicated that they presses a button
+     * @return if the user has puposefully indicated that they presses a button
+     */
+    public boolean isButtonPressed() {
         return buttonPressed;
     }
 
-    public void setButtonPressed(boolean buttonPressed){
+    /**
+     * @author Andrew Walker
+     * This function resets if the user purposefully pressed a button
+     * @param buttonPressed a boolean dictating if a button has been pressed
+     */
+    public void setButtonPressed(boolean buttonPressed) {
         this.buttonPressed = buttonPressed;
     }
-
-    public void setHasBegun(boolean hasBegun){ this.hasBegun = hasBegun;}
 }

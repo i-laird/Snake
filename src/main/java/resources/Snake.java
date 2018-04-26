@@ -5,6 +5,10 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Objects;
 
+/**
+ * @author Andrew Walker
+ * This class implements the idea of the Snake
+ */
 public class Snake {
     //As the snake travels to new tiles we push on
     //As snake travels we pop tiles off b/c fixed length
@@ -26,8 +30,8 @@ public class Snake {
 
     /**
      * @author Ian Laird
-     * @param other
-     * Copy constructor
+     * This is the copy constructor
+     * @param other the other Snake to copy from
      */
     private Snake(Snake other){
         this.headLocation = other.headLocation;
@@ -39,23 +43,23 @@ public class Snake {
 
     /**
      * @author Ian Laird
-     * factory method for a Snake
+     * This function is a factory method for a Snake
      */
     public static Snake makeSnake(){
         return new Snake();
     }
     /**
      * @author Ian Laird
-     * @param other
      * Factory method that returns a copy.
+     * @param other the Snake to copy from
      */
     public static Snake makeSnake(Snake other){
         return new Snake(other);
     }
     /**
      * @author Ian Laird
-     * @param startPos
-     * sets the head location of the Snake.
+     * This function sets the head location of the Snake.
+     * @param startPos the starting location
      */
     void setHeadLocation(Cell startPos){
         this.headLocation = startPos;
@@ -86,10 +90,11 @@ public class Snake {
     }
 
     /**
+     * @author Ian Laird
      * This method sees if the indicated Location is present in the resources.Snake.
      * It is used to see check for resources.Snake collisions
-     * @param location
-     * @return
+     * @param location the location to check for
+     * @return if the Snake contains the location
      */
     public boolean containsMove(Cell location){
         return this.locations.contains(location);
@@ -97,7 +102,8 @@ public class Snake {
 
     /**
      * @author Ian Laird
-     * @return  Snake color
+     * This function returns the Snake's color
+     * @return the Snake's color
      */
     public Color getColor() {
         return color;
@@ -105,7 +111,8 @@ public class Snake {
 
     /**
      * @author Ian Laird
-     * @param   color- the new color
+     * This function sets the Snake to a new color
+     * @param color the new color
      */
     public void setColor(Color color) {
         this.color = color;
@@ -113,6 +120,7 @@ public class Snake {
 
     /**
      * @author Ian Laird
+     * This function returns the head location
      * @return location of the head
      */
     public Cell getHeadLocation() {
@@ -121,20 +129,28 @@ public class Snake {
 
     /**
      * @author Ian Laird
-     * @return  All Snake locations
+     * This function returns the collection of all the locations of the snake
+     * @return the collection of all the locations of the snake
      */
     public Deque<Cell> getSnakeLocations(){
         return this.locations;
     }
 
     /**
-     * @author Ian Laird
-     * @return  the Cell no longer occupied
+     * @author Andrew Walker
+     * Returns the Cell just cleared out of by the Snake
+     * @return the Cell no longer occupied
      */
     public Cell getPrevTail(){
         return this.prevTail;
     }
 
+    /**
+     * @author Ian Laird
+     * This function tests the equivalence of two Snake objects
+     * @param o the object to test against
+     * @return equivalence of two Objects
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

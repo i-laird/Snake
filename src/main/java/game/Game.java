@@ -1,6 +1,7 @@
 package game;
 import display.Screen;
 import exceptions.BuilderException;
+import reporting.GameReport;
 import resources.*;
 import exceptions.NetworkException;
 
@@ -12,42 +13,36 @@ import java.net.UnknownHostException;
 import java.util.logging.Logger;
 
 /**
+ * @author Ian Laird
  * {@link Game} represents the Game of Snake. It contains a Screen, Snakes,
  *  and the location of the power up.
- * @author Ian Laird
  */
 public abstract class Game {
 
     protected static final int SCREEN_WIDTH = 800;
     protected static final int SCREEN_HEIGHT = 400;
-    protected static Logger LOGGER = Logger.getLogger("Game");
+    private static Logger LOGGER = Logger.getLogger("Game");
 
-    protected SnakeBuilder snakeMaker = new SnakeBuilder();
+    private SnakeBuilder snakeMaker = new SnakeBuilder();
     protected Snake playerOne = null;
     protected Snake playerTwo = null;
-    protected int playerOneScore = 0;
-    protected int playerTwoScore = 0;
-    private String username;
-    private String player2Username;
+    private int playerOneScore = 0;
+    private int playerTwoScore = 0;
+    private String playerOneUsername;
+    private String playerTwoUsername;
 
     protected Socket networkSocket = null;
-    //For sending moves over network
     protected DataOutputStream moveSender = null;
-    //for receiving moves over network
     protected DataInputStream moveReader = null;
 
-    protected Screen gameScreen = null;
+    private Screen gameScreen = null;
+    protected Cell powerUp = null;
 
     private boolean gameOver = false;
 
-
-    //Power up location is communicated over network through server to client
-    Cell powerUp = null;
-    private boolean hasBegun = false;
-    //////////////////////////////////////////////////////////////////////////////////////
-
     /**
      * @author Ian Laird
+     * This function initializes the connnection
      * @param hostName name of the server
      * @param portNum port of the server
      * @throws NetworkException if error connecting to the server
@@ -70,9 +65,14 @@ public abstract class Game {
         }
     }
 
+    /**
+     * @author Andrew Walker
+     * This function initializes the game variables
+     * @throws IOException if there is an issue recieving or writing the usernames
+     */
     public void initGame() throws IOException {
-        moveSender.writeUTF(this.username);
-        this.player2Username = moveReader.readUTF();
+        moveSender.writeUTF(this.playerOneUsername);
+        this.playerTwoUsername = moveReader.readUTF();
         LOGGER.info("Initialized Username");
         initSnakes();
         initScreen();
@@ -104,12 +104,19 @@ public abstract class Game {
 
     /**
      * @author: Ian Laird
+     * This function returns if the game is over
      * @return indicates if the game is over
      */
     public boolean isGameOver() {
         return gameOver;
     }
 
+    /**
+     * @author Andrew Walker
+     * This function restores the game if the users want
+     * @param record the record to restore the game from
+     * @return if the users want to play again
+     */
     public boolean playAgain(GameRecord record){
         LOGGER.info("playAgain");
         this.gameScreen.addMessage("Would you like to play again? (y/n)");
@@ -148,9 +155,8 @@ public abstract class Game {
     }
 
     /**
-     * This records the current game for memento
-     *
      * @author Ian Laird
+     * This records the current game for memento
      * @return record of this Game
      */
     public GameRecord createRecord(){
@@ -158,21 +164,20 @@ public abstract class Game {
     }
 
     /**
-     * Restoring to old State using memento
-     *
      * @author Ian Laird
+     * Restoring to old State using memento
      * @param old-The Game record that this Game will be restored to
      */
     public void restoreFromOldState(GameRecord old){
         this.playerOne = Snake.makeSnake(old.getSnakeOneRecord());
         this.playerTwo = Snake.makeSnake(old.getSnakeTwoRecord());
         this.powerUp = old.getPowerUpLocation();
-        this.hasBegun = false;
+        this.gameScreen.setHasBegun(false);
     }
 
     /**
-     * initializes the Screen for the game
      * @author Ian Laird
+     * This function initializes the Screen for the game
      */
     protected void initScreen(){
         gameScreen = Screen.getInstance(SCREEN_WIDTH, SCREEN_HEIGHT + 50);
@@ -191,7 +196,7 @@ public abstract class Game {
 
     /**
      * @author: Ian Laird
-     * retrieves moves for both players and then performs those moves
+     * This function retrieves moves for both players and then performs those moves
      */
     public void MovePlayers() throws IOException{
         Cell playerOneMove = getPlayerOneMove();
@@ -235,8 +240,8 @@ public abstract class Game {
             playerTwo.increaseLength();
             powerUpEaten = true;
             playerTwoScore+=1;
-            gameScreen.addMessage(player2Username + " has just eaten a Power-Up");
-            gameScreen.addMessage(player2Username + "'s new score is " + playerTwoScore);
+            gameScreen.addMessage(playerTwoUsername + " has just eaten a Power-Up");
+            gameScreen.addMessage(playerTwoUsername + "'s new score is " + playerTwoScore);
         }
         //get new power up location such that it is not occupied by a resources.Snake
         if(powerUpEaten) {
@@ -256,10 +261,11 @@ public abstract class Game {
     }
 
     /**
-     * See if the move will kill the player
      * @author Ian Laird
-     * @param otherPlayer
-     * @return
+     * See if the move will kill the player
+     * @param otherPlayer the player to test against
+     * @param moveTo the other player's move
+     * @return if the player is dead after the move
      */
     protected boolean playerDeadAfterMove(Snake otherPlayer, Cell moveTo){
         if(!isMoveInBounds(moveTo)){
@@ -270,6 +276,7 @@ public abstract class Game {
 
     /**
      * @author Ian Laird
+     * This function tests if the move is in bounds
      * @param move the move to see if within the bounds of the Game
      * @return indicates if move is within frame
      */
@@ -280,8 +287,8 @@ public abstract class Game {
 
     /**
      * @author Ian Laird
-     * @return indiactes success
      * This function initializes the network input scanner
+     * @return indicates success
      */
     protected boolean initNetIn(){
         //I chose to use Data Input Stream instead of Reader, because it should be more efficient
@@ -296,8 +303,8 @@ public abstract class Game {
 
     /**
      * @author Ian Laird
-     * @return indicates success
      * This method initializes the printWriter over the network
+     * @return indicates success
      */
     protected boolean initNetOut(){
         //I chose to use Data Output Stream instead of PrintWriter because it should be more efficient
@@ -312,6 +319,7 @@ public abstract class Game {
     }
 
     /**
+     * @author Ian Laird
      * This should get a move direction from user on this machine
      * It then calculates what the new location will be
      * @return the move generated by the player
@@ -321,45 +329,52 @@ public abstract class Game {
     }
 
     /**
+     * @author Ian Laird
      * This should get a move from player 2 from over the network
-     * @return
+     * @return player two's move
      */
     protected Cell getPlayerTwoMove() throws IOException{
         return new Cell(moveReader.readInt(), moveReader.readInt());
     }
 
     /**
+     * @author Ian Laird
      * This should send the move over the network
-     * @param move
+     * @param move the move to send over the network
      */
     protected void sendPlayerOneMove(Cell move) throws IOException{
         moveSender.writeInt(move.getRow());
         moveSender.writeInt(move.getCol());
     }
+
+    /**
+     * @author Andrew Walker
+     * This function returns player one's score
+     * @return player one's score
+     */
     public int getScore() {
         return playerOneScore;
     }
 
-    public String getIP() throws UnknownHostException {
-        return Inet4Address.getLocalHost().getHostAddress();
-    }
-
-
-    ////////////////////////////////////////////////////////////////
-
     /**
+     * @author Ian Laird
      * Method for initialzing the network socket
-     * @param hostName
-     * @param PortNumber
-     * @throws IOException
+     * @param hostName the host to connect to
+     * @param PortNumber the port to connect over
+     * @throws IOException thrown if there is an issue connecting
      */
     protected abstract void initializeSocket(String hostName, int PortNumber) throws IOException;
 
+    /**
+     * @author Ian Laird
+     * This function resets the power up
+     * @throws IOException thrown if there is an issue sending the power up
+     */
     protected abstract void resetPowerUp() throws IOException;
-
 
     /**
      * @author Ian Laird
+     * This function returns the screen width
      * @return screen width
      */
     public static int getScreenWidth() {
@@ -368,6 +383,7 @@ public abstract class Game {
 
     /**
      * @author Ian Laird
+     * This function returns player one
      * @return Player 1
      */
     public Snake getPlayerOne() {
@@ -376,6 +392,7 @@ public abstract class Game {
 
     /**
      * @author Ian Laird
+     * This function returns player two
      * @return Player 2
      */
     public Snake getPlayerTwo() {
@@ -384,12 +401,19 @@ public abstract class Game {
 
     /**
      * @author Ian Laird
+     * This function returns the power up
      * @return power up
      */
     public Cell getPowerUp() {
         return powerUp;
     }
 
+    /**
+     * @author Andrew Walker
+     * This function returns if the game has begun
+     * @return if the game has begun
+     * @throws IOException thrown if there is an issue sending over the connection
+     */
     public boolean hasBegun() throws IOException{
 
         if(this.gameScreen.isHasBegun()) {
@@ -401,51 +425,57 @@ public abstract class Game {
             return false;
     }
 
-    public static void setLOGGER(Logger LOGGER) {
-        Game.LOGGER = LOGGER;
-    }
-
-    public void setPlayerOne(Snake playerOne) {
-        this.playerOne = playerOne;
-    }
-
-    public void setPlayerTwo(Snake playerTwo) {
-        this.playerTwo = playerTwo;
-    }
-
-    public void setPowerUp(Cell powerUp) {
-        this.powerUp = powerUp;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public int getPlayerOneScore() {
-        return playerOneScore;
-    }
-
-    public void setPlayerOneScore(int playerOneScore) {
-        this.playerOneScore = playerOneScore;
-    }
-
-    public int getPlayerTwoScore() {
-        return playerTwoScore;
-    }
-
-    public void setPlayerTwoScore(int playerTwoScore) {
-        this.playerTwoScore = playerTwoScore;
-    }
-
+    /**
+     * @author Andrew Walker
+     * This function adds new game data to the report
+     * @param gr the report to add game data to
+     */
     public void amendReport(GameReport gr){
         gr.ammend(this);
     }
 
-    public String getPlayer2Username(){
-        return player2Username;
+    /**
+     * @author Andrew Walker
+     * This function returns the player one score
+     * @return
+     */
+    public int getPlayerOneScore() {
+        return playerOneScore;
+    }
+
+    /**
+     * @author Andrew Walker
+     * This function returns the player two score
+     * @return
+     */
+    public int getPlayerTwoScore() {
+        return playerTwoScore;
+    }
+
+    /**
+     * @author Andrew Walker
+     * This function returns player one's name
+     * @return
+     */
+    public String getPlayerOneUsername() {
+        return playerOneUsername;
+    }
+
+    /**
+     * @author Andrew Walker
+     * This function sets player one's username
+     * @param playerOneUsername the name to set as player one's username
+     */
+    public void setPlayerOneUsername(String playerOneUsername) {
+        this.playerOneUsername = playerOneUsername;
+    }
+
+    /**
+     * @author Andrew Walker
+     * This function returns player two's name
+     * @return player two's name
+     */
+    public String getPlayerTwoUsername() {
+        return playerTwoUsername;
     }
 }

@@ -6,14 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * {@link GameBoard} is used in Screen for graphics
  * @author Andrew Walker
+ * {@link GameBoard} is used in Screen for graphics
  */
 public class GameBoard extends JPanel {
+    // The width and height of the panel
     private int width;
     private int height;
+
+    // The master matrix for the grid
     private Color[][] plot;
-    private Color BACKGROUND = Color.BLACK;
 
     /**
      * @author Andrew Walker
@@ -61,7 +63,7 @@ public class GameBoard extends JPanel {
      * @param col the col of the plot to change
      */
     public void unColorLocation(int row, int col){
-        this.plot[row][col] = BACKGROUND;
+        this.plot[row][col] = Color.BLACK;
     }
 
 

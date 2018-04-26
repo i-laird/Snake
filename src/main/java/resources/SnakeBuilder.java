@@ -8,9 +8,8 @@ public class SnakeBuilder {
     private Snake mySnake = null;
 
     /**
-     * Initializes the Snake that is being constructed
-     *
      * @author Ian Laird
+     * Initializes the Snake that is being constructed
      * @return this for chaining
      */
     public SnakeBuilder init(){
@@ -18,10 +17,9 @@ public class SnakeBuilder {
         return this;
     }
     /**
+
      * Sets the color of the Snake being constructed
-     *
-     * @author Ian Laird
-     * @param wantedColor-the color that is desired
+     * @param wantedColor the color that is desired
      * @return this for chaining
      */
     public SnakeBuilder setColor(Color wantedColor) throws BuilderException{
@@ -31,10 +29,9 @@ public class SnakeBuilder {
         return this;
     }
     /**
-     * Sets the color of the Snake being constructed
-     *
      * @author Ian Laird
-     * @param startPos-the initial position of the Snake
+     * Sets the color of the Snake being constructed
+     * @param startPos the initial position of the Snake
      * @return this for chaining
      */
     public SnakeBuilder setStart(Cell startPos) throws BuilderException{
@@ -44,9 +41,8 @@ public class SnakeBuilder {
         return this;
     }
     /**
-     * returns the Snake that has been created.
-     *
      * @author Ian Laird
+     * returns the Snake that has been created.
      * @return created Snake
      */
     public Snake collectSnakeBuilder() throws BuilderException{

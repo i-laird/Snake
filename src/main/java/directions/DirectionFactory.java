@@ -4,12 +4,12 @@ import enums.Direct;
 
 /**
  * @author Ian Laird
- *
  * {@link DirectionFactory} is an abstract factory for creating
  * a {@link Direction} based on the given instance of a {@link Direct}.
  */
 public class DirectionFactory {
     /**
+     * @author Ian Laird
      * creates the desired {@link Direction}
      * @param d-the indicated {@link Direct}
      * @return the created Direction
