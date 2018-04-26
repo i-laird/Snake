@@ -11,16 +11,24 @@
 \begin{document}
 	\maketitle
 	\section{Outline}
-	This game implements a 2 player version of the popular game Snake. Communication between the host and client is done using TCP. Players can pick up power ups and kill the other player to increase their score. The top 10 high scores are stored in a file.
-	
+	This game implements a 2 player version of the popular game Snake. Communication between the host and client is done using TCP. Players can pick up power ups and kill the other player to increase their score. The player scores are saved in an XML file.
+
 	\section{Vision Statement}
-	The next step in this game will be making it so that more than 2 players can play at the same time.
+	The next step in this game will be making it so that more than 2 players can play at the same time. A further iteration of the software will have a dedicated Snake server that can run multiple games with lots of players concurrently.
 	
 	\section{Gantt}
 	
 	\section{Requirements}
 	\begin{enumerate}
-		\item 
+		\item Game should run on any machine that supports Java.
+		\item Game should play smoothly.
+		\item Users should be able to view game score history.
+		\item Game should have a GUI.
+		\item Game should have a scoring system.
+		\item Snakes should be able to increase in length.
+		\item Users should be able to win/lose.
+		\item Users should be able to play on separate computers over the internet.
+		\item Users should be able to play again without restarting game.
 	\end{enumerate}
 	
 	\section{Business Rules}
@@ -207,6 +215,7 @@
 	\section{Sequence Diagrams}
 	
 	\section{Design model}
+	\includegraphics[scale=.75]{DesignModel}
 	
 	\section{GRASP}
 	
@@ -223,6 +232,10 @@
 				A Builder is used to create instances of a Snake. Because the snake is a complex object builder lets the application customize them. It allows Snake location and color to be both be customized.
 			\item \textbf{State:}
 				State is used in the Screen to represent movement direction as determined by user keystrokes. It uses polymorphism to avoid using a switch statement in calculating the new snake position.
+			\item \textbf{Command:}\\
+				Command is used to represent the Game being executed. In this project there is only class that implements the GameCommand interface but it makes it so that new games you could easily be added to the project.
+			\item \textbf{Memento:}\\
+				The memento design pattern is used when the players wish to restart the Game. It allows a version of the Game to be saved even though the Game is a singleton.
 		\end{enumerate}
 	\section{Stats}
 	\subsection{Hours Spent per User}
