@@ -51,7 +51,7 @@
 	\subsection{Use Case 1}
 	\itemsep0em 
 
-			\textbf{\makebox[4 cm]{Name:\hfill}} UC1--Initialize game\\
+			\textbf{\makebox[4 cm]{Name:\hfill}} UC1 -- Initialize Game\\
 			\textbf{\makebox[4 cm]{Primary Actor:\hfill}} Local user\\
 			\textbf{\makebox[4 cm]{Secondary Actor:\hfill}} Secondary user\\
 			\textbf{\makebox[4 cm]{Trigger:\hfill}} Game is created\\
@@ -88,7 +88,7 @@
 	\subsection{Use Case 2}
 	\itemsep0em 
 	
-	\textbf{\makebox[4 cm]{Name:\hfill}} UC2--Play Game\\
+	\textbf{\makebox[4 cm]{Name:\hfill}} UC2 -- Play Game\\
 	\textbf{\makebox[4 cm]{Primary Actor:\hfill}} Local user\\
 	\textbf{\makebox[4 cm]{Secondary Actor:\hfill}} Secondary user\\
 	\textbf{\makebox[4 cm]{Pre-condition:\hfill}} Game is created\\
@@ -136,7 +136,7 @@
 	\subsection{Use Case 3}
 	\itemsep0em 
 	
-	\textbf{\makebox[4 cm]{Name:\hfill}} UC3--play Again\\
+	\textbf{\makebox[4 cm]{Name:\hfill}} UC3 -- Play Again\\
 	\textbf{\makebox[4 cm]{Primary Actor:\hfill}} Local user\\
 	\textbf{\makebox[4 cm]{Secondary Actor:\hfill}} Secondary user\\
 	\textbf{\makebox[4 cm]{Pre-condition:\hfill}} Game over\\
@@ -173,7 +173,7 @@
 	\section{System Operations}
 	\begin{enumerate}
 		\item $initGame()$
-		\item $server\_or\_client(boolean~mode)$
+		\item $serverOrClient(boolean~mode)$
 		\item $sendMove(Direction~move)$
 	\end{enumerate}
 	
@@ -195,7 +195,7 @@
 	\subsection{Contract 2}
 	\itemsep0em 
 	
-	\textbf{\makebox[4 cm]{Operation:\hfill}} server\_or\_client(boolean status)\\
+	\textbf{\makebox[4 cm]{Operation:\hfill}} serverOrClient(boolean status)\\
 	\textbf{\makebox[4 cm]{Cross References:\hfill}} UC1\\
 	\textbf{\makebox[4 cm]{Pre-conditions:\hfill}} Game network has not been initialized previously.\\
 	\textbf{\makebox[4 cm]{Post-conditions:\hfill}}
@@ -221,8 +221,14 @@
 	
 	
 	\section{Sequence Diagrams}
-	\subsection{Sequence Diagram 1 : initialize Game}
+	\subsection{Sequence Diagram 1 : Initialize Game}
 	\includegraphics[scale=.75]{Sequence1}
+	
+	\subsection{Sequence Diagram 2 : Play Game}
+	\includegraphics[scale=1]{Sequence2}
+	
+	\subsection{Sequence Diagram 3 : Play Again}
+	\includegraphics[scale=1]{Sequence3}
 	
 	\section{Design model}
 	\includegraphics[scale=.75]{DesignModel_better}
