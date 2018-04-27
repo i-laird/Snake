@@ -267,6 +267,11 @@ public class Screen extends JFrame implements KeyListener {
         this.buttonPressed = buttonPressed;
     }
 
+    /**
+     * @author Andrew Walker
+     * This function returns the state of the Screen
+     * @return the state of the Screen
+     */
     public Direct getState2(){
         return this.state;
     }

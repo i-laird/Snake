@@ -2,10 +2,10 @@ package game;
 
 /**
  * @author Ian Laird
- * {@link GameMaker}is the way that Games are actually generated and it allows there to be one instance of a Game in existance.
+ * {@link gameMaker}is the way that Games are actually generated and it allows there to be one instance of a Game in existance.
  * Server or Client can be returned.
  */
-public class GameMaker {
+public class gameMaker {
     private static Game thisGame = null;
 
     /**
