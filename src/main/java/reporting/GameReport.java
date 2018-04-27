@@ -2,7 +2,8 @@ package reporting;
 
 import game.Game;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 
 /**
@@ -18,14 +19,14 @@ public class GameReport {
      * @author Andrew Walker
      * The default constructor for a GameReport
      */
-    public GameReport(){
+    public GameReport() {
         records = new ArrayList<>();
     }
 
     /**
+     * @return the collection of the games
      * @author Andrew Walker
      * This function returns the collection of the games
-     * @return the collection of the games
      */
     @XmlElement(name = "game")
     public ArrayList<ReportObject> getRecords() {
@@ -33,20 +34,20 @@ public class GameReport {
     }
 
     /**
+     * @param records the collection of the games
      * @author Andrew Walker
      * This function sets the collection of the games
-     * @param records the collection of the games
      */
     public void setRecords(ArrayList<ReportObject> records) {
         this.records = records;
     }
 
     /**
+     * @param g the Game to add to the record
      * @author Andrew Walker
      * This function adds a new Game to the record
-     * @param g the Game to add to the record
      */
-    public void ammend(Game g){
+    public void ammend(Game g) {
         records.add(new ReportObject(g.getPlayerOneUsername(), g.getPlayerTwoUsername(), g.getPlayerOneScore(), g.getPlayerTwoScore()));
     }
 }

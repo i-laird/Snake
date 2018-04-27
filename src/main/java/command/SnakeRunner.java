@@ -1,6 +1,6 @@
 package command;
 
-import game.*;
+import game.SnakeGame;
 
 /**
  * @author Andrew Walker

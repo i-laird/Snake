@@ -11,22 +11,22 @@ import resources.Snake;
 public class Left implements Direction {
 
     /**
+     * @return new instance of {@link Left}
      * @author Ian laird
-     * This function moves the Snake to new position to the left
+     * This is a factory method.
+     */
+    public static Direction create() {
+        return new Left();
+    }
+
+    /**
      * @param s-the Snake to be modified
      * @return the position
+     * @author Ian laird
+     * This function moves the Snake to new position to the left
      */
     @Override
     public Cell performUpdate(Snake s) {
         return new Cell(s.getHeadLocation().getRow(), s.getHeadLocation().getCol() - 1);
-    }
-
-    /**
-     * @author Ian laird
-     * This is a factory method.
-     * @return new instance of {@link Left}
-     */
-    public static Direction create(){
-        return new Left();
     }
 }

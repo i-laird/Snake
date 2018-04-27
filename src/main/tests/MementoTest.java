@@ -1,17 +1,16 @@
 import exceptions.SnakeBuilderError;
 import game.Game;
-import game.GameRecord;
 import game.GameMaker;
+import game.GameRecord;
 import org.junit.jupiter.api.Test;
 import resources.Cell;
 import resources.SnakeBuilder;
-
-import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * {@link MementoTest} tests the Memento design pattern.
+ *
  * @author Ian laird
  */
 public class MementoTest {
@@ -20,8 +19,9 @@ public class MementoTest {
 
     /**
      * This stores a Game as a memento and then retrieves it.
-     * @author Ian laird
+     *
      * @throws SnakeBuilderError -this will not be thrown
+     * @author Ian laird
      */
     @Test
     void testRestoration() throws SnakeBuilderError {

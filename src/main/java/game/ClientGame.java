@@ -16,36 +16,37 @@ public class ClientGame extends Game {
      * @author Ian Laird
      * This is the private constructor for a ClientGame
      */
-    private ClientGame(){}
-
-    /**
-     * @author Ian Laird
-     * This function returns the singleton instance
-     * @return the singleton of the class
-     */
-    static Game getClientGame(){
-        if(singleGame == null)
-            singleGame = new ClientGame();
-        return  singleGame;
+    private ClientGame() {
     }
 
     /**
+     * @return the singleton of the class
      * @author Ian Laird
-     * This function is the overriden function for initializing the network socket
-     * @param hostName the ip address of the host
+     * This function returns the singleton instance
+     */
+    static Game getClientGame() {
+        if (singleGame == null)
+            singleGame = new ClientGame();
+        return singleGame;
+    }
+
+    /**
+     * @param hostName   the ip address of the host
      * @param portNumber the port number of the host's computer
      * @throws IOException if network error is encountered
+     * @author Ian Laird
+     * This function is the overriden function for initializing the network socket
      */
-    public void initializeSocket(String hostName, int portNumber) throws IOException{
+    public void initializeSocket(String hostName, int portNumber) throws IOException {
         networkSocket = new Socket(hostName, portNumber);
     }
 
     /**
+     * @throws IOException if network error is encountered
      * @author Ian Laird
      * This function reads power up location from the server
-     * @throws IOException if network error is encountered
      */
-    protected void resetPowerUp() throws IOException{
+    protected void resetPowerUp() throws IOException {
         powerUp = new Cell(moveReader.readInt(), moveReader.readInt());
     }
 }

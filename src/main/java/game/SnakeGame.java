@@ -41,7 +41,7 @@ public class SnakeGame {
 
         //This creates the Screen in Game makeScreen
         LOGGER.info("Generating Game");
-        Game ourGame =  GameMaker.generateGame(isServer);
+        Game ourGame = GameMaker.generateGame(isServer);
         ourGame.setPlayerOneUsername(username);
 
         GameReport gameReport = null;
@@ -51,39 +51,38 @@ public class SnakeGame {
             context = JAXBContext.newInstance(GameReport.class);
             Unmarshaller um = context.createUnmarshaller();
             File toRead = new File("./gameReport.xml");
-            if(toRead.exists()) {
+            if (toRead.exists()) {
                 readFrom = new FileReader(toRead);
                 gameReport = (GameReport) um.unmarshal(readFrom);
-            }
-            else{
+            } else {
                 gameReport = new GameReport();
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             LOGGER.severe("FIle not found");
-        }catch(JAXBException f){
+        } catch (JAXBException f) {
             LOGGER.severe("JAXB error caught");
-        }finally{
+        } finally {
             try {
                 if (readFrom != null) {
                     readFrom.close();
                 }
-            }catch(IOException e){}
+            } catch (IOException e) {
+            }
         }
 
         try {
             LOGGER.info("Initializing Game");
-            if(ourGame.initConnection(host, PORT_NUM))
+            if (ourGame.initConnection(host, PORT_NUM))
                 Initializer.close();
-        } catch(NetworkError e){
+        } catch (NetworkError e) {
             LOGGER.severe("Network failed to initialize!");
             LOGGER.info("Game is shutting down now");
             throw new RuntimeException();
         }
 
-        try{
+        try {
             ourGame.initGame();
-        }
-        catch(IOException f){
+        } catch (IOException f) {
             LOGGER.severe("Network write/ read error");
             LOGGER.info("Game is shutting down now");
             throw new RuntimeException();
@@ -93,7 +92,7 @@ public class SnakeGame {
         GameRecord initialGame = ourGame.createRecord();
         try {
             do {
-                while(!ourGame.hasBegun()){
+                while (!ourGame.hasBegun()) {
                     Thread.sleep(250);
                 }
                 while (!ourGame.isGameOver()) {
@@ -107,12 +106,12 @@ public class SnakeGame {
             LOGGER.severe("Exception occurred while playing the game: " + e.getMessage());
         }
 
-        try{
+        try {
             context = JAXBContext.newInstance(GameReport.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             m.marshal(gameReport, new File("./gameReport.xml"));
-        } catch(JAXBException e){
+        } catch (JAXBException e) {
             e.printStackTrace();
         }
     }

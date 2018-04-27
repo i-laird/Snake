@@ -5,13 +5,12 @@ import resources.Cell;
 import resources.Snake;
 import resources.SnakeBuilder;
 
-import java.awt.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * {@link SnakeBuilderTests} tests the Snake Builder to make sure that it functions properly.
+ *
  * @author Ian Laird
  */
 public class SnakeBuilderTests {
@@ -21,17 +20,19 @@ public class SnakeBuilderTests {
 
     /**
      * Initializes a new SnakeBuilder each time
+     *
      * @author Ian Laird
      */
     @BeforeEach
-    public void setup(){
+    public void setup() {
         sb = new SnakeBuilder();
     }
 
     /**
      * tests Builder setting color
-     * @author Ian laird
+     *
      * @throws SnakeBuilderError if Builder is not initialized
+     * @author Ian laird
      */
     @Test
     public void colorTest() throws SnakeBuilderError {
@@ -41,8 +42,9 @@ public class SnakeBuilderTests {
 
     /**
      * tests Builder setting start Location
-     * @author Ian laird
+     *
      * @throws SnakeBuilderError if Builder is not initialized
+     * @author Ian laird
      */
     @Test
     public void locationTest() throws SnakeBuilderError {
@@ -52,8 +54,9 @@ public class SnakeBuilderTests {
 
     /**
      * tests Builder setting color and start location
-     * @author Ian laird
+     *
      * @throws SnakeBuilderError if Builder is not initialized
+     * @author Ian laird
      */
     @Test
     public void bothTest() throws SnakeBuilderError {
@@ -64,10 +67,11 @@ public class SnakeBuilderTests {
 
     /**
      * tests Builder throwing error if color is set without initializing.
+     *
      * @author Ian laird
      */
     @Test
-    public void testExceptionThrown(){
-        assertThrows(SnakeBuilderError.class, ()->sb.setColor(Color.BLACK));
+    public void testExceptionThrown() {
+        assertThrows(SnakeBuilderError.class, () -> sb.setColor(Color.BLACK));
     }
 }

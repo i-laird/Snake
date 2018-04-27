@@ -5,13 +5,12 @@ import resources.Cell;
 import resources.Snake;
 import resources.SnakeBuilder;
 
-import java.awt.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 /**
  * {@link SnakeTesting} tests various functionality necessary to having a proper {@link Snake}
+ *
  * @author ian laird
  */
 public class SnakeTesting {
@@ -20,8 +19,9 @@ public class SnakeTesting {
 
     /**
      * This initialzes the two {@link Snake}
-     * @author Ian laird
+     *
      * @throws SnakeBuilderError -should never be thrown
+     * @author Ian laird
      */
     @BeforeEach
     void init() throws SnakeBuilderError {
@@ -35,33 +35,35 @@ public class SnakeTesting {
      * tests that the two {@link Snake} generated are not the same
      */
     @Test
-    void factoryDistinct(){
+    void factoryDistinct() {
         assertNotSame(ms, ms2);
     }
+
     /**
      * @author Ian laird
      * tests that the {@link Snake} properly sizes
      */
     @Test
-    void testLength(){
-        ms.moveLocation(new Cell(0 ,1));
-        ms.moveLocation(new Cell(0 ,2));
-        ms.moveLocation(new Cell(0 ,3));
-        ms.moveLocation(new Cell(0 ,4));
-        ms.moveLocation(new Cell(0 ,5));
+    void testLength() {
+        ms.moveLocation(new Cell(0, 1));
+        ms.moveLocation(new Cell(0, 2));
+        ms.moveLocation(new Cell(0, 3));
+        ms.moveLocation(new Cell(0, 4));
+        ms.moveLocation(new Cell(0, 5));
         assertEquals(ms.getSnakeLocations().size(), DEFAULT_SIZE);
     }
+
     /**
      * @author Ian laird
      * tests that the{@link Snake} properly saves Tail location
      */
     @Test
-    void testMovement(){
-        ms.moveLocation(new Cell(0 ,1));
-        ms.moveLocation(new Cell(0 ,2));
-        ms.moveLocation(new Cell(0 ,3));
+    void testMovement() {
+        ms.moveLocation(new Cell(0, 1));
+        ms.moveLocation(new Cell(0, 2));
+        ms.moveLocation(new Cell(0, 3));
         assertEquals(ms.getPrevTail(), new Cell(0, 0));
-        ms.moveLocation(new Cell(0 ,4));
+        ms.moveLocation(new Cell(0, 4));
         assertEquals(ms.getPrevTail(), new Cell(0, 1));
     }
 }

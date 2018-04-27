@@ -9,10 +9,10 @@ import resources.Snake;
  */
 public interface Direction {
     /**
-     * @author Ian Laird
-     * This function moves the Snake to new position
      * @param s the Snake to be modified
      * @return the new position of the snake
+     * @author Ian Laird
+     * This function moves the Snake to new position
      */
     Cell performUpdate(Snake s);
 }

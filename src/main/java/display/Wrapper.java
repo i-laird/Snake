@@ -10,12 +10,11 @@ import java.util.logging.Logger;
  */
 public class Wrapper extends JPanel {
 
-    private static Logger LOGGER = Logger.getLogger("Wrapper");
     private static final int WRAPPER_WIDTH = 800;
     private static final int WRAPPER_HEIGHT = 400;
     private static final int COMPONENT_WIDTH = 400;
     private static final int COMPONENT_HEIGHT = 400;
-
+    private static Logger LOGGER = Logger.getLogger("Wrapper");
     private GameBoard board;
     private TextBox textBox;
 
@@ -23,7 +22,7 @@ public class Wrapper extends JPanel {
      * @author Andrew Walker
      * Constructs a default wrapper
      */
-    public Wrapper(){
+    public Wrapper() {
         this.setPreferredSize(new Dimension(WRAPPER_WIDTH, WRAPPER_HEIGHT));
         this.setBackground(Color.WHITE);
         this.setFocusable(true);
@@ -35,7 +34,7 @@ public class Wrapper extends JPanel {
      * @author Andrew Walker
      * This method initializes the gameBoard and adds it to the panel
      */
-    public void initBoard(){
+    public void initBoard() {
         this.board = new GameBoard(COMPONENT_WIDTH, COMPONENT_HEIGHT);
         super.add(BorderLayout.LINE_START, this.board);
         LOGGER.info("Initialized Board");
@@ -45,7 +44,7 @@ public class Wrapper extends JPanel {
      * @author Andrew Walker
      * This method initializes the textBox and adds it to the panel
      */
-    public void initText(){
+    public void initText() {
         this.textBox = new TextBox(COMPONENT_WIDTH, COMPONENT_HEIGHT);
         super.add(BorderLayout.LINE_END, this.textBox);
         LOGGER.info("Initialized TextBox");
@@ -62,20 +61,20 @@ public class Wrapper extends JPanel {
     }
 
     /**
+     * @return the {@link GameBoard}
      * @author Andrew Walker
      * This function returns the {@link GameBoard}
-     * @return the {@link GameBoard}
      */
-    public GameBoard getBoard(){
+    public GameBoard getBoard() {
         return this.board;
     }
 
     /**
+     * @return the {@link TextBox}
      * @author Andrew Walker
      * This function returns the {@link TextBox}
-     * @return the {@link TextBox}
      */
-    public TextBox getTextBox(){
+    public TextBox getTextBox() {
         return this.textBox;
     }
 

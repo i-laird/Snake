@@ -18,12 +18,12 @@ public class GameBoard extends JPanel {
     private Color[][] plot;
 
     /**
+     * @param width  the width of the panel
+     * @param height the height of the panel
      * @author Andrew Walker
      * This method is the constructor for the GameBoard
-     * @param width the width of the panel
-     * @param height the height of the panel
      */
-    public GameBoard(int width, int height){
+    public GameBoard(int width, int height) {
         this.width = width;
         this.height = height;
         super.setPreferredSize(new Dimension(width, height));
@@ -32,13 +32,13 @@ public class GameBoard extends JPanel {
     }
 
     /**
+     * @param g Graphics object
      * @author Andrew Walker
      * This method is the overriden function to paint the panel
-     * @param g Graphics object
      */
     public void paintComponent(Graphics g) {
-        for(int x = 0; x < height / Cell.getCellSize(); x++){
-            for(int y = 0; y < width / Cell.getCellSize(); y++){
+        for (int x = 0; x < height / Cell.getCellSize(); x++) {
+            for (int y = 0; y < width / Cell.getCellSize(); y++) {
                 g.setColor(plot[x][y]);
                 g.fillRect(y * Cell.getCellSize(), x * Cell.getCellSize(), height / Cell.getCellSize(), width / Cell.getCellSize());
             }
@@ -46,23 +46,23 @@ public class GameBoard extends JPanel {
     }
 
     /**
+     * @param row   the row of the plot to change
+     * @param col   the col of the plot to change
+     * @param color the Color of the plot to change
      * @author Andrew Walker
      * This method plots a new color in the master matrix
-     * @param row the row of the plot to change
-     * @param col the col of the plot to change
-     * @param color the Color of the plot to change
      */
-    public void colorLocation(int row, int col, Color color){
+    public void colorLocation(int row, int col, Color color) {
         this.plot[row][col] = color;
     }
 
     /**
-     * @author Andrew Walker
-     * This method plots the default color in the master matrix
      * @param row the row of the plot to change
      * @param col the col of the plot to change
+     * @author Andrew Walker
+     * This method plots the default color in the master matrix
      */
-    public void unColorLocation(int row, int col){
+    public void unColorLocation(int row, int col) {
         this.plot[row][col] = Color.BLACK;
     }
 
@@ -72,8 +72,8 @@ public class GameBoard extends JPanel {
      * This method plots the default color in the entire master matrix
      */
     public void plotBackground() {
-        for(int x = 0; x < height / Cell.getCellSize(); x++){
-            for(int y = 0; y < width / Cell.getCellSize(); y++){
+        for (int x = 0; x < height / Cell.getCellSize(); x++) {
+            for (int y = 0; y < width / Cell.getCellSize(); y++) {
                 plot[x][y] = Color.BLACK;
             }
         }

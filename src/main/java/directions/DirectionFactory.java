@@ -9,13 +9,13 @@ import enums.Direct;
  */
 public class DirectionFactory {
     /**
-     * @author Ian Laird
-     * creates the desired {@link Direction}
      * @param d-the indicated {@link Direct}
      * @return the created Direction
+     * @author Ian Laird
+     * creates the desired {@link Direction}
      */
-    public static Direction make(Direct d){
-        switch(d){
+    public static Direction make(Direct d) {
+        switch (d) {
             case DOWN:
                 return Down.create();
             case UP:

@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+
 import java.net.InetAddress;
 
 /**
@@ -20,7 +21,7 @@ import java.net.InetAddress;
  * This class creates a popup to prompt for input from the user to
  * initialize the {@link game.Game}
  */
-public class Initializer extends Application{
+public class Initializer extends Application {
     // The information needed from the user
     private static boolean isServer;
     private static String host, username;
@@ -30,15 +31,50 @@ public class Initializer extends Application{
      * @author Andrew Walker
      * This function launches the modal
      */
-    public static void startModal(){
+    public static void startModal() {
         launch();
     }
 
     /**
+     * @return if it is going to be a server game
      * @author Andrew Walker
-     * This is the main function for building and displaying the popup
+     * Returns if it is going to be a server game
+     */
+    public static boolean getIsServer() {
+        return isServer;
+    }
+
+    /**
+     * @return the hostname for the connection
+     * @author Andrew Walker
+     * Gets the hostname for the connection
+     */
+    public static String getHost() {
+        return host;
+    }
+
+    /**
+     * @return the username of the player
+     * @author Andrew Walker
+     * This function returns the username of the player
+     */
+    public static String getUsername() {
+        return username;
+    }
+
+    /**
+     * @author Andrew Walker
+     * This function closes the popup
+     */
+    public static void close() {
+        Platform.exit();
+    }
+
+    /**
      * @param initStage the initial stage
      * @throws Exception if there is an issue generating the stage
+     * @author Andrew Walker
+     * This is the main function for building and displaying the popup
      */
     @Override
     public void start(Stage initStage) throws Exception {
@@ -73,7 +109,7 @@ public class Initializer extends Application{
         submitButton.setOnMouseClicked(e -> {
             username = usernameField.getText();
             host = hostField.getText();
-            if(isServer) {
+            if (isServer) {
                 ipPrompt.setVisible(true);
                 submitButton.setDisable(true);
                 clientButton.setDisable(true);
@@ -141,40 +177,5 @@ public class Initializer extends Application{
 
         stage.setScene(scene);
         stage.show();
-    }
-
-    /**
-     * @author Andrew Walker
-     * Returns if it is going to be a server game
-     * @return if it is going to be a server game
-     */
-    public static boolean getIsServer(){
-        return isServer;
-    }
-
-    /**
-     * @author Andrew Walker
-     * Gets the hostname for the connection
-     * @return the hostname for the connection
-     */
-    public static String getHost(){
-        return host;
-    }
-
-    /**
-     * @author Andrew Walker
-     * This function returns the username of the player
-     * @return the username of the player
-     */
-    public static String getUsername(){
-        return username;
-    }
-
-    /**
-     * @author Andrew Walker
-     * This function closes the popup
-     */
-    public static void close(){
-        Platform.exit();
     }
 }

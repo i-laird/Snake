@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.3.16)  26 APR 2018 18:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.10)  26 APR 2018 20:06
 entering extended mode
 **./Software_write_up.tex
 (Software_write_up.tex
 LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 75 language(s) loaded.
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
+Babel <3.15> and hyphenation patterns for 75 language(s) loaded.
+(E:\MiKTeX\tex\latex\base\article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo"
+(E:\MiKTeX\tex\latex\base\size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -21,21 +21,21 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+(E:\MiKTeX\tex\latex\geometry\geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+(E:\MiKTeX\tex\latex\graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+(E:\MiKTeX\tex\generic\oberdiek\ifpdf.sty
 Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
+(E:\MiKTeX\tex\generic\oberdiek\ifvtex.sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+(E:\MiKTeX\tex\generic\ifxetex\ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count87
@@ -51,28 +51,27 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+(E:\MiKTeX\tex\latex\geometry\geometry.cfg))
+(E:\MiKTeX\tex\latex\graphics\graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+(E:\MiKTeX\tex\latex\graphics\graphics.sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+(E:\MiKTeX\tex\latex\graphics\trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg"
+(E:\MiKTeX\tex\latex\graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
-File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+(E:\MiKTeX\tex\latex\graphics-def\pdftex.def
+File: pdftex.def 2017/06/24 v1.0g Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen111
 \Gin@req@width=\dimen112
-)
-(Software_write_up.aux)
+) (Software_write_up.aux)
 \openout1 = `Software_write_up.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
@@ -122,7 +121,7 @@ LaTeX Font Info:    ... okay on input line 11.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+(E:\MiKTeX\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count90
 \scratchdimen=\dimen113
@@ -135,31 +134,31 @@ LaTeX Font Info:    ... okay on input line 11.
 \MPnumerator=\count94
 \makeMPintoPDFobject=\count95
 \everyMPtoPDFconversion=\toks17
-) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+) (E:\MiKTeX\tex\latex\oberdiek\epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+(E:\MiKTeX\tex\generic\oberdiek\infwarerr.sty
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+(E:\MiKTeX\tex\latex\oberdiek\grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+(E:\MiKTeX\tex\generic\oberdiek\kvdefinekeys.sty
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+(E:\MiKTeX\tex\generic\oberdiek\ltxcmds.sty
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )))
-("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+(E:\MiKTeX\tex\latex\oberdiek\kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+(E:\MiKTeX\tex\generic\oberdiek\kvsetkeys.sty
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+(E:\MiKTeX\tex\generic\oberdiek\etexcmds.sty
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+(E:\MiKTeX\tex\generic\oberdiek\ifluatex.sty
 Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -168,8 +167,8 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
-Package: pdftexcmds 2018/01/21 v0.26 Utility functions of pdfTeX for LuaTeX (HO
+(E:\MiKTeX\tex\generic\oberdiek\pdftexcmds.sty
+Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -195,8 +194,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 <images/gantt2.png, id=8, 1160.83687pt x 363.60844pt>
 File: images/gantt2.png Graphic file (type png)
 <use images/gantt2.png>
-Package pdftex.def Info: images/gantt2.png  used on input line 20.
-(pdftex.def)             Requested size: 580.417pt x 181.80377pt.
+Package pdftex.def Info: images/gantt2.png  used on input line 20. on input lin
+e 20.
+Package pdftex.def Info: Requested size: 580.417pt x 181.80377pt on input line 
+20.
 
 Overfull \hbox (108.38577pt too wide) in paragraph at lines 20--21
 [] 
@@ -206,44 +207,52 @@ Overfull \hbox (108.38577pt too wide) in paragraph at lines 20--21
 <images/UCD.png, id=19, 621.32124pt x 299.1175pt>
 File: images/UCD.png Graphic file (type png)
 <use images/UCD.png>
-Package pdftex.def Info: images/UCD.png  used on input line 161.
-(pdftex.def)             Requested size: 465.98979pt x 224.33757pt.
+Package pdftex.def Info: images/UCD.png  used on input line 168. on input line 
+168.
+Package pdftex.def Info: Requested size: 465.98979pt x 224.33757pt on input lin
+e 168.
 <images/SSD.png, id=20, 637.38126pt x 355.82938pt>
 File: images/SSD.png Graphic file (type png)
 <use images/SSD.png>
-Package pdftex.def Info: images/SSD.png  used on input line 164.
-(pdftex.def)             Requested size: 478.03477pt x 266.87137pt.
+Package pdftex.def Info: images/SSD.png  used on input line 171. on input line 
+171.
+Package pdftex.def Info: Requested size: 478.03477pt x 266.87137pt on input lin
+e 171.
 
-Overfull \hbox (6.00354pt too wide) in paragraph at lines 164--165
+Overfull \hbox (6.00354pt too wide) in paragraph at lines 171--172
 [] 
  []
 
 [3 <./images/UCD.png>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 168.
+(Font)              <7> on input line 175.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 168.
+(Font)              <5> on input line 175.
 <images/DM.png, id=25, 611.78563pt x 267.49937pt>
 File: images/DM.png Graphic file (type png)
 <use images/DM.png>
-Package pdftex.def Info: images/DM.png  used on input line 174.
-(pdftex.def)             Requested size: 458.83809pt x 200.62402pt.
+Package pdftex.def Info: images/DM.png  used on input line 181. on input line 1
+81.
+Package pdftex.def Info: Requested size: 458.83809pt x 200.62402pt on input lin
+e 181.
  [4 <./images/SSD.png> <./images/DM.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 185.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 192.
 
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+(E:\MiKTeX\tex\latex\base\omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 185.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 192.
 <images/Sequence1.png, id=32, 689.57625pt x 625.58719pt>
 File: images/Sequence1.png Graphic file (type png)
 <use images/Sequence1.png>
-Package pdftex.def Info: images/Sequence1.png  used on input line 218.
-(pdftex.def)             Requested size: 517.18091pt x 469.18924pt.
+Package pdftex.def Info: images/Sequence1.png  used on input line 225. on input
+ line 225.
+Package pdftex.def Info: Requested size: 517.18091pt x 469.18924pt on input lin
+e 225.
 
-Overfull \hbox (45.14967pt too wide) in paragraph at lines 218--219
+Overfull \hbox (45.14967pt too wide) in paragraph at lines 225--226
 [] 
  []
 
@@ -251,32 +260,31 @@ Overfull \hbox (45.14967pt too wide) in paragraph at lines 218--219
 <images/DesignModel_better.png, id=37, 640.64343pt x 603.75563pt>
 File: images/DesignModel_better.png Graphic file (type png)
 <use images/DesignModel_better.png>
-Package pdftex.def Info: images/DesignModel_better.png  used on input line 221.
+Package pdftex.def Info: images/DesignModel_better.png  used on input line 228.
+ on input line 228.
+Package pdftex.def Info: Requested size: 480.48138pt x 452.81561pt on input lin
+e 228.
 
-(pdftex.def)             Requested size: 480.48138pt x 452.81561pt.
-
-Overfull \hbox (8.45015pt too wide) in paragraph at lines 221--222
+Overfull \hbox (8.45015pt too wide) in paragraph at lines 228--229
 [] 
  []
 
 [6 <./images/Sequence1.png>] [7 <./images/DesignModel_better.png>] [8]
 (Software_write_up.aux) ) 
 Here is how much of TeX's memory you used:
- 1968 strings out of 493305
- 28735 string characters out of 3138871
- 94086 words of memory out of 3000000
- 5507 multiletter control sequences out of 15000+200000
+ 1966 strings out of 493312
+ 27646 string characters out of 3146700
+ 93637 words of memory out of 3000000
+ 5502 multiletter control sequences out of 15000+200000
  8194 words of font info for 29 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,7n,25p,342b,232s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-bx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Software_write_up.pdf (9 pages, 330361 bytes).
+ 41i,7n,25p,342b,226s stack positions out of 5000i,500n,10000p,200000b,50000s
+<E:/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+E:/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><E:/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmmi10.pfb><E:/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+E:/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><E:/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmr17.pfb><E:/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on Software_write_up.pdf (9 pages, 330562 bytes).
 PDF statistics:
  73 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
