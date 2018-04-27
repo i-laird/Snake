@@ -11,7 +11,7 @@
 \begin{document}
 	\maketitle
 	\section{Outline}
-	This game implements a 2 player version of the popular game Snake. Communication between the host and client is done using TCP. Players can pick up power ups and kill the other player to increase their score. The player scores are saved in an XML file.
+	This game implements a 2 player version of the popular game Snake. Communication between the host and client is done using TCP. Players can pick up power ups and kill the other player to increase their score. The player scores are saved in an XML file. Graphics are done using JavaFX for game setup and with Swing for the Game itself. The goal of the Game is to end with a higher score than the other player.
 
 	\section{Vision Statement}
 	The next step in this game will be making it so that more than 2 players can play at the same time. A further iteration of the software will have a dedicated Snake server that can run multiple games with more than 2 players concurrently.
@@ -236,13 +236,13 @@
 	\section{GRASP}
 		\begin{enumerate}
 			\item \textbf{High Cohesion:}\\
-			For high cohesion we focused on making sure the functions were delegated to the proper functions. For example the Game will handle all of the game logic and delegates display features, like printing to the screen, to the Screen object.
+			For high cohesion we focused on making sure that each class had one specific responsibility. For example the Game will handle all of the game logic, while the Screen is responsible for all display.
 			\item \textbf{Pure Fabrication:}\\
-			An example of pure fabrication in our project is our Wrapper class which is a container around the components and is then slotted into the Screen object.
+			An example of pure fabrication in our project is the GameRecord class. It was introduced so that the Game state could be reverted.
 			\item \textbf{Information Expert:}\\
-			We delegated the creation of objects to the classes who know the required information. For example, the Wrapper is created by the Screen since the Screen knows what the width and height of the Wrapper need to be.
+			We delegated the creation of objects to the classes who know the required information. For example, the Wrapper is created by the Screen since the Screen knows what the width and height of the Wrapper need to be. Also, the only class that creates Snakes is the Game object.
 			\item \textbf{Polymorphism:}\\
-			The Game uses polymorphism for if it is a client game or a server game.
+			The Game uses polymorphism when calculating the position that a Snake will move to. It is also used in Game so that the Game can properly act as either a server or a client.
 		\end{enumerate}
 	
 	\section{Design Patterns}
@@ -252,11 +252,11 @@
 				time. The game screen and the game itself were both singletons.
 			\item \textbf{Factory method:}
 				Factory method was used to remove the need to use new to create instances of a Snake. The Cell method also had a getRandom method that functioned much like a factory.
-			\item \textbf{Abstract Factory:}
+			\item \textbf{Abstract Factory:}\\
 				Abstract factory was used to create instances of a Game Object. Because there were multiple subtypes of the Game Object the abstract factory made it simpler to create an instance. Also the abstract factory allowed only one instance of any of game's subtypes to exist.
-			\item \textbf{Builder:}
+			\item \textbf{Builder:}\\
 				A Builder is used to create instances of a Snake. Because the snake is a complex object builder lets the application customize them. It allows Snake location and color to be both be customized.
-			\item \textbf{State:}
+			\item \textbf{State:}\\
 				State is used in the Screen to represent movement direction as determined by user keystrokes. It uses polymorphism to avoid using a switch statement in calculating the new snake position.
 			\item \textbf{Command:}\\
 				Command is used to represent the Game being executed. In this project there is only class that implements the GameRunner interface but it makes it so that new games you could easily be added to the project. The Main class runs a SnakeRunner which extends the abstract class GameRunner, and starts the SnakeGame;
@@ -265,7 +265,7 @@
 		\end{enumerate}
 	\section{Stats}
 	\subsection{Hours Spent per User}
-	\textbf{Ian Laird:} ~~~~~20 hours\\
+	\textbf{Ian Laird:} ~~~~~25 hours\\
 	\textbf{Andrew Walker:}~23 hours
 	\subsection{Logical Lines from Each User}
 	\textbf{Ian Laird:} ~~~~~ 574 lines\\

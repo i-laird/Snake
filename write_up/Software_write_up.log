@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.3.16)  26 APR 2018 21:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.11)  26 APR 2018 22:06
 entering extended mode
 **./Software_write_up.tex
 (Software_write_up.tex
 LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 75 language(s) loaded.
+Babel <3.15> and hyphenation patterns for 75 language(s) loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo"
@@ -67,7 +67,7 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
-File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+File: pdftex.def 2017/06/24 v1.0g Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen111
 \Gin@req@width=\dimen112
@@ -169,7 +169,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
-Package: pdftexcmds 2018/01/21 v0.26 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -191,12 +191,14 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 12.
  [1
 
-{C:/Users/Andrew/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+{C:/Users/iancl/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 <images/gantt2.png, id=8, 1160.83687pt x 363.60844pt>
 File: images/gantt2.png Graphic file (type png)
 <use images/gantt2.png>
-Package pdftex.def Info: images/gantt2.png  used on input line 20.
-(pdftex.def)             Requested size: 580.417pt x 181.80377pt.
+Package pdftex.def Info: images/gantt2.png  used on input line 20. on input lin
+e 20.
+Package pdftex.def Info: Requested size: 580.417pt x 181.80377pt on input line 
+20.
 
 Overfull \hbox (108.38577pt too wide) in paragraph at lines 20--21
 [] 
@@ -206,13 +208,17 @@ Overfull \hbox (108.38577pt too wide) in paragraph at lines 20--21
 <images/UCD.png, id=19, 621.32124pt x 299.1175pt>
 File: images/UCD.png Graphic file (type png)
 <use images/UCD.png>
-Package pdftex.def Info: images/UCD.png  used on input line 168.
-(pdftex.def)             Requested size: 465.98979pt x 224.33757pt.
+Package pdftex.def Info: images/UCD.png  used on input line 168. on input line 
+168.
+Package pdftex.def Info: Requested size: 465.98979pt x 224.33757pt on input lin
+e 168.
 <images/SSD.png, id=20, 637.38126pt x 355.82938pt>
 File: images/SSD.png Graphic file (type png)
 <use images/SSD.png>
-Package pdftex.def Info: images/SSD.png  used on input line 171.
-(pdftex.def)             Requested size: 478.03477pt x 266.87137pt.
+Package pdftex.def Info: images/SSD.png  used on input line 171. on input line 
+171.
+Package pdftex.def Info: Requested size: 478.03477pt x 266.87137pt on input lin
+e 171.
 
 Overfull \hbox (6.00354pt too wide) in paragraph at lines 171--172
 [] 
@@ -226,8 +232,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 <images/DM.png, id=25, 611.78563pt x 267.49937pt>
 File: images/DM.png Graphic file (type png)
 <use images/DM.png>
-Package pdftex.def Info: images/DM.png  used on input line 181.
-(pdftex.def)             Requested size: 458.83809pt x 200.62402pt.
+Package pdftex.def Info: images/DM.png  used on input line 181. on input line 1
+81.
+Package pdftex.def Info: Requested size: 458.83809pt x 200.62402pt on input lin
+e 181.
  [4 <./images/SSD.png> <./images/DM.png>]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 192.
 
@@ -240,8 +248,10 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 <images/Sequence1.png, id=32, 689.57625pt x 625.58719pt>
 File: images/Sequence1.png Graphic file (type png)
 <use images/Sequence1.png>
-Package pdftex.def Info: images/Sequence1.png  used on input line 225.
-(pdftex.def)             Requested size: 517.18091pt x 469.18924pt.
+Package pdftex.def Info: images/Sequence1.png  used on input line 225. on input
+ line 225.
+Package pdftex.def Info: Requested size: 517.18091pt x 469.18924pt on input lin
+e 225.
 
 Overfull \hbox (45.14967pt too wide) in paragraph at lines 225--226
 [] 
@@ -251,14 +261,18 @@ Overfull \hbox (45.14967pt too wide) in paragraph at lines 225--226
 <images/Sequence2.png, id=37, 470.35725pt x 445.06274pt>
 File: images/Sequence2.png Graphic file (type png)
 <use images/Sequence2.png>
-Package pdftex.def Info: images/Sequence2.png  used on input line 228.
-(pdftex.def)             Requested size: 470.3561pt x 445.06165pt.
+Package pdftex.def Info: images/Sequence2.png  used on input line 228. on input
+ line 228.
+Package pdftex.def Info: Requested size: 470.3561pt x 445.06165pt on input line
+ 228.
  [6 <./images/Sequence1.png>]
 <images/Sequence3.png, id=43, 479.69212pt x 377.61075pt>
 File: images/Sequence3.png Graphic file (type png)
 <use images/Sequence3.png>
-Package pdftex.def Info: images/Sequence3.png  used on input line 231.
-(pdftex.def)             Requested size: 479.69095pt x 377.60982pt.
+Package pdftex.def Info: images/Sequence3.png  used on input line 231. on input
+ line 231.
+Package pdftex.def Info: Requested size: 479.69095pt x 377.60982pt on input lin
+e 231.
 
 Overfull \hbox (7.65971pt too wide) in paragraph at lines 231--232
 [] 
@@ -269,8 +283,9 @@ Overfull \hbox (7.65971pt too wide) in paragraph at lines 231--232
 File: images/DesignModel_better.png Graphic file (type png)
 <use images/DesignModel_better.png>
 Package pdftex.def Info: images/DesignModel_better.png  used on input line 234.
-
-(pdftex.def)             Requested size: 480.48138pt x 452.81561pt.
+ on input line 234.
+Package pdftex.def Info: Requested size: 480.48138pt x 452.81561pt on input lin
+e 234.
 
 Overfull \hbox (8.45015pt too wide) in paragraph at lines 234--235
 [] 
@@ -279,13 +294,13 @@ Overfull \hbox (8.45015pt too wide) in paragraph at lines 234--235
 [8 <./images/Sequence3.png>] [9 <./images/DesignModel_better.png>] [10]
 (Software_write_up.aux) ) 
 Here is how much of TeX's memory you used:
- 1977 strings out of 493305
- 28941 string characters out of 3138871
- 94086 words of memory out of 3000000
- 5514 multiletter control sequences out of 15000+200000
+ 1975 strings out of 493312
+ 28826 string characters out of 3138898
+ 93637 words of memory out of 3000000
+ 5509 multiletter control sequences out of 15000+200000
  8194 words of font info for 29 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,7n,25p,342b,226s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,7n,25p,436b,226s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
 bx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb
@@ -293,7 +308,7 @@ bx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files
 /MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Software_write_up.pdf (11 pages, 442349 bytes).
+Output written on Software_write_up.pdf (11 pages, 442532 bytes).
 PDF statistics:
  83 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
