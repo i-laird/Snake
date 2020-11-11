@@ -1,57 +1,32 @@
-Overview of Progress 4/22/2018
-====
-+ Game is running
-+ Need 1 more design pattern(we have 6)
-+ polishing up Swing stuff( Andrew)
-+ Diagramming
-    + Design Model
-    + Sequence Diagrams
-+ High Scores
+# Snake Game
 
-Overview of Progress 3/22/2018 Ian Laird
-=====
-+ I have made good progress
-+ Game class is almost entirely "finished"
-    + One thing left undone is reading unbuffered input from keyboard for moves
-+ Screen class is nowhere bear being done
-    + Methods I need for Game are created but most are unfinished
-+ Look into KeyListener Interface
-   - https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyListener.html
+This Snake game was created as the group project for Software Engineering 1/ Intro to Java Programming at Baylor University.
 
-Overview of classes
-===========
-game:
-- Abstract
-- Contains two player Snakes
-- Contains screen which is where game will be displayed
-- Communication done through reader and Writer
-- These will be generated with TCP
+In this game two players control snakes and attempt to reach the longest length through eating fruits. if you hit the other snake you lose.
 
-Snake:
-- represented by Deque
-- Two exist to represent the two players
+Check [here](classOverview.md) to see an overview of classes
 
-Cell:
-- represents a Cell in the Game
+# Built Using
++ Java 8
+   + TCP is used for the networking
+   + Java FX is used for the GUI
+   + Swing is used to display the game
++ Maven
++ Spot Bugs for Code Analysis
++ Junit for unit testing
 
-ServerGame:
-- Inherits from Game
-- Hosts the game
-- Communicates with ClientGame on other machine
-- TCP
+# Running the Game
 
-ClientGame
-- Inherits from Game
-- Does not host game
-- Commicates with Server
-- TCP
+Run this command in your terminal when you are in the project folder
+```
+mvn clean javafx:run
+```
 
-GameMaker:
-- Actually created either ServerGame or ClientGame
-- ONLY ONE GAME OF ANY KIND CAN EXIST
+You will see a GUI appear asking if you are a host or a client. Since currenly only two players are supported one player must choose to be a host and one must choose to be a client.
 
-Screen:
-- Is the game screen
-- How everything is displayed
-- Probably need to put Swing stuff here
+If you choose to be a server your ip address will be given to you and then you will be told to hit ok. Once you do so you are ready to accept incoming connections from a client. Note: if the server GUI is still open when the client attempts to connect the connection will fail and the client will have to try again.
+
+# Authors
++ Ian laird
++ Andrew Walker
 
