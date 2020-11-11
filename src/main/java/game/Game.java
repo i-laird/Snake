@@ -1,3 +1,9 @@
+/**
+ * file name: Game.java
+ * project: Snake
+ * author: Ian Laird & Andrew Walker
+ */
+
 package game;
 
 import display.Screen;
@@ -22,21 +28,51 @@ import java.util.logging.Logger;
  */
 public abstract class Game {
 
+    // the width of the screen
     protected static final int SCREEN_WIDTH = 800;
+
+    // the height of the screen
     protected static final int SCREEN_HEIGHT = 400;
+
+    // logger for the game
     private static final Logger LOGGER = Logger.getLogger("Game");
+
+    // this player
     protected Snake playerOne = null;
+
+    // the other player
     protected Snake playerTwo = null;
+
+    // used to communicate with the other player
     protected Socket networkSocket = null;
+
+    // writes moves that the player has made to the other player
     protected DataOutputStream moveSender = null;
+
+    // receives moves that the other player has made
     protected DataInputStream moveReader = null;
+
+    // the location of the fruit
     protected Cell powerUp = null;
+
     private SnakeBuilder snakeMaker = new SnakeBuilder();
+
+    // score of this player
     private int playerOneScore = 0;
+
+    // score of that player
     private int playerTwoScore = 0;
+
+    // username of this player
     private String playerOneUsername;
+
+    // username of that player
     private String playerTwoUsername;
+
+    // used to actually display the game
     private Screen gameScreen = null;
+
+    // indicates if a player has won
     private boolean gameOver = false;
 
     /**
@@ -57,13 +93,15 @@ public abstract class Game {
      * @author Ian Laird
      */
     public boolean initConnection(String hostName, int portNum) throws NetworkError {
+
         //initialize the network
         try {
+            LOGGER.info("initializing socket");
             initializeSocket(hostName, portNum);
             LOGGER.info("Initialized Socket");
         } catch (IOException e) {
-            LOGGER.severe("Socket failed to open!");
-            throw new NetworkError("Socket Error");
+            LOGGER.severe("Socket initialization failed");
+            throw new NetworkError("Socket initialization failed");
         }
         if (!initNetIn() || !initNetOut()) {
             LOGGER.severe("Network initialization failed");
@@ -93,6 +131,7 @@ public abstract class Game {
      * Initializes the Snakes with independent random positions
      */
     protected void initSnakes() throws IOException {
+        LOGGER.info("Initilializing the snakes");
         //First create the two Snakes
         Cell start1 = null, start2 = null;
         do {

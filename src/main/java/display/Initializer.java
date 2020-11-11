@@ -102,7 +102,7 @@ public class Initializer extends Application {
 
         Button serverButton = new Button("Server");
         Button clientButton = new Button("Client");
-        Button closeButton = new Button("OK");
+        Button closeButton = new Button("Ready");
 
         Button submitButton = new Button("Submit");
         submitButton.setMinWidth(80);
