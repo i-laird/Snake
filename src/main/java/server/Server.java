@@ -7,9 +7,7 @@ import server.communication.message.Error;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -25,7 +23,11 @@ public class Server extends Thread {
         }
     }
 
+    // holds all of the lobbies that are currently open in the game
+    // once a game has started the lobby closes
     private static Set<Lobby> lobbies = new HashSet<>();
+
+    // holds all of the players in the game
     private static Set<Player> players = new HashSet<>();
 
     /**
@@ -79,6 +81,16 @@ public class Server extends Thread {
         this.handleClient();
     }
 
+    /**
+     * Handles a client connecting to the server
+     *
+     * Steps:
+     *      1) tell client that the connection has been established
+     *      2) get the client name
+     *      3) tell the client what the lobbies are
+     *      4) allow the client to either open or join a lobby
+     *      5) Wait for the player to ready
+     */
     private void handleClient(){
         try {
             try {
@@ -86,13 +98,13 @@ public class Server extends Thread {
                 messageHandler.sendMessage(new ACK("Connection Established"));
 
                 // get the name of this player
-                handleClientName();
+                Player player = handleClientName();
 
                 // send the lobbies that are currently open
                 sendLobbies();
 
                 // handle player's lobby selection
-                handleLobby();
+                handleLobby(player);
 
             } catch (MessageTypeException e) {
                 messageHandler.sendMessage(new Error(e.getMessage()));
@@ -102,32 +114,44 @@ public class Server extends Thread {
         catch(IOException | ClassNotFoundException e2){}
     }
 
-    private void handleClientName() throws IOException, ClassNotFoundException, MessageTypeException {
-        // this message needs to be the player name
+    private Player handleClientName() throws IOException, ClassNotFoundException, MessageTypeException {
         Message receive = messageHandler.receiveMessage();
+
+        // if the message is not a player name there is a communication error TERMINATE CONNECTION
         if(! (receive instanceof Register_Name)){
             throw new MessageTypeException("Error: REGISTER_NAME expected");
         }
+
         Register_Name clientName = (Register_Name) receive;
         Player proposedPlayer = new Player(clientName.getPlayerName());
 
         // if the name already exists prompt the player to send a new one
         if(!players.add(proposedPlayer)){
-            messageHandler.sendMessage(new ACK("Invalid"));
-            handleClientName();
+            messageHandler.sendMessage(new Error("Invalid player name"));
+            return handleClientName(); // recursion
         }
 
         // if the name is not already in use send confirmation and use that name
         else {
             messageHandler.sendMessage(new ACK(approvedClientName));
         }
+        return proposedPlayer;
     }
 
+    /**
+     * Helper method for telling client about the lobbies that exist
+     * @throws IOException if connection error
+     */
     private void sendLobbies() throws IOException {
         messageHandler.sendMessage(new Lobbies(new ArrayList<>(lobbies)));
     }
 
-    private void handleLobby() throws ClassNotFoundException, IOException, MessageTypeException {
+    /**
+     * Handles Client lobby request
+     *
+     * Allows client to either create or join a lobby
+     */
+    private void handleLobby(Player player) throws ClassNotFoundException, IOException, MessageTypeException {
         Message m = messageHandler.receiveMessage();
 
         if(m instanceof Create_Lobby){
@@ -135,6 +159,7 @@ public class Server extends Thread {
             String lobbyName = create_lobby.getLobbyName();
 
             Lobby proposedLobby = new Lobby(lobbyName);
+            proposedLobby.getPlayers().add(player);
 
             // see if a lobby of this name already exists
             if (lobbies.add(proposedLobby)) {
@@ -143,13 +168,20 @@ public class Server extends Thread {
 
             // if lobby already exists send invalid message and wait for new lobby choice
             else{
-                messageHandler.sendMessage(new ACK("Invalid"));
-                handleLobby();
+                messageHandler.sendMessage(new Error("Invalid lobby name"));
+                handleLobby(player); // recursion
+                return;
             }
         }
 
         else if( m instanceof Join_Lobby){
-            // TODO add player to this lobby
+            Join_Lobby join_lobby = (Join_Lobby)m;
+            Optional<Lobby> l = lobbies.stream().filter(x -> x.getLobbyName().equals(join_lobby.getLobbyName())).findFirst();
+            if(l.isEmpty()){
+                messageHandler.sendMessage(new Error("lobby does not exist"));
+                handleLobby(player);
+            }
+            l.get().getPlayers().add(player);
         }
 
         else{

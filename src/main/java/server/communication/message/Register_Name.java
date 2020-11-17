@@ -1,6 +1,8 @@
 package server.communication.message;
 
-public class Register_Name extends Message{
+import java.io.Serializable;
+
+public class Register_Name extends Message implements Serializable {
     private String playerName;
 
     public String getPlayerName() {

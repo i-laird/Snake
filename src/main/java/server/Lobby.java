@@ -1,9 +1,13 @@
 package server;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lobby {
     private String lobbyName;
+
+    private Set<Player> players = new HashSet<>();
 
     public Lobby(String lobbyName) {
         this.lobbyName = lobbyName;
@@ -20,5 +24,21 @@ public class Lobby {
     @Override
     public int hashCode() {
         return Objects.hash(lobbyName);
+    }
+
+    public String getLobbyName() {
+        return lobbyName;
+    }
+
+    public void setLobbyName(String lobbyName) {
+        this.lobbyName = lobbyName;
+    }
+
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Set<Player> players) {
+        this.players = players;
     }
 }

@@ -1,4 +1,6 @@
 package server.communication.message;
 
-public class Ready extends Message{
+import java.io.Serializable;
+
+public class Ready extends Message implements Serializable {
 }

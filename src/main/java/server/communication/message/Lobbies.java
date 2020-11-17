@@ -2,9 +2,10 @@ package server.communication.message;
 
 import server.Lobby;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Lobbies extends Message{
+public class Lobbies extends Message implements Serializable {
     private List<Lobby> lobbies;
 
     public Lobbies(List<Lobby> lobbies) {

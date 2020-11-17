@@ -2,6 +2,8 @@ package server.communication.message;
 
 import server.Move;
 
-public class Moves extends Message{
+import java.io.Serializable;
+
+public class Moves extends Message implements Serializable {
     private Move[] moves;
 }

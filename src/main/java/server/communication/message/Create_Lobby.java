@@ -1,6 +1,8 @@
 package server.communication.message;
 
-public class Create_Lobby extends Message {
+import java.io.Serializable;
+
+public class Create_Lobby extends Message implements Serializable {
     private String lobbyName;
 
     public Create_Lobby(String lobbyName) {

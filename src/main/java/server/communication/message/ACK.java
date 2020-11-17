@@ -1,6 +1,8 @@
 package server.communication.message;
 
-public class ACK extends Message{
+import java.io.Serializable;
+
+public class ACK extends Message implements Serializable {
 
     private String ackMessage;
 

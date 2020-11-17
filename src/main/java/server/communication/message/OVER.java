@@ -1,4 +1,6 @@
 package server.communication.message;
 
-public class OVER extends Message{
+import java.io.Serializable;
+
+public class OVER extends Message implements Serializable {
 }

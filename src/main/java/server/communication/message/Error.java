@@ -1,6 +1,8 @@
 package server.communication.message;
 
-public class Error extends Message{
+import java.io.Serializable;
+
+public class Error extends Message implements Serializable {
 
     private String errorMessage;
 
