@@ -1,13 +1,13 @@
 package server;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Lobby {
     private String lobbyName;
 
-    private Set<Player> players = new HashSet<>();
+    private boolean start = false;
+
+    private Map<Player, Boolean> playerToStatus = new HashMap<>();
 
     public Lobby(String lobbyName) {
         this.lobbyName = lobbyName;
@@ -34,11 +34,19 @@ public class Lobby {
         this.lobbyName = lobbyName;
     }
 
-    public Set<Player> getPlayers() {
-        return players;
+    public Map<Player, Boolean> getPlayerToStatus() {
+        return playerToStatus;
     }
 
-    public void setPlayers(Set<Player> players) {
-        this.players = players;
+    public void setPlayerToStatus(Map<Player, Boolean> playerToStatus) {
+        this.playerToStatus = playerToStatus;
+    }
+
+    public boolean isStart() {
+        return start;
+    }
+
+    public void setStart(boolean start) {
+        this.start = start;
     }
 }

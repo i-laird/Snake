@@ -13,6 +13,9 @@ import java.util.concurrent.Executors;
 
 public class Server extends Thread {
 
+    public static final boolean NOT_READY = false;
+    public static final boolean READY = true;
+
     private static class MessageTypeException extends Throwable{
         private String message;
         private MessageTypeException(){
@@ -29,6 +32,8 @@ public class Server extends Thread {
 
     // holds all of the players in the game
     private static Set<Player> players = new HashSet<>();
+
+    private static Map<Player, Server> playerToServer = new HashMap();
 
     /**
      * This is a server for the Snake game
@@ -65,6 +70,10 @@ public class Server extends Thread {
 
     private String approvedClientName;
 
+    private Player player;
+
+    private Lobby lobby;
+
     private Server(Socket s){
         this.socket = s;
     }
@@ -98,13 +107,18 @@ public class Server extends Thread {
                 messageHandler.sendMessage(new ACK("Connection Established"));
 
                 // get the name of this player
-                Player player = handleClientName();
+                this.player = handleClientName();
+
+                playerToServer.put(this.player, this);
 
                 // send the lobbies that are currently open
                 sendLobbies();
 
                 // handle player's lobby selection
-                handleLobby(player);
+                this.lobby = handleLobby();
+
+                // block until player readies up
+                idleLobbyHandle();
 
             } catch (MessageTypeException e) {
                 messageHandler.sendMessage(new Error(e.getMessage()));
@@ -151,7 +165,7 @@ public class Server extends Thread {
      *
      * Allows client to either create or join a lobby
      */
-    private void handleLobby(Player player) throws ClassNotFoundException, IOException, MessageTypeException {
+    private Lobby handleLobby() throws ClassNotFoundException, IOException, MessageTypeException {
         Message m = messageHandler.receiveMessage();
 
         if(m instanceof Create_Lobby){
@@ -159,18 +173,18 @@ public class Server extends Thread {
             String lobbyName = create_lobby.getLobbyName();
 
             Lobby proposedLobby = new Lobby(lobbyName);
-            proposedLobby.getPlayers().add(player);
+            proposedLobby.getPlayerToStatus().put(player, NOT_READY);
 
             // see if a lobby of this name already exists
             if (lobbies.add(proposedLobby)) {
                 messageHandler.sendMessage(new ACK(lobbyName));
+                return proposedLobby;
             }
 
             // if lobby already exists send invalid message and wait for new lobby choice
             else{
                 messageHandler.sendMessage(new Error("Invalid lobby name"));
-                handleLobby(player); // recursion
-                return;
+                return handleLobby(); // recursion
             }
         }
 
@@ -179,14 +193,79 @@ public class Server extends Thread {
             Optional<Lobby> l = lobbies.stream().filter(x -> x.getLobbyName().equals(join_lobby.getLobbyName())).findFirst();
             if(l.isEmpty()){
                 messageHandler.sendMessage(new Error("lobby does not exist"));
-                handleLobby(player);
+                return handleLobby();
             }
-            l.get().getPlayers().add(player);
+            l.get().getPlayerToStatus().put(player, NOT_READY);
+            return l.get();
         }
 
         else{
             throw new MessageTypeException("Error: Either CREATE_LOBBY OR JOIN_LOBBY expected");
         }
+    }
+
+    private void idleLobbyHandle() throws IOException, ClassNotFoundException, MessageTypeException {
+
+        // if the thread has been interrupted it means that the game is starting
+        if(currentThread().isInterrupted()){
+            notifyClientStart();
+            return;
+        }
+        Message m = messageHandler.receiveMessage();
+
+        // if the client wants to switch to a different lobby
+        if (m instanceof Change_Lobby) {
+
+            this.lobby.getPlayerToStatus().remove(this.player);
+
+            // notify other clients in this lobby of the new state
+            sendLobbies();
+
+            // get the new lobby choice
+            this.lobby = handleLobby();
+            idleLobbyHandle();
+
+        } else if (m instanceof Ready) {
+
+            // save that this player is ready
+            this.lobby.getPlayerToStatus().put(this.player, READY);
+
+            // if all players are ready
+            if (this.lobby.getPlayerToStatus().values().stream().reduce((x, y) -> {
+                return x && y;
+            }).get()) {
+
+                this.lobby.setStart(READY);
+
+                // send START to each client
+                // for each client in the lobby interrupt that thread
+                this.lobby.getPlayerToStatus().keySet().forEach(x -> {
+                    playerToServer.get(x).interrupt();
+                });
+
+                notifyClientStart();
+                return;
+            }
+            else {
+                sendLobbies();
+                if(currentThread().isInterrupted()){
+                    notifyClientStart();
+                }
+                else {
+                    try {
+                        sleep(1000);
+                    }catch(InterruptedException e){
+                        notifyClientStart();
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    private void notifyClientStart() throws IOException{
+        this.messageHandler.sendMessage(new Start());
     }
 
     private void closeConnection() throws IOException{
