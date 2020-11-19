@@ -10,11 +10,15 @@ import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Server extends Thread {
 
     public static final boolean NOT_READY = false;
     public static final boolean READY = true;
+    private static ReadWriteLock playersRWlock = new ReentrantReadWriteLock();
+    private static ReadWriteLock lobbiesRWlock = new ReentrantReadWriteLock();
 
     private static class MessageTypeException extends Throwable{
         private String message;
@@ -140,7 +144,11 @@ public class Server extends Thread {
         Player proposedPlayer = new Player(clientName.getPlayerName());
 
         // if the name already exists prompt the player to send a new one
-        if(!players.add(proposedPlayer)){
+        playersRWlock.writeLock().lock();
+        boolean flag = !players.add(proposedPlayer);
+        playersRWlock.writeLock().unlock();
+
+        if(flag){
             messageHandler.sendMessage(new Error("Invalid player name"));
             return handleClientName(); // recursion
         }
@@ -157,7 +165,9 @@ public class Server extends Thread {
      * @throws IOException if connection error
      */
     private void sendLobbies() throws IOException {
+        lobbiesRWlock.readLock().lock();
         messageHandler.sendMessage(new Lobbies(new ArrayList<>(lobbies)));
+        lobbiesRWlock.readLock().unlock();
     }
 
     /**
@@ -176,7 +186,11 @@ public class Server extends Thread {
             proposedLobby.getPlayerToStatus().put(player, NOT_READY);
 
             // see if a lobby of this name already exists
-            if (lobbies.add(proposedLobby)) {
+            lobbiesRWlock.writeLock().lock();
+            boolean flag = lobbies.add(proposedLobby);
+            lobbiesRWlock.writeLock().unlock();
+
+            if (flag) {
                 messageHandler.sendMessage(new ACK(lobbyName));
                 return proposedLobby;
             }
@@ -190,7 +204,9 @@ public class Server extends Thread {
 
         else if( m instanceof Join_Lobby){
             Join_Lobby join_lobby = (Join_Lobby)m;
+            lobbiesRWlock.readLock().lock();
             Optional<Lobby> l = lobbies.stream().filter(x -> x.getLobbyName().equals(join_lobby.getLobbyName())).findFirst();
+            lobbiesRWlock.readLock().unlock();
             if(l.isEmpty()){
                 messageHandler.sendMessage(new Error("lobby does not exist"));
                 return handleLobby();
