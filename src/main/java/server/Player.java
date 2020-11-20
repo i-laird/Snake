@@ -1,13 +1,16 @@
 package server;
 
+import java.net.Socket;
 import java.util.Objects;
 
 public class Player {
 
     private String playerName;
+    private Socket socket;
 
-    public Player(String playerName) {
+    public Player(String playerName, Socket s) {
         this.playerName = playerName;
+        this.socket = s;
     }
 
     public String getPlayerName() {

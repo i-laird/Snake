@@ -15,20 +15,38 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Server extends Thread {
 
-    public static final boolean NOT_READY = false;
-    public static final boolean READY = true;
-    private static ReadWriteLock playersRWlock = new ReentrantReadWriteLock();
-    private static ReadWriteLock lobbiesRWlock = new ReentrantReadWriteLock();
-
+    /**
+     * @author Ian Laird
+     *
+     * Used to indicate that an unexpected message has been received from the client
+     */
     private static class MessageTypeException extends Throwable{
-        private String message;
+        /**
+         * constructor
+         */
         private MessageTypeException(){
             super();
         }
+
+        /**
+         * custom constructor
+         * @param s message detailing the cause of the error
+         */
         private MessageTypeException(String s){
             super(s);
         }
     }
+
+    // indicates that a client in a game is not ready for the game to start
+    public static final boolean NOT_READY = false;
+
+    // indicates that a client in a game is ready for a game to start
+    public static final boolean READY = true;
+
+    // used to lock access to lobbies object
+    // is a write is happening nothing else is allowed in
+    // if a write is happening as many reads as we want can happen
+    private static ReadWriteLock lobbiesRWlock = new ReentrantReadWriteLock();
 
     // holds all of the lobbies that are currently open in the game
     // once a game has started the lobby closes
@@ -37,7 +55,13 @@ public class Server extends Thread {
     // holds all of the players in the game
     private static Set<Player> players = new HashSet<>();
 
+    // maps a player to the thread that is currently servicing them
+    // this is useful so that we can stop threads
     private static Map<Player, Server> playerToServer = new HashMap();
+
+    // this executes the threads that actually run games
+    // one thread per game
+    private static ExecutorService gameExecutorService = Executors.newFixedThreadPool(10);
 
     /**
      * This is a server for the Snake game
@@ -132,6 +156,16 @@ public class Server extends Thread {
         catch(IOException | ClassNotFoundException e2){}
     }
 
+    /**
+     * Handles a client registering with the server. Will reprompt for a new client name if the one given
+     * if already taken by another client.
+     *
+     * @return the player that is created with the client name
+     * @throws IOException if an IO exception occurs when communicating with the client
+     * @throws ClassNotFoundException if the client sends an unexpected object over the wire
+     * @throws MessageTypeException if the client sends the wrong type of message
+     *    Allowed types of message to be sent are REGISTER_NAME
+     */
     private Player handleClientName() throws IOException, ClassNotFoundException, MessageTypeException {
         Message receive = messageHandler.receiveMessage();
 
@@ -141,12 +175,14 @@ public class Server extends Thread {
         }
 
         Register_Name clientName = (Register_Name) receive;
-        Player proposedPlayer = new Player(clientName.getPlayerName());
+        Player proposedPlayer = new Player(clientName.getPlayerName(), this.socket);
+
+        boolean flag;
 
         // if the name already exists prompt the player to send a new one
-        playersRWlock.writeLock().lock();
-        boolean flag = !players.add(proposedPlayer);
-        playersRWlock.writeLock().unlock();
+        synchronized (players) {
+            flag = !players.add(proposedPlayer);
+        }
 
         if(flag){
             messageHandler.sendMessage(new Error("Invalid player name"));
@@ -162,6 +198,7 @@ public class Server extends Thread {
 
     /**
      * Helper method for telling client about the lobbies that exist
+     *
      * @throws IOException if connection error
      */
     private void sendLobbies() throws IOException {
@@ -174,6 +211,10 @@ public class Server extends Thread {
      * Handles Client lobby request
      *
      * Allows client to either create or join a lobby
+     * @throws IOException if an IO exception occurs when communicating with the client
+     * @throws ClassNotFoundException if the client sends an unexpected object over the wire
+     * @throws MessageTypeException if the client sends the wrong type of message
+     *    Allowed types of Message are CREATE_LOBBY | JOIN_LOBBY
      */
     private Lobby handleLobby() throws ClassNotFoundException, IOException, MessageTypeException {
         Message m = messageHandler.receiveMessage();
@@ -204,14 +245,20 @@ public class Server extends Thread {
 
         else if( m instanceof Join_Lobby){
             Join_Lobby join_lobby = (Join_Lobby)m;
+
             lobbiesRWlock.readLock().lock();
             Optional<Lobby> l = lobbies.stream().filter(x -> x.getLobbyName().equals(join_lobby.getLobbyName())).findFirst();
             lobbiesRWlock.readLock().unlock();
+
             if(l.isEmpty()){
                 messageHandler.sendMessage(new Error("lobby does not exist"));
                 return handleLobby();
             }
-            l.get().getPlayerToStatus().put(player, NOT_READY);
+
+            synchronized (l.get()) {
+                l.get().getPlayerToStatus().put(player, NOT_READY);
+            }
+
             return l.get();
         }
 
@@ -220,11 +267,22 @@ public class Server extends Thread {
         }
     }
 
+    /**
+     * method used to handle requests while a client is waiting in a lobby.
+     *
+     * CHANGE_LOBBY: if received the client is removed from this
+     *     lobby and server goes back to get lobby step
+     * READY: if received this client is marked as ready in the server
+     *
+     * @throws IOException if an IO exception occurs when communicating with the client
+     * @throws ClassNotFoundException if the client sends an unexpected object over the wire
+     * @throws MessageTypeException if the client sends the wrong type of message
+     *    Allowed types of Message are CHANGE_LOBBY | READY
+     */
     private void idleLobbyHandle() throws IOException, ClassNotFoundException, MessageTypeException {
 
         // if the thread has been interrupted it means that the game is starting
         if(currentThread().isInterrupted()){
-            notifyClientStart();
             return;
         }
         Message m = messageHandler.receiveMessage();
@@ -232,10 +290,19 @@ public class Server extends Thread {
         // if the client wants to switch to a different lobby
         if (m instanceof Change_Lobby) {
 
-            this.lobby.getPlayerToStatus().remove(this.player);
+            synchronized (this.lobby) {
+                this.lobby.getPlayerToStatus().remove(this.player);
+            }
 
             // notify other clients in this lobby of the new state
             sendLobbies();
+
+            synchronized (this.lobby) {
+                if (allClientsInLobbyReady()) {
+                    interruptOtherClientsInLobby();
+                    initGameRunner();
+                }
+            }
 
             // get the new lobby choice
             this.lobby = handleLobby();
@@ -243,50 +310,55 @@ public class Server extends Thread {
 
         } else if (m instanceof Ready) {
 
+            boolean flag;
+
             // save that this player is ready
-            this.lobby.getPlayerToStatus().put(this.player, READY);
+            synchronized (this.lobby) {
+                this.lobby.getPlayerToStatus().put(this.player, READY);
+                flag = allClientsInLobbyReady();
 
-            // if all players are ready
-            if (this.lobby.getPlayerToStatus().values().stream().reduce((x, y) -> {
-                return x && y;
-            }).get()) {
-
-                this.lobby.setStart(READY);
-
-                // send START to each client
-                // for each client in the lobby interrupt that thread
-                this.lobby.getPlayerToStatus().keySet().forEach(x -> {
-                    playerToServer.get(x).interrupt();
-                });
-
-                notifyClientStart();
-                return;
-            }
-            else {
-                sendLobbies();
-                if(currentThread().isInterrupted()){
-                    notifyClientStart();
+                if(flag){
+                    this.lobby.setStart(READY);
+                    interruptOtherClientsInLobby();
+                    initGameRunner();
                 }
-                else {
+            }
+
+            if(!flag) {
+                sendLobbies();
+                if(!currentThread().isInterrupted()){
                     try {
                         sleep(1000);
-                    }catch(InterruptedException e){
-                        notifyClientStart();
-                    }
+                    }catch(InterruptedException e){}
                 }
             }
         }
-
-
-    }
-
-    private void notifyClientStart() throws IOException{
-        this.messageHandler.sendMessage(new Start());
     }
 
     private void closeConnection() throws IOException{
         this.messageHandler.closeConnections();
         this.socket.close();
+    }
+
+    private boolean allClientsInLobbyReady(){
+        return this.lobby.getPlayerToStatus().values().stream().reduce((x, y) -> {
+            return x && y;
+        }).get();
+    }
+
+    private void interruptOtherClientsInLobby(){
+
+        // send START to each client
+        // for each client in the lobby interrupt that thread
+        this.lobby.getPlayerToStatus().keySet().forEach(x -> {
+            playerToServer.get(x).interrupt();
+        });
+    }
+
+    private void initGameRunner(){
+        GameRunner newGame = new GameRunner();
+        this.lobby.getPlayerToStatus().keySet().forEach(newGame::addPlayer);
+        gameExecutorService.submit(newGame);
     }
 
 
