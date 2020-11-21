@@ -1,4 +1,4 @@
-package server.communication.message;
+package communication.message;
 
 import server.Lobby;
 

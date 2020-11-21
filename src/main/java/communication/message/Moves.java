@@ -1,6 +1,6 @@
-package server.communication.message;
+package communication.message;
 
-import server.Move;
+import communication.Move;
 
 import java.io.Serializable;
 

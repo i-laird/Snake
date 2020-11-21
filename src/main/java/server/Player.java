@@ -1,5 +1,8 @@
 package server;
 
+import communication.SynchronizedMessageHandler;
+
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Objects;
 
@@ -7,6 +10,7 @@ public class Player {
 
     private String playerName;
     private Socket socket;
+    private SynchronizedMessageHandler messageHandler;
 
     public Player(String playerName, Socket s) {
         this.playerName = playerName;
@@ -19,6 +23,22 @@ public class Player {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
+
+    public SynchronizedMessageHandler getMessageHandler() {
+        return messageHandler;
+    }
+
+    public void setMessageHandler(SynchronizedMessageHandler messageHandler) {
+        this.messageHandler = messageHandler;
     }
 
     @Override

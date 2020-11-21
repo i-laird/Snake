@@ -1,6 +1,6 @@
-package server.communication;
+package communication;
 
-import server.communication.message.Message;
+import communication.message.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -23,6 +23,10 @@ public class SynchronizedMessageHandler {
 
     public Message receiveMessage() throws IOException, ClassNotFoundException {
         return (Message)in.readObject();
+    }
+
+    public ObjectOutputStream getOut() {
+        return out;
     }
 
     public void closeConnections() throws IOException{

@@ -1,8 +1,8 @@
 package server;
 
-import server.communication.SynchronizedMessageHandler;
-import server.communication.message.*;
-import server.communication.message.Error;
+import communication.SynchronizedMessageHandler;
+import communication.message.*;
+import communication.message.Error;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -92,16 +92,25 @@ public class Server extends Thread {
     }
 
     // to communicate with the client
+    // each client has its own socket
     private Socket socket = null;
 
+    // used to read and write messages
     private SynchronizedMessageHandler messageHandler = null;
 
+    // the name of the client that is interacting with this thread
     private String approvedClientName;
 
+    // the player associated with this thread
     private Player player;
 
+    // the lobby currently associated with this thread
     private Lobby lobby;
 
+    /**
+     * custom constructor
+     * @param s the socket to be associated with this thread
+     */
     private Server(Socket s){
         this.socket = s;
     }
@@ -193,6 +202,7 @@ public class Server extends Thread {
         else {
             messageHandler.sendMessage(new ACK(approvedClientName));
         }
+        proposedPlayer.setMessageHandler(this.messageHandler);
         return proposedPlayer;
     }
 
