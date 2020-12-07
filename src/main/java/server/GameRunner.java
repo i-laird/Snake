@@ -175,10 +175,6 @@ public class GameRunner extends Thread{
 
     public void runGame() throws ExecutionException, InterruptedException, IOException {
 
-        boolean gameOver = false;
-        boolean playAgain = false;
-        boolean getPlayerReady = false;
-
         readMoveFutures = new ArrayList<>(players.size());
         writeMoveFutures = new ArrayList<>(players.size());
         readbyteBuffers = new ArrayList<>(players.size());
@@ -190,13 +186,8 @@ public class GameRunner extends Thread{
         }
 
         while(true) {
-
-            // read the moves from each player
-            gameOver = readMovesFromPlayers();
-
-            // if need to check if players want to play again
-            if(getPlayerReady){
-
+            if(readMovesFromPlayers()){
+                readMovesFromPlayers();
                 // check if all players want to play again
                 boolean allPlayersWantToPlay = moves.stream().allMatch(x -> {
                     if (x.getDirection() == Direct.PLAY_AGAIN) {
@@ -204,18 +195,9 @@ public class GameRunner extends Thread{
                     }
                     return false;
                 });
-
-                gameOver = false;
-                getPlayerReady = false;
-
-                if(allPlayersWantToPlay){
-                    continue;
+                if(!allPlayersWantToPlay){
+                    break;
                 }
-                break; // if not all players want to play again end the session
-            }
-
-            if(gameOver){
-                getPlayerReady = true;
             }
             else {
                 // send all moves to each player
