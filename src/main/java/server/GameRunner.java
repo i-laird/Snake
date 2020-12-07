@@ -1,7 +1,14 @@
+/*
+ * file: GameRunner.java
+ * author: Ian Laird
+ * project: Snake
+ */
+
 package server;
 
 import communication.Move;
 import communication.message.Start;
+import enums.Direct;
 import javafx.util.Pair;
 
 import java.io.*;
@@ -14,20 +21,59 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+/**
+ * @author Ian Laird
+ *
+ * Server for a game.
+ *
+ * While setting up the game is synchrnous, this step is asynchrnous.
+ *
+ * Repeatedly receives moves from each player and then sends it to each other player
+ */
 public class GameRunner extends Thread{
 
+    // holds all of the players that are in this game
     Set<Player> players;
 
+    /**
+     * adds a player to the game
+     *
+     * Note: this may only be run before a game has started
+     * @param p the player to add to the game
+     */
     public void addPlayer(Player p){
         this.players.add(p);
     }
 
+    // the port that this game is running on
     private int port;
 
+    // the async server socket for this game
+    // this is used to accept connections
     private AsynchronousServerSocketChannel server;
 
+    // maps players to the connections for that player
     private List<Pair<Player, AsynchronousSocketChannel>> playerToSocket = new ArrayList<>();
 
+    // holds the moves that each player has made
+    private List<Move> moves = null;
+
+    // futures for writing moves to all clients
+    List<Future<Integer>> writeMoveFutures = null;
+
+    // futures for reading moves from the clients
+    List<Future<Integer>> readMoveFutures = null;
+
+    List<ByteBuffer> readbyteBuffers = null;
+
+    /**
+     * the run method for this thread
+     *
+     * manages running the game.
+     *
+     * Players will have option to play again as well. Currently all players need to
+     * indicate that they want to play again in order to do so.
+     */
     public void run(){
 
         // set up the async server for this game
@@ -41,6 +87,7 @@ public class GameRunner extends Thread{
         }
 
         // send start to each client
+        // this step is synchronous
         this.players.forEach(x -> {
             try {
                 x.getMessageHandler().sendMessage(new Start(port));
@@ -56,28 +103,48 @@ public class GameRunner extends Thread{
         sendPlayerNames();
 
         // run the game
-        runGame();
+        try {
+            runGame();
+        } catch (ExecutionException e) {
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * opens a async connection with each of the clients in this lobby
+     *
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public void openConnections() throws ExecutionException, InterruptedException {
         List<Future<AsynchronousSocketChannel>> connectionFutures = new ArrayList<>(players.size());
         List<Pair<AsynchronousSocketChannel, ByteBuffer> > sockets = new ArrayList<>(players.size());
         List<Future<Integer>> readFutures = new ArrayList<>(players.size());
 
+        // get a future for a connection for each player that we expect to join
         for(int i = 0; i < players.size(); i++){
             Future<AsynchronousSocketChannel> future = server.accept();
             connectionFutures.add(future);
         }
 
+        // for each connection future
         for(Future<AsynchronousSocketChannel> f : connectionFutures){
+
+            // associate a new bytebuffer with each connection
+            // notice the blocking get
             sockets.add(new Pair<>(f.get(), ByteBuffer.allocate(32)));
         }
 
+        // get a future for a read for every connection
+        // this read will be the name of each client
         for(Pair<AsynchronousSocketChannel, ByteBuffer> pair: sockets){
             readFutures.add(pair.getKey().read(pair.getValue()));
         }
 
         for(int i = 0; i < players.size(); i++){
+
+            // blocking get
             readFutures.get(i).get();
             String clientName = StandardCharsets.UTF_8.decode(sockets.get(i).getValue()).toString();
             Player p = players.stream().filter(x -> x.getPlayerName().equals(clientName)).findAny().get();
@@ -85,6 +152,12 @@ public class GameRunner extends Thread{
         }
     }
 
+    /**
+     * sends the names of the players in the lobby to all of the clients
+     *
+     * Note that the order in which the player names are sent is also
+     * the order in which player moves will be sent
+     */
     public void sendPlayerNames(){
         for(int i = 0; i < playerToSocket.size(); i++){
             AsynchronousSocketChannel channel = playerToSocket.get(i).getValue();
@@ -102,42 +175,95 @@ public class GameRunner extends Thread{
 
     public void runGame() throws ExecutionException, InterruptedException, IOException {
 
-        List<Future<Integer>> readFutures = new ArrayList<>(players.size());
-        List<Future<Integer>> writeFutures = new ArrayList<>(players.size());
-        List<ByteBuffer> byteBuffers = new ArrayList<>(players.size());
-        List<Move> moves = new ArrayList<>(players.size());
+        boolean gameOver = false;
+        boolean playAgain = false;
+        boolean getPlayerReady = false;
+
+        readMoveFutures = new ArrayList<>(players.size());
+        writeMoveFutures = new ArrayList<>(players.size());
+        readbyteBuffers = new ArrayList<>(players.size());
+        moves = new ArrayList<>(players.size());
 
         // allocate byte buffers for reads
         for (int i = 0; i < players.size(); i++) {
-            byteBuffers.set(i, ByteBuffer.allocate(32));
+            readbyteBuffers.set(i, ByteBuffer.allocate(32));
         }
 
         while(true) {
 
-            // get each players move
-            for (int i = 0; i < players.size(); i++) {
-                readFutures.set(i, playerToSocket.get(i).getValue().read(byteBuffers.get(i)));
-            }
+            // read the moves from each player
+            gameOver = readMovesFromPlayers();
 
-            for (int i = 0; i < players.size(); i++) {
-                readFutures.get(i).get();
-                DataInputStream in = new DataInputStream(new ByteArrayInputStream(byteBuffers.get(i).array()));
-                moves.set(i, new Move(in.readInt()));
-            }
+            // if need to check if players want to play again
+            if(getPlayerReady){
 
-            // send all moves to each player
-            for (int i = 0; i < players.size(); i++) {
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                DataOutputStream out = new DataOutputStream(bytes);
-                for (int j = 0; j < players.size(); j++) {
-                    if (i == j) {
-                        continue;
+                // check if all players want to play again
+                boolean allPlayersWantToPlay = moves.stream().allMatch(x -> {
+                    if (x.getDirection() == Direct.PLAY_AGAIN) {
+                        return true;
                     }
-                    out.writeInt(moves.get(j).getDirection().ordinal());
+                    return false;
+                });
+
+                gameOver = false;
+                getPlayerReady = false;
+
+                if(allPlayersWantToPlay){
+                    continue;
                 }
-                ByteBuffer bb = ByteBuffer.wrap(bytes.toByteArray());
-                writeFutures.set(i, playerToSocket.get(i).getValue().write(bb));
+                break; // if not all players want to play again end the session
             }
+
+            if(gameOver){
+                getPlayerReady = true;
+            }
+            else {
+                // send all moves to each player
+                writeMovesToPlayers();
+            }
+
+        }
+    }
+
+    /**
+     * reads the moves from the players
+     * @return true indicates that the game is over
+     * @throws ExecutionException
+     * @throws InterruptedException
+     * @throws IOException
+     */
+    private boolean readMovesFromPlayers() throws ExecutionException, InterruptedException, IOException {
+
+        boolean gameOver = false;
+        // get each players move
+        for (int i = 0; i < players.size(); i++) {
+            readMoveFutures.set(i, playerToSocket.get(i).getValue().read(readbyteBuffers.get(i)));
+        }
+
+        for (int i = 0; i < players.size(); i++) {
+            readMoveFutures.get(i).get();
+            DataInputStream in = new DataInputStream(new ByteArrayInputStream(readbyteBuffers.get(i).array()));
+            Move m = new Move(in.readInt());
+            moves.set(i, m);
+            if(m.getDirection() == Direct.GAME_OVER){
+                gameOver = true;
+            }
+        }
+        return gameOver;
+    }
+
+    private void writeMovesToPlayers() throws IOException {
+        for (int i = 0; i < players.size(); i++) {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            DataOutputStream out = new DataOutputStream(bytes);
+            for (int j = 0; j < players.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+                out.writeInt(moves.get(j).getDirection().ordinal());
+            }
+            ByteBuffer bb = ByteBuffer.wrap(bytes.toByteArray());
+            writeMoveFutures.set(i, playerToSocket.get(i).getValue().write(bb));
         }
     }
 }

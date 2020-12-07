@@ -5,7 +5,7 @@ package enums;
  * {@link Direct}is used to indicate a move direction
  */
 public enum Direct {
-    DOWN, LEFT, UP, RIGHT, NO_MOVE;
+    DOWN, LEFT, UP, RIGHT,  GAME_OVER, PLAY_AGAIN, NO_MOVE,
 
     public static Direct fromNum(int num){
         switch(num){
@@ -17,6 +17,10 @@ public enum Direct {
                 return UP;
             case 3:
                 return RIGHT;
+            case 4:
+                return GAME_OVER;
+            case 5:
+                return PLAY_AGAIN;
             default:
                 return NO_MOVE;
         }

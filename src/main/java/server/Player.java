@@ -1,8 +1,13 @@
+/*
+ * file: Player.java
+ * author: Ian Laird
+ * project: Snake
+ */
+
 package server;
 
 import communication.SynchronizedMessageHandler;
 
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Objects;
 
