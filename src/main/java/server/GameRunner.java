@@ -175,6 +175,8 @@ public class GameRunner extends Thread{
 
     public void runGame() throws ExecutionException, InterruptedException, IOException {
 
+        boolean newGame = true;
+
         readMoveFutures = new ArrayList<>(players.size());
         writeMoveFutures = new ArrayList<>(players.size());
         readbyteBuffers = new ArrayList<>(players.size());
@@ -186,6 +188,10 @@ public class GameRunner extends Thread{
         }
 
         while(true) {
+            if(newGame){
+                newGame = false;
+                sendPlayerStartPos();
+            }
             if(readMovesFromPlayers()){
                 readMovesFromPlayers();
                 // check if all players want to play again
@@ -195,7 +201,10 @@ public class GameRunner extends Thread{
                     }
                     return false;
                 });
-                if(!allPlayersWantToPlay){
+                if(allPlayersWantToPlay){
+                    newGame = true;
+                }
+                else {
                     break;
                 }
             }
@@ -232,6 +241,10 @@ public class GameRunner extends Thread{
             }
         }
         return gameOver;
+    }
+
+    private void sendPlayerStartPos(){
+
     }
 
     private void writeMovesToPlayers() throws IOException {
