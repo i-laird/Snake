@@ -32,6 +32,9 @@ import java.util.concurrent.Future;
  */
 public class GameRunner extends Thread{
 
+    private static final int GAME_WIDTH = 100;
+    private static final int GAME_HEIGHT = 100;
+
     // holds all of the players that are in this game
     Set<Player> players;
 
@@ -245,6 +248,49 @@ public class GameRunner extends Thread{
 
     private void sendPlayerStartPos(){
 
+        // calculate the starting position for every player
+        Set<Pair<Integer, Integer>> positionSet = new HashSet<>();
+        List<Pair<Integer, Integer>> positions = new ArrayList<>(players.size());
+        Random rand = new Random();
+
+        for(int i = 0; i < players.size(); i++) {
+            Pair<Integer, Integer> pair = null;
+            do{
+                int xPos = rand.nextInt() % GAME_WIDTH;
+                int yPos = rand.nextInt() % GAME_HEIGHT;
+                pair = new Pair<>(xPos, yPos);
+                positions.set(i, pair);
+            }while(!positionSet.add(pair)); //TODO check this
+        }
+
+        // create the string that will be sent over the network
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(bytes);
+        positions.forEach(x -> {
+            try {
+                out.writeInt(x.getKey());
+                out.writeInt(x.getValue());
+            } catch (IOException e) {}
+        });
+
+        // now send the locations over the network to each player
+        for(int i =0; i < players.size(); i++){
+            ByteBuffer bb = ByteBuffer.wrap(bytes.toByteArray());
+            writeMoveFutures.set(i, playerToSocket.get(i).getValue().write(bb));
+        }
+
+        waitForAllWriteFutures();
+
+    }
+
+    private void waitForAllWriteFutures(){
+        writeMoveFutures.forEach(x -> {
+            try {
+                x.get();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void writeMovesToPlayers() throws IOException {
@@ -260,5 +306,6 @@ public class GameRunner extends Thread{
             ByteBuffer bb = ByteBuffer.wrap(bytes.toByteArray());
             writeMoveFutures.set(i, playerToSocket.get(i).getValue().write(bb));
         }
+        waitForAllWriteFutures();
     }
 }
