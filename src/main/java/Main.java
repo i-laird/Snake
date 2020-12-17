@@ -1,5 +1,5 @@
-import command.GameRunner;
-import command.SnakeRunner;
+import old.command.GameRunner;
+import old.command.SnakeRunner;
 
 /**
  * @author Andrew Walker

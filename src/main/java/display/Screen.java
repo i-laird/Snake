@@ -3,8 +3,8 @@ package display;
 import directions.Direction;
 import directions.DirectionFactory;
 import enums.Direct;
-import resources.Cell;
-import resources.Snake;
+import old.resources.Cell;
+import old.resources.Snake;
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,7 +82,7 @@ public class Screen extends JFrame implements KeyListener {
 
     /**
      * @author Andrew Walker
-     * This function will simply update the game screen. It itself does not change.
+     * This function will simply update the old.game screen. It itself does not change.
      */
     public void updateScreen() {
         wrapper.update();
@@ -258,7 +258,7 @@ public class Screen extends JFrame implements KeyListener {
 
     /**
      * @author Andrew Walker
-     * This function plots the background on the game board
+     * This function plots the background on the old.game board
      */
     public void plotBackground() {
         wrapper.getBoard().plotBackground();
@@ -274,18 +274,18 @@ public class Screen extends JFrame implements KeyListener {
     }
 
     /**
-     * @return if the user has indicated they want to begin the game
+     * @return if the user has indicated they want to begin the old.game
      * @author Andrew Walker
-     * This function returns if the user has indicated they want to begin the game
+     * This function returns if the user has indicated they want to begin the old.game
      */
     public boolean isHasBegun() {
         return hasBegun;
     }
 
     /**
-     * @param hasBegun a boolean dictating if the game should start
+     * @param hasBegun a boolean dictating if the old.game should start
      * @author Andrew Walker
-     * Resets if the user wants the game to start or not
+     * Resets if the user wants the old.game to start or not
      */
     public void setHasBegun(boolean hasBegun) {
         this.hasBegun = hasBegun;

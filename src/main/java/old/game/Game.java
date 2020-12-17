@@ -4,15 +4,15 @@
  * author: Ian Laird & Andrew Walker
  */
 
-package game;
+package old.game;
 
 import display.Screen;
-import exceptions.NetworkError;
-import exceptions.SnakeBuilderError;
-import reporting.GameReport;
-import resources.Cell;
-import resources.Snake;
-import resources.SnakeBuilder;
+import old.exceptions.NetworkError;
+import old.exceptions.SnakeBuilderError;
+import old.reporting.GameReport;
+import old.resources.Cell;
+import old.resources.Snake;
+import old.resources.SnakeBuilder;
 
 import java.awt.*;
 import java.io.DataInputStream;
@@ -34,7 +34,7 @@ public abstract class Game {
     // the height of the screen
     protected static final int SCREEN_HEIGHT = 400;
 
-    // logger for the game
+    // logger for the old.game
     private static final Logger LOGGER = Logger.getLogger("Game");
 
     // this player
@@ -69,7 +69,7 @@ public abstract class Game {
     // username of that player
     private String playerTwoUsername;
 
-    // used to actually display the game
+    // used to actually display the old.game
     private Screen gameScreen = null;
 
     // indicates if a player has won
@@ -115,7 +115,7 @@ public abstract class Game {
     /**
      * @throws IOException if there is an issue receiving or writing the usernames
      * @author Andrew Walker
-     * This function initializes the game variables
+     * This function initializes the old.game variables
      */
     public void initGame() throws IOException {
         moveSender.writeUTF(this.playerOneUsername);
@@ -152,19 +152,19 @@ public abstract class Game {
     }
 
     /**
-     * @return indicates if the game is over
+     * @return indicates if the old.game is over
      * @author: Ian Laird
-     * This function returns if the game is over
+     * This function returns if the old.game is over
      */
     public boolean isGameOver() {
         return gameOver;
     }
 
     /**
-     * @param record the record to restore the game from
+     * @param record the record to restore the old.game from
      * @return if the users want to play again
      * @author Andrew Walker
-     * This function restores the game if the users want
+     * This function restores the old.game if the users want
      */
     public boolean playAgain(GameRecord record) {
         LOGGER.info("playAgain");
@@ -205,7 +205,7 @@ public abstract class Game {
     /**
      * @return record of this Game
      * @author Ian Laird
-     * This records the current game for memento
+     * This records the current old.game for memento
      */
     public GameRecord createRecord() {
         return new GameRecord(this);
@@ -226,7 +226,7 @@ public abstract class Game {
 
     /**
      * @author Ian Laird
-     * This function initializes the Screen for the game
+     * This function initializes the Screen for the old.game
      */
     protected void initScreen() {
         gameScreen = Screen.getInstance(SCREEN_WIDTH, SCREEN_HEIGHT + 50);
@@ -293,7 +293,7 @@ public abstract class Game {
             gameScreen.addMessage(playerTwoUsername + " has just eaten a Power-Up");
             gameScreen.addMessage(playerTwoUsername + "'s new score is " + playerTwoScore);
         }
-        //get new power up location such that it is not occupied by a resources.Snake
+        //get new power up location such that it is not occupied by a old.resources.Snake
         if (powerUpEaten) {
             resetPowerUp();
         }
@@ -463,10 +463,10 @@ public abstract class Game {
     }
 
     /**
-     * @return if the game has begun
+     * @return if the old.game has begun
      * @throws IOException thrown if there is an issue sending over the connection
      * @author Andrew Walker
-     * This function returns if the game has begun
+     * This function returns if the old.game has begun
      */
     public boolean hasBegun() throws IOException {
 
@@ -480,9 +480,9 @@ public abstract class Game {
     }
 
     /**
-     * @param gr the report to add game data to
+     * @param gr the report to add old.game data to
      * @author Andrew Walker
-     * This function adds new game data to the report
+     * This function adds new old.game data to the report
      */
     public void amendReport(GameReport gr) {
         gr.ammend(this);

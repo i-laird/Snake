@@ -299,7 +299,7 @@ Here is how much of TeX's memory you used:
  93637 words of memory out of 3000000
  5509 multiletter control sequences out of 15000+200000
  8194 words of font info for 29 fonts, out of 3000000 for 9000
- 1141 hyphenation exceptions out of 8191
+ 1141 hyphenation old.exceptions out of 8191
  41i,7n,25p,436b,226s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm

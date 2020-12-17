@@ -1,13 +1,13 @@
-package game;
+package old.game;
 
-import resources.Cell;
-import resources.Snake;
+import old.resources.Cell;
+import old.resources.Snake;
 
 import java.util.Objects;
 
 /**
  * @author Ian Laird
- * This class implments a system for restoring a game using the memento design
+ * This class implments a system for restoring a old.game using the memento design
  * pattern
  */
 public class GameRecord {

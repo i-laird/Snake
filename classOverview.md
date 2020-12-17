@@ -1,9 +1,9 @@
 Overview of classes
 ===========
-game:
+old.game:
 - Abstract
 - Contains two player Snakes
-- Contains screen which is where game will be displayed
+- Contains screen which is where old.game will be displayed
 - Communication done through reader and Writer
 - These will be generated with TCP
 
@@ -16,13 +16,13 @@ Cell:
 
 ServerGame:
 - Inherits from Game
-- Hosts the game
+- Hosts the old.game
 - Communicates with ClientGame on other machine
 - TCP
 
 ClientGame
 - Inherits from Game
-- Does not host game
+- Does not host old.game
 - Commicates with Server
 - TCP
 
@@ -31,6 +31,6 @@ GameMaker:
 - ONLY ONE GAME OF ANY KIND CAN EXIST
 
 Screen:
-- Is the game screen
+- Is the old.game screen
 - How everything is displayed
 - Probably need to put Swing stuff here

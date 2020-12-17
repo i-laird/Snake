@@ -1,4 +1,4 @@
-package command;
+package old.command;
 
 /**
  * @author Andrew Walker
@@ -8,7 +8,7 @@ public abstract class GameRunner {
 
     /**
      * @author Andrew Walker
-     * The abstract function for executing a game
+     * The abstract function for executing a old.game
      */
     public abstract void execute();
 }

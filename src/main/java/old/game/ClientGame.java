@@ -1,6 +1,6 @@
-package game;
+package old.game;
 
-import resources.Cell;
+import old.resources.Cell;
 
 import java.io.IOException;
 import java.net.Socket;

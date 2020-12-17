@@ -1,5 +1,5 @@
 import display.Screen;
-import game.GameMaker;
+import old.game.GameMaker;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertSame;

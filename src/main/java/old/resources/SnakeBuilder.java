@@ -1,6 +1,6 @@
-package resources;
+package old.resources;
 
-import exceptions.SnakeBuilderError;
+import old.exceptions.SnakeBuilderError;
 
 import java.awt.*;
 

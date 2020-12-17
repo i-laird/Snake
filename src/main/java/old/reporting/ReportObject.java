@@ -1,4 +1,4 @@
-package reporting;
+package old.reporting;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 /**
  * @author Andrew Walker
- * This class holds the data for a specific game
+ * This class holds the data for a specific old.game
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ReportObject {
@@ -36,7 +36,7 @@ public class ReportObject {
      * @param user1score the score of player one
      * @param user2score the score of player two
      * @author Andrew Walker
-     * This is a constructor for generating a real game
+     * This is a constructor for generating a real old.game
      */
     public ReportObject(String user1, String user2, int user1score, int user2score) {
         this.user1 = user1;

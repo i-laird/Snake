@@ -1,10 +1,10 @@
-package command;
+package old.command;
 
-import game.SnakeGame;
+import old.game.SnakeGame;
 
 /**
  * @author Andrew Walker
- * This class is a runner for the Snake game. Implements the command design pattern by extending the
+ * This class is a runner for the Snake old.game. Implements the old.command design pattern by extending the
  * GameRunner
  */
 public class SnakeRunner extends GameRunner {
@@ -14,7 +14,7 @@ public class SnakeRunner extends GameRunner {
 
     /**
      * @author Andrew Walker
-     * Implements the execute function to run the Snake game
+     * Implements the execute function to run the Snake old.game
      */
     @Override
     public void execute() {

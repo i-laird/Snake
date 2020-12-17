@@ -1,5 +1,7 @@
 package display;
 
+import communication.SynchronizedMessageHandler;
+import communication.message.Register_Name;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -8,23 +10,31 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 /**
  * @author Andrew Walker
  * This class creates a popup to prompt for input from the user to
- * initialize the {@link game.Game}
+ * initialize the {@link old.game.Game}
  */
 public class Initializer extends Application {
-    // The information needed from the user
-    private static boolean isServer;
-    private static String host, username;
+
+    public static final String SERVER_HOST = "localhost";
+    public static final int SERVER_PORT = 8078;
+
+    private static String username;
+    private static String createLobbyName;
+    private Socket socket;
+
+    // used to read and write messages
+    private SynchronizedMessageHandler messageHandler = null;
     private Stage stage;
 
     /**
@@ -33,24 +43,6 @@ public class Initializer extends Application {
      */
     public static void startModal() {
         launch();
-    }
-
-    /**
-     * @return if it is going to be a server game
-     * @author Andrew Walker
-     * Returns if it is going to be a server game
-     */
-    public static boolean getIsServer() {
-        return isServer;
-    }
-
-    /**
-     * @return the hostname for the connection
-     * @author Andrew Walker
-     * Gets the hostname for the connection
-     */
-    public static String getHost() {
-        return host;
     }
 
     /**
@@ -79,96 +71,81 @@ public class Initializer extends Application {
     @Override
     public void start(Stage initStage) throws Exception {
 
+        initSocket();
+
         stage = initStage;
-        stage.setTitle("Snake");
+        stage.setTitle("Snake Game");
         stage.setWidth(400);
         stage.setHeight(400);
 
+        Text userNamePrompt = new Text("Please enter your username");
+        Text lobbyNamePrompt = new Text("Please enter the lobby name");
+
+
         TextField usernameField = new TextField();
-        usernameField.setPromptText("Username");
+        usernameField.setPromptText("UserName");
         usernameField.setMaxWidth(125);
         usernameField.setVisible(false);
 
-        Text initialPrompt = new Text("Will you be a server or a client?");
-        InetAddress localhost = InetAddress.getLocalHost();
-        Text ipPrompt = new Text("You IP Address is - " + (localhost.getHostAddress()).trim() + "\nCopy down the IP Address for the client and then click OK \n(This window will close)");
-        ipPrompt.setVisible(false);
+        TextField lobbyCreateName = new TextField();
+        lobbyCreateName.setPromptText("Enter lobby name");
+        lobbyCreateName.setMaxWidth(125);
+        lobbyCreateName.setVisible(false);
 
-        TextField hostField = new TextField();
-        hostField.setPromptText("Hostname");
-        hostField.setMaxWidth(125);
-        hostField.setVisible(false);
+        Button showLobbies = new Button("Show Lobby");
+        Button createLobby = new Button("Create Lobby");
+        createLobby.setOnMouseClicked(e ->{
+            lobbyCreateName.setVisible(true);
+        });
 
-
-        Button serverButton = new Button("Server");
-        Button clientButton = new Button("Client");
         Button closeButton = new Button("Ready");
 
-        Button submitButton = new Button("Submit");
-        submitButton.setMinWidth(80);
-        submitButton.setOnMouseClicked(e -> {
-            username = usernameField.getText();
-            host = hostField.getText();
-            if (isServer) {
-                ipPrompt.setVisible(true);
-                submitButton.setDisable(true);
-                clientButton.setDisable(true);
-                serverButton.setDisable(true);
+        Button submit = new Button("Submit");
+        submit.setMinWidth(80);
+        submit.setVisible(true);
+        submit.setOnMouseClicked(e -> {
+            if(usernameField.isVisible()){
+                username = usernameField.getText();
+                registerUserName();
                 usernameField.setDisable(true);
-                closeButton.setVisible(true);
-            } else {
-                stage.close();
+                usernameField.setVisible(false);
+                showLobbies.setVisible(true);
+                createLobby.setVisible(true);
+                submit.setVisible(false);
+            }
+            else if(lobbyCreateName.isVisible()){
+                createLobbyName = lobbyCreateName.getText();
+                lobbyCreateName.setDisable(true);
+                lobbyCreateName.setVisible(false);
+                submit.setVisible(false);
             }
         });
-        submitButton.setVisible(false);
-
 
         closeButton.setMinWidth(80);
         closeButton.setOnMouseClicked(e -> Platform.exit());
         closeButton.setVisible(false);
 
-        serverButton.setMinWidth(80);
-        serverButton.setOnMouseClicked(e -> {
-            isServer = true;
-            usernameField.setVisible(true);
-            hostField.setVisible(false);
-            submitButton.setVisible(true);
-        });
+        HBox userNamePromptHBox = new HBox();
+        userNamePromptHBox.getChildren().addAll(userNamePrompt);
+        userNamePromptHBox.setSpacing(5);
+        userNamePromptHBox.setPadding(new Insets(10, 10, 10, 10));
+        userNamePromptHBox.setAlignment(Pos.CENTER);
 
-        clientButton.setMinWidth(80);
-        clientButton.setOnMouseClicked(e -> {
-            isServer = false;
-            usernameField.setVisible(true);
-            hostField.setVisible(true);
-            submitButton.setVisible(true);
-        });
+        VBox userNameBox = new VBox();
+        userNameBox.getChildren().addAll(userNamePromptHBox, usernameField);
+        userNameBox.setSpacing(5);
+        userNameBox.setPadding(new Insets(10, 10, 10, 10));
+        userNameBox.setAlignment(Pos.CENTER);
 
-        HBox clientServer = new HBox();
-        clientServer.getChildren().addAll(serverButton, clientButton);
-        clientServer.setSpacing(5);
-        clientServer.setPadding(new Insets(10, 10, 10, 10));
-        clientServer.setAlignment(Pos.CENTER);
-
-        HBox initalPromptHbox = new HBox();
-        initalPromptHbox.getChildren().addAll(initialPrompt);
-        initalPromptHbox.setSpacing(5);
-        initalPromptHbox.setPadding(new Insets(10, 10, 10, 10));
-        initalPromptHbox.setAlignment(Pos.CENTER);
-
-        VBox initialPromptBox = new VBox();
-        initialPromptBox.getChildren().addAll(initalPromptHbox, clientServer);
-        initialPromptBox.setSpacing(5);
-        initialPromptBox.setPadding(new Insets(10, 10, 10, 10));
-        clientServer.setAlignment(Pos.CENTER);
-
-        StackPane ipRoot = new StackPane();
-        ipPrompt.setTextAlignment(TextAlignment.CENTER);
-        ipRoot.getChildren().addAll(ipPrompt);
-        StackPane.setAlignment(ipPrompt, Pos.CENTER);
+        VBox lobbyNameBox = new VBox();
+        lobbyNameBox.getChildren().addAll(lobbyNamePrompt, lobbyCreateName);
+        lobbyNameBox.setSpacing(5);
+        lobbyNameBox.setPadding(new Insets(10, 10, 10, 10));
+        lobbyNameBox.setAlignment(Pos.CENTER);
 
         VBox vbox = new VBox();
         vbox.setSpacing(5);
-        vbox.getChildren().addAll(initialPromptBox, usernameField, hostField, submitButton, ipRoot, closeButton);
+        vbox.getChildren().addAll(userNameBox, lobbyNameBox, submit, closeButton);
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 10, 10, 10));
         vbox.setAlignment(Pos.CENTER);
@@ -177,5 +154,18 @@ public class Initializer extends Application {
 
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void initSocket(){
+        try {
+            this.socket = new Socket(SERVER_HOST, SERVER_PORT);
+            this.messageHandler = new SynchronizedMessageHandler(this.socket);
+        }catch(IOException e){
+            close();
+        }
+    }
+
+    public void registerUserName() throws IOException {
+        this.messageHandler.sendMessage(new Register_Name(username));
     }
 }

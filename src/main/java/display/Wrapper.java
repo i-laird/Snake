@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Andrew Walker
- * This is a wrapper to contain the components of the game on the screen
+ * This is a wrapper to contain the components of the old.game on the screen
  */
 public class Wrapper extends JPanel {
 

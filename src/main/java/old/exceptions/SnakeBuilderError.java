@@ -1,4 +1,4 @@
-package exceptions;
+package old.exceptions;
 
 /**
  * @author Ian Laird

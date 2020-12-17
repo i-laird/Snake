@@ -1,4 +1,4 @@
-package resources;
+package old.resources;
 
 import java.awt.*;
 import java.util.ArrayDeque;
@@ -17,7 +17,7 @@ public class Snake {
     private Cell headLocation = null;
     private Cell prevTail = null;
     private Color color;
-    //Holds the length of the resources.Snake
+    //Holds the length of the old.resources.Snake
     private int length = 3;
 
     /**
@@ -69,7 +69,7 @@ public class Snake {
     }
 
     /**
-     * @param moveTo This method is used to record a resources.Snake movement
+     * @param moveTo This method is used to record a old.resources.Snake movement
      *               It removes the tail of teh snake and adds a new head
      * @author Ian Laird
      */
@@ -86,8 +86,8 @@ public class Snake {
      * @param location the location to check for
      * @return if the Snake contains the location
      * @author Ian Laird
-     * This method sees if the indicated Location is present in the resources.Snake.
-     * It is used to see check for resources.Snake collisions
+     * This method sees if the indicated Location is present in the old.resources.Snake.
+     * It is used to see check for old.resources.Snake collisions
      */
     public boolean containsMove(Cell location) {
         return this.locations.contains(location);

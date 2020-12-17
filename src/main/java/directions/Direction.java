@@ -1,7 +1,7 @@
 package directions;
 
-import resources.Cell;
-import resources.Snake;
+import old.resources.Cell;
+import old.resources.Snake;
 
 /**
  * @author Ian Laird

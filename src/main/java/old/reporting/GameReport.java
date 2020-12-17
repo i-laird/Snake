@@ -1,6 +1,6 @@
-package reporting;
+package old.reporting;
 
-import game.Game;
+import old.game.Game;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  * @author Andrew Walker
- * This class is a wrapper for generating a game report
+ * This class is a wrapper for generating a old.game report
  */
 @XmlRootElement(name = "report")
 public class GameReport {
@@ -28,7 +28,7 @@ public class GameReport {
      * @author Andrew Walker
      * This function returns the collection of the games
      */
-    @XmlElement(name = "game")
+    @XmlElement(name = "old/game")
     public ArrayList<ReportObject> getRecords() {
         return records;
     }

@@ -11,10 +11,10 @@
 \begin{document}
 	\maketitle
 	\section{Outline}
-	This game implements a 2 player version of the popular game Snake. Communication between the host and client is done using TCP. Players can pick up power ups and kill the other player to increase their score. The player scores are saved in an XML file. Graphics are done using JavaFX for game setup and with Swing for the Game itself. The goal of the Game is to end with a higher score than the other player.
+	This old.game implements a 2 player version of the popular old.game Snake. Communication between the host and client is done using TCP. Players can pick up power ups and kill the other player to increase their score. The player scores are saved in an XML file. Graphics are done using JavaFX for old.game setup and with Swing for the Game itself. The goal of the Game is to end with a higher score than the other player.
 
 	\section{Vision Statement}
-	The next step in this game will be making it so that more than 2 players can play at the same time. A further iteration of the software will have a dedicated Snake server that can run multiple games with more than 2 players concurrently.
+	The next step in this old.game will be making it so that more than 2 players can play at the same time. A further iteration of the software will have a dedicated Snake server that can run multiple games with more than 2 players concurrently.
 	
 	\section{Gantt}
 	\includegraphics[scale=.50]{gantt2}
@@ -23,28 +23,28 @@
 	\begin{enumerate}
 		\item Game should run on any machine that supports Java.
 		\item Game should play smoothly.
-		\item Users should be able to view game score history.
+		\item Users should be able to view old.game score history.
 		\item Game should have a GUI.
 		\item Game should have a scoring system.
 		\item Snakes should be able to increase in length.
 		\item Users should be able to win/lose.
 		\item Users should be able to play on separate computers over the internet.
-		\item Users should be able to play again without restarting game.
+		\item Users should be able to play again without restarting old.game.
 	\end{enumerate}
 	
 	\section{Business Rules}
 	
 	\begin{enumerate}
 		\item Client must know the ip address of the server.
-		\item Each game must have two players.
+		\item Each old.game must have two players.
 		\item High scores are remembered.
 	\end{enumerate}
 
 	\section{All Roles}
 	
 	\begin{enumerate}
-		\item Primary (Local) User - The user acting as the host for the game
-		\item Secondary User - The user joining the hosted game
+		\item Primary (Local) User - The user acting as the host for the old.game
+		\item Secondary User - The user joining the hosted old.game
 	\end{enumerate}
 	
 	\section{Use Cases}
@@ -55,10 +55,10 @@
 			\textbf{\makebox[4 cm]{Primary Actor:\hfill}} Local user\\
 			\textbf{\makebox[4 cm]{Secondary Actor:\hfill}} Secondary user\\
 			\textbf{\makebox[4 cm]{Trigger:\hfill}} Game is created\\
-			\textbf{command.SnakeRunner Success Scenario}
+			\textbf{old.command.SnakeRunner Success Scenario}
 				\begin{enumerate}
 					\itemsep0em 
-					\item[1] Primary and secondary users both want to play the game.
+					\item[1] Primary and secondary users both want to play the old.game.
 					\item[2] Network connection is established to secondary player.
 					\item[3] Snakes and Tokens are generated with random locations.
 					\item[4] Screen is created.
@@ -92,7 +92,7 @@
 	\textbf{\makebox[4 cm]{Primary Actor:\hfill}} Local user\\
 	\textbf{\makebox[4 cm]{Secondary Actor:\hfill}} Secondary user\\
 	\textbf{\makebox[4 cm]{Pre-condition:\hfill}} Game is created\\
-	\textbf{command.SnakeRunner Success Scenario}
+	\textbf{old.command.SnakeRunner Success Scenario}
 	\begin{enumerate}
 		\itemsep0em 
 		\item[1] Primary user makes and sends move.
@@ -141,7 +141,7 @@
 	\textbf{\makebox[4 cm]{Secondary Actor:\hfill}} Secondary user\\
 	\textbf{\makebox[4 cm]{Pre-condition:\hfill}} Game over\\
 	\textbf{\makebox[4 cm]{Post-condition:\hfill}} Game is not over\\
-	\textbf{command.SnakeRunner Success Scenario}
+	\textbf{old.command.SnakeRunner Success Scenario}
 	\begin{enumerate}
 		\itemsep0em 
 		\item[1] Snakes and Tokens are generated with random locations.
@@ -236,7 +236,7 @@
 	\section{GRASP}
 		\begin{enumerate}
 			\item \textbf{High Cohesion:}\\
-			For high cohesion we focused on making sure that each class had one specific responsibility. For example the Game will handle all of the game logic, while the Screen is responsible for all display.
+			For high cohesion we focused on making sure that each class had one specific responsibility. For example the Game will handle all of the old.game logic, while the Screen is responsible for all display.
 			\item \textbf{Pure Fabrication:}\\
 			An example of pure fabrication in our project is the GameRecord class. It was introduced so that the Game state could be reverted.
 			\item \textbf{Information Expert:}\\
@@ -249,11 +249,11 @@
 		\begin{enumerate}
 			\item \textbf{Singleton:}\\
 				Singleton was the most used design pattern in this project. Many of the objects used lent themselves to only letting one instance exist at any
-				time. The game screen and the game itself were both singletons.
+				time. The old.game screen and the old.game itself were both singletons.
 			\item \textbf{Factory method:}
 				Factory method was used to remove the need to use new to create instances of a Snake. The Cell method also had a getRandom method that functioned much like a factory.
 			\item \textbf{Abstract Factory:}\\
-				Abstract factory was used to create instances of a Game Object. Because there were multiple subtypes of the Game Object the abstract factory made it simpler to create an instance. Also the abstract factory allowed only one instance of any of game's subtypes to exist.
+				Abstract factory was used to create instances of a Game Object. Because there were multiple subtypes of the Game Object the abstract factory made it simpler to create an instance. Also the abstract factory allowed only one instance of any of old.game's subtypes to exist.
 			\item \textbf{Builder:}\\
 				A Builder is used to create instances of a Snake. Because the snake is a complex object builder lets the application customize them. It allows Snake location and color to be both be customized.
 			\item \textbf{State:}\\

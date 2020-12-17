@@ -24,9 +24,9 @@ import java.util.concurrent.Future;
 /**
  * @author Ian Laird
  *
- * Server for a game.
+ * Server for a old.game.
  *
- * While setting up the game is synchrnous, this step is asynchrnous.
+ * While setting up the old.game is synchrnous, this step is asynchrnous.
  *
  * Repeatedly receives moves from each player and then sends it to each other player
  */
@@ -35,23 +35,23 @@ public class GameRunner extends Thread{
     private static final int GAME_WIDTH = 100;
     private static final int GAME_HEIGHT = 100;
 
-    // holds all of the players that are in this game
+    // holds all of the players that are in this old.game
     Set<Player> players;
 
     /**
-     * adds a player to the game
+     * adds a player to the old.game
      *
-     * Note: this may only be run before a game has started
-     * @param p the player to add to the game
+     * Note: this may only be run before a old.game has started
+     * @param p the player to add to the old.game
      */
     public void addPlayer(Player p){
         this.players.add(p);
     }
 
-    // the port that this game is running on
+    // the port that this old.game is running on
     private int port;
 
-    // the async server socket for this game
+    // the async server socket for this old.game
     // this is used to accept connections
     private AsynchronousServerSocketChannel server;
 
@@ -72,14 +72,14 @@ public class GameRunner extends Thread{
     /**
      * the run method for this thread
      *
-     * manages running the game.
+     * manages running the old.game.
      *
      * Players will have option to play again as well. Currently all players need to
      * indicate that they want to play again in order to do so.
      */
     public void run(){
 
-        // set up the async server for this game
+        // set up the async server for this old.game
         try {
             server = AsynchronousServerSocketChannel.open();
             server.bind(null);
@@ -105,7 +105,7 @@ public class GameRunner extends Thread{
         // send the player names that are in this lobby as well as the order of them
         sendPlayerNames();
 
-        // run the game
+        // run the old.game
         try {
             runGame();
         } catch (ExecutionException e) {
@@ -221,7 +221,7 @@ public class GameRunner extends Thread{
 
     /**
      * reads the moves from the players
-     * @return true indicates that the game is over
+     * @return true indicates that the old.game is over
      * @throws ExecutionException
      * @throws InterruptedException
      * @throws IOException

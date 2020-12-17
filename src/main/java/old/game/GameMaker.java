@@ -1,4 +1,4 @@
-package game;
+package old.game;
 
 /**
  * @author Ian Laird
@@ -9,10 +9,10 @@ public class GameMaker {
     private static Game thisGame = null;
 
     /**
-     * @param isServer indicates if the generated game should be a server
+     * @param isServer indicates if the generated old.game should be a server
      * @return the generated Game
      * @author Ian Laird
-     * Allows there to only be one game type in existence
+     * Allows there to only be one old.game type in existence
      */
     public static Game generateGame(boolean isServer) {
         if (thisGame == null) {

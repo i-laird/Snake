@@ -1,9 +1,9 @@
 
-command
+old.command
 directions
 display
 enums
-exceptions
-game
-reporting
-resources
+old.exceptions
+old.game
+old.reporting
+old.resources

@@ -37,10 +37,10 @@ public class Server extends Thread {
         }
     }
 
-    // indicates that a client in a game is not ready for the game to start
+    // indicates that a client in a old.game is not ready for the old.game to start
     public static final boolean NOT_READY = false;
 
-    // indicates that a client in a game is ready for a game to start
+    // indicates that a client in a old.game is ready for a old.game to start
     public static final boolean READY = true;
 
     // used to lock access to lobbies object
@@ -48,11 +48,11 @@ public class Server extends Thread {
     // if a write is happening as many reads as we want can happen
     private static ReadWriteLock lobbiesRWlock = new ReentrantReadWriteLock();
 
-    // holds all of the lobbies that are currently open in the game
-    // once a game has started the lobby closes
+    // holds all of the lobbies that are currently open in the old.game
+    // once a old.game has started the lobby closes
     private static Set<Lobby> lobbies = new HashSet<>();
 
-    // holds all of the players in the game
+    // holds all of the players in the old.game
     private static Set<Player> players = new HashSet<>();
 
     // maps a player to the thread that is currently servicing them
@@ -60,11 +60,11 @@ public class Server extends Thread {
     private static Map<Player, Server> playerToServer = new HashMap();
 
     // this executes the threads that actually run games
-    // one thread per game
+    // one thread per old.game
     private static ExecutorService gameExecutorService = Executors.newFixedThreadPool(10);
 
     /**
-     * This is a server for the Snake game
+     * This is a server for the Snake old.game
      *
      * @param args
      *  port: the port that the server is to run on
@@ -291,7 +291,7 @@ public class Server extends Thread {
      */
     private void idleLobbyHandle() throws IOException, ClassNotFoundException, MessageTypeException {
 
-        // if the thread has been interrupted it means that the game is starting
+        // if the thread has been interrupted it means that the old.game is starting
         if(currentThread().isInterrupted()){
             return;
         }

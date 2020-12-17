@@ -1,8 +1,8 @@
 # Snake Game
 
-This Snake game was created as the group project for Software Engineering 1/ Intro to Java Programming at Baylor University.
+This Snake old.game was created as the group project for Software Engineering 1/ Intro to Java Programming at Baylor University.
 
-In this game two players control snakes and attempt to reach the longest length through eating fruits. if you hit the other snake you lose.
+In this old.game two players control snakes and attempt to reach the longest length through eating fruits. if you hit the other snake you lose.
 
 Check [here](classOverview.md) to see an overview of classes
 
@@ -10,14 +10,14 @@ Check [here](classOverview.md) to see an overview of classes
 + Java 8
    + TCP is used for the networking
    + Java FX is used for the GUI
-   + Swing is used to display the game
+   + Swing is used to display the old.game
 + Maven
 + Spot Bugs for Code Analysis
 + Junit for unit testing
 
 # Running the Game
 
-Run this command in your terminal when you are in the project folder
+Run this old.command in your terminal when you are in the project folder
 ```
 mvn clean javafx:run
 ```

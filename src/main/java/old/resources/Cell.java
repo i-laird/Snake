@@ -1,4 +1,4 @@
-package resources;
+package old.resources;
 
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
@@ -13,8 +13,8 @@ public class Cell {
     private int col;
 
     /**
-     * @param r the row of the resources.Cell
-     * @param c the column of the resources.Cell
+     * @param r the row of the old.resources.Cell
+     * @param c the column of the old.resources.Cell
      * @author Andrew Walker
      * This constructor takes an initial row and column
      */
@@ -36,7 +36,7 @@ public class Cell {
     /**
      * @param width  of the table
      * @param height of the table
-     * @return newly generated resources.Cell
+     * @return newly generated old.resources.Cell
      * @author Andrew Walker
      * Creates a Cell in a random location in the table
      */

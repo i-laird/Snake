@@ -1,9 +1,9 @@
-import exceptions.SnakeBuilderError;
+import old.exceptions.SnakeBuilderError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import resources.Cell;
-import resources.Snake;
-import resources.SnakeBuilder;
+import old.resources.Cell;
+import old.resources.Snake;
+import old.resources.SnakeBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

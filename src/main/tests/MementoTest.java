@@ -1,10 +1,10 @@
-import exceptions.SnakeBuilderError;
-import game.Game;
-import game.GameMaker;
-import game.GameRecord;
+import old.exceptions.SnakeBuilderError;
+import old.game.Game;
+import old.game.GameMaker;
+import old.game.GameRecord;
 import org.junit.jupiter.api.Test;
-import resources.Cell;
-import resources.SnakeBuilder;
+import old.resources.Cell;
+import old.resources.SnakeBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

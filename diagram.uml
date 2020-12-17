@@ -7,34 +7,34 @@
     <node x="396.92977085260657" y="310.0">directions.Direction</node>
     <node x="424.6964375192733" y="630.0">display.Screen</node>
     <node x="154.05160460075263" y="430.0">display.TextBox</node>
-    <node x="728.6864149248206" y="180.0">resources.Snake</node>
-    <node x="1235.3009982581539" y="630.0">reporting.GameReport</node>
-    <node x="1240.1572593626574" y="1130.0">command.SnakeRunner</node>
-    <node x="1033.7172708526066" y="310.0">game.GameRecord</node>
+    <node x="728.6864149248206" y="180.0">old.resources.Snake</node>
+    <node x="1235.3009982581539" y="630.0">old.reporting.GameReport</node>
+    <node x="1240.1572593626574" y="1130.0">old.command.SnakeRunner</node>
+    <node x="1033.7172708526066" y="310.0">old.game.GameRecord</node>
     <node x="491.1964375192733" y="430.0">directions.Right</node>
-    <node x="355.50623949201963" y="870.0">game.ServerGame</node>
-    <node x="1216.1572593626574" y="1050.0">game.SnakeGame</node>
-    <node x="797.7172708526066" y="630.0">resources.SnakeBuilder</node>
-    <node x="847.8422708526066" y="950.0">game.GameMaker</node>
-    <node x="871.7172708526066" y="530.0">exceptions.SnakeBuilderError</node>
+    <node x="355.50623949201963" y="870.0">old.game.ServerGame</node>
+    <node x="1216.1572593626574" y="1050.0">old.game.SnakeGame</node>
+    <node x="797.7172708526066" y="630.0">old.resources.SnakeBuilder</node>
+    <node x="847.8422708526066" y="950.0">old.game.GameMaker</node>
+    <node x="871.7172708526066" y="530.0">old.exceptions.SnakeBuilderError</node>
     <node x="469.0516046007527" y="530.0">directions.DirectionFactory</node>
     <node x="264.0516046007527" y="430.0">directions.Left</node>
-    <node x="1233.3009982581539" y="530.0">reporting.ReportObject</node>
+    <node x="1233.3009982581539" y="530.0">old.reporting.ReportObject</node>
     <node x="351.0516046007527" y="430.0">directions.Up</node>
     <node x="24.051604600752626" y="430.0">display.GameBoard</node>
-    <node x="1346.1572593626574" y="1050.0">command.GameRunner</node>
-    <node x="896.0922708526066" y="770.0">game.Game</node>
-    <node x="543.8620018115944" y="-16.0">resources.Cell</node>
-    <node x="1050.4303248388478" y="870.0">game.ClientGame</node>
+    <node x="1346.1572593626574" y="1050.0">old.command.GameRunner</node>
+    <node x="896.0922708526066" y="770.0">old.game.Game</node>
+    <node x="543.8620018115944" y="-16.0">old.resources.Cell</node>
+    <node x="1050.4303248388478" y="870.0">old.game.ClientGame</node>
     <node x="110.82808159148726" y="530.0">display.Wrapper</node>
     <node x="732.8422708526066" y="950.0">display.Initializer</node>
     <node x="1329.2822593626574" y="1210.0">Main</node>
-    <node x="1094.3009982581539" y="630.0">exceptions.NetworkError</node>
+    <node x="1094.3009982581539" y="630.0">old.exceptions.NetworkError</node>
     <node x="686.1964375192733" y="430.0">enums.Direct</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="directions.Up" target="resources.Cell">
+    <edge source="directions.Up" target="old.resources.Cell">
       <point x="-25.200000000000045" y="-15.0" />
       <point x="357.35160460075264" y="370.0" />
       <point x="349.994748258154" y="370.0" />
@@ -42,7 +42,7 @@
       <point x="565.7098278985509" y="120.0" />
       <point x="-11.652173913043498" y="15.0" />
     </edge>
-    <edge source="directions.Down" target="resources.Snake">
+    <edge source="directions.Down" target="old.resources.Snake">
       <point x="31.600000000000023" y="-15.0" />
       <point x="658.2964375192732" y="410.0" />
       <point x="723.4672708526066" y="410.0" />
@@ -50,7 +50,7 @@
       <point x="758.3114149248206" y="290.0" />
       <point x="-9.875" y="15.0" />
     </edge>
-    <edge source="game.Game" target="game.GameRecord">
+    <edge source="old.game.Game" target="old.game.GameRecord">
       <point x="17.28125" y="-15.0" />
       <point x="952.8735208526066" y="710.0" />
       <point x="1078.8634982581539" y="710.0" />
@@ -58,7 +58,7 @@
       <point x="1077.2172708526066" y="400.0" />
       <point x="-14.5" y="15.0" />
     </edge>
-    <edge source="game.ClientGame" target="resources.Cell">
+    <edge source="old.game.ClientGame" target="old.resources.Cell">
       <point x="36.33333333333326" y="-15.0" />
       <point x="1141.2636581721813" y="850.0" />
       <point x="1222.8009982581539" y="850.0" />
@@ -66,7 +66,7 @@
       <point x="609.4054800724639" y="50.0" />
       <point x="32.043478260869506" y="15.0" />
     </edge>
-    <edge source="directions.Left" target="resources.Cell">
+    <edge source="directions.Left" target="old.resources.Cell">
       <point x="-13.399999999999977" y="-15.0" />
       <point x="284.1516046007527" y="410.0" />
       <point x="275.99474825815395" y="410.0" />
@@ -92,7 +92,7 @@
       <point x="699.3631041859401" y="510.0" />
       <point x="-26.333333333333258" y="15.0" />
     </edge>
-    <edge source="resources.SnakeBuilder" target="resources.Cell">
+    <edge source="old.resources.SnakeBuilder" target="old.resources.Cell">
       <point x="14.5" y="-15.0" />
       <point x="870.2172708526066" y="610.0" />
       <point x="861.2172708526066" y="610.0" />
@@ -100,7 +100,7 @@
       <point x="594.8402626811596" y="100.0" />
       <point x="17.478260869565247" y="15.0" />
     </edge>
-    <edge source="game.SnakeGame" target="reporting.GameReport">
+    <edge source="old.game.SnakeGame" target="old.reporting.GameReport">
       <point x="31.428571428571445" y="-15.0" />
       <point x="1302.585830791229" y="1020.0" />
       <point x="1343.8634982581539" y="1020.0" />
@@ -114,19 +114,19 @@
       <point x="478.5297708526065" y="380.0" />
       <point x="33.59999999999991" y="15.0" />
     </edge>
-    <edge source="directions.Up" target="resources.Snake">
+    <edge source="directions.Up" target="old.resources.Snake">
       <point x="0.0" y="-15.0" />
       <point x="382.5516046007527" y="260.0" />
       <point x="738.5614149248206" y="260.0" />
       <point x="-29.625" y="15.0" />
     </edge>
-    <edge source="game.ServerGame" target="game.Game">
+    <edge source="old.game.ServerGame" target="old.game.Game">
       <point x="37.33333333333337" y="-15.0" />
       <point x="448.839572825353" y="830.0" />
       <point x="913.0208422811779" y="830.0" />
       <point x="-22.571428571428555" y="15.0" />
     </edge>
-    <edge source="game.GameMaker" target="game.ServerGame">
+    <edge source="old.game.GameMaker" target="old.game.ServerGame">
       <point x="-42.0" y="-15.0" />
       <point x="861.8422708526066" y="925.0" />
       <point x="411.50623949201963" y="925.0" />
@@ -138,7 +138,7 @@
       <point x="199.05160460075263" y="500.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="Main" target="command.SnakeRunner">
+    <edge source="Main" target="old.command.SnakeRunner">
       <point x="-18.5" y="-15.0" />
       <point x="1347.7822593626574" y="1185.0" />
       <point x="1298.6572593626574" y="1185.0" />
@@ -150,7 +150,7 @@
       <point x="420.92977085260657" y="400.0" />
       <point x="-24.0" y="15.0" />
     </edge>
-    <edge source="game.ServerGame" target="resources.Cell">
+    <edge source="old.game.ServerGame" target="old.resources.Cell">
       <point x="-37.33333333333337" y="-15.0" />
       <point x="374.17290615868626" y="850.0" />
       <point x="0.0" y="850.0" />
@@ -166,13 +166,13 @@
       <point x="752.0297708526066" y="510.0" />
       <point x="26.333333333333258" y="15.0" />
     </edge>
-    <edge source="game.Game" target="reporting.GameReport">
+    <edge source="old.game.Game" target="old.reporting.GameReport">
       <point x="32.09375" y="-15.0" />
       <point x="967.6860208526066" y="740.0" />
       <point x="1249.6759982581539" y="740.0" />
       <point x="-43.125" y="15.0" />
     </edge>
-    <edge source="game.GameRecord" target="resources.Cell">
+    <edge source="old.game.GameRecord" target="old.resources.Cell">
       <point x="23.19999999999999" y="-15.0" />
       <point x="1114.9172708526066" y="280.0" />
       <point x="1153.6511910727136" y="280.0" />
@@ -186,7 +186,7 @@
       <point x="459.32977085260654" y="400.0" />
       <point x="14.399999999999977" y="15.0" />
     </edge>
-    <edge source="directions.Right" target="resources.Snake">
+    <edge source="directions.Right" target="old.resources.Snake">
       <point x="30.40000000000009" y="-15.0" />
       <point x="559.5964375192734" y="410.0" />
       <point x="583.4464375192733" y="410.0" />
@@ -194,19 +194,19 @@
       <point x="751.7280815914872" y="280.0" />
       <point x="-16.45833333333337" y="15.0" />
     </edge>
-    <edge source="directions.Direction" target="resources.Cell">
+    <edge source="directions.Direction" target="old.resources.Cell">
       <point x="-24.0" y="-15.0" />
       <point x="420.92977085260657" y="140.0" />
       <point x="571.5359148550726" y="140.0" />
       <point x="-5.826086956521749" y="15.0" />
     </edge>
-    <edge source="reporting.GameReport" target="game.Game">
+    <edge source="old.reporting.GameReport" target="old.game.Game">
       <point x="-14.375" y="15.0" />
       <point x="1278.4259982581539" y="750.0" />
       <point x="972.6235208526066" y="750.0" />
       <point x="37.03125" y="-15.0" />
     </edge>
-    <edge source="game.GameRecord" target="game.Game">
+    <edge source="old.game.GameRecord" target="old.game.Game">
       <point x="-43.5" y="15.0" />
       <point x="1048.2172708526066" y="410.0" />
       <point x="1073.9259982581539" y="410.0" />
@@ -214,7 +214,7 @@
       <point x="947.9360208526066" y="700.0" />
       <point x="12.34375" y="-15.0" />
     </edge>
-    <edge source="game.SnakeGame" target="exceptions.NetworkError">
+    <edge source="old.game.SnakeGame" target="old.exceptions.NetworkError">
       <point x="0.0" y="-15.0" />
       <point x="1271.1572593626574" y="1000.0" />
       <point x="1305.0509982581539" y="1000.0" />
@@ -228,7 +228,7 @@
       <point x="382.5516046007527" y="500.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="directions.Direction" target="resources.Snake">
+    <edge source="directions.Direction" target="old.resources.Snake">
       <point x="24.0" y="-15.0" />
       <point x="468.92977085260657" y="270.0" />
       <point x="745.144748258154" y="270.0" />
@@ -240,7 +240,7 @@
       <point x="411.32977085260654" y="390.0" />
       <point x="-33.60000000000002" y="15.0" />
     </edge>
-    <edge source="directions.Right" target="resources.Cell">
+    <edge source="directions.Right" target="old.resources.Cell">
       <point x="15.200000000000045" y="-15.0" />
       <point x="544.3964375192734" y="400.0" />
       <point x="572.4464375192733" y="400.0" />
@@ -254,7 +254,7 @@
       <point x="115.71827126741937" y="490.0" />
       <point x="36.66666666666674" y="15.0" />
     </edge>
-    <edge source="Main" target="command.GameRunner">
+    <edge source="Main" target="old.command.GameRunner">
       <point x="18.5" y="-15.0" />
       <point x="1384.7822593626574" y="1185.0" />
       <point x="1433.9072593626574" y="1185.0" />
@@ -266,25 +266,25 @@
       <point x="297.5516046007527" y="510.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="display.GameBoard" target="resources.Cell">
+    <edge source="display.GameBoard" target="old.resources.Cell">
       <point x="0.0" y="-15.0" />
       <point x="79.05160460075263" y="90.0" />
       <point x="556.9706974637683" y="90.0" />
       <point x="-20.39130434782612" y="15.0" />
     </edge>
-    <edge source="game.Game" target="exceptions.NetworkError">
+    <edge source="old.game.Game" target="old.exceptions.NetworkError">
       <point x="27.15625" y="-15.0" />
       <point x="962.7485208526066" y="730.0" />
       <point x="1123.8009982581539" y="730.0" />
       <point x="-29.5" y="15.0" />
     </edge>
-    <edge source="game.ClientGame" target="game.Game">
+    <edge source="old.game.ClientGame" target="old.game.Game">
       <point x="-36.33333333333326" y="-15.0" />
       <point x="1068.5969915055148" y="850.0" />
       <point x="946.8779851383208" y="850.0" />
       <point x="11.285714285714278" y="15.0" />
     </edge>
-    <edge source="game.SnakeGame" target="display.Initializer">
+    <edge source="old.game.SnakeGame" target="display.Initializer">
       <point x="-47.14285714285711" y="-15.0" />
       <point x="1224.0144022198003" y="1030.0" />
       <point x="780.3422708526066" y="1030.0" />
@@ -296,25 +296,25 @@
       <point x="536.0516046007526" y="580.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="command.SnakeRunner" target="command.GameRunner">
+    <edge source="old.command.SnakeRunner" target="old.command.GameRunner">
       <point x="39.0" y="-15.0" />
       <point x="1337.6572593626574" y="1105.0" />
       <point x="1375.4072593626574" y="1105.0" />
       <point x="-29.25" y="15.0" />
     </edge>
-    <edge source="game.GameRecord" target="resources.Snake">
+    <edge source="old.game.GameRecord" target="old.resources.Snake">
       <point x="-23.200000000000045" y="-15.0" />
       <point x="1068.5172708526065" y="230.0" />
       <point x="804.3947482581539" y="230.0" />
       <point x="36.20833333333326" y="15.0" />
     </edge>
-    <edge source="game.Game" target="exceptions.SnakeBuilderError">
+    <edge source="old.game.Game" target="old.exceptions.SnakeBuilderError">
       <point x="2.46875" y="-15.0" />
       <point x="938.0610208526066" y="680.0" />
       <point x="977.4672708526066" y="680.0" />
       <point x="35.25" y="15.0" />
     </edge>
-    <edge source="game.Game" target="resources.Cell">
+    <edge source="old.game.Game" target="old.resources.Cell">
       <point x="-32.09375" y="-15.0" />
       <point x="903.4985208526066" y="740.0" />
       <point x="10.638561122491751" y="740.0" />
@@ -322,13 +322,13 @@
       <point x="551.1446105072465" y="70.0" />
       <point x="-26.21739130434787" y="15.0" />
     </edge>
-    <edge source="command.SnakeRunner" target="game.SnakeGame">
+    <edge source="old.command.SnakeRunner" target="old.game.SnakeGame">
       <point x="-39.0" y="-15.0" />
       <point x="1259.6572593626574" y="1105.0" />
       <point x="1243.6572593626574" y="1105.0" />
       <point x="-27.5" y="15.0" />
     </edge>
-    <edge source="resources.SnakeBuilder" target="resources.Snake">
+    <edge source="old.resources.SnakeBuilder" target="old.resources.Snake">
       <point x="-14.5" y="-15.0" />
       <point x="841.2172708526066" y="610.0" />
       <point x="848.291187934086" y="610.0" />
@@ -336,13 +336,13 @@
       <point x="791.2280815914872" y="250.0" />
       <point x="23.04166666666663" y="15.0" />
     </edge>
-    <edge source="directions.Left" target="resources.Snake">
+    <edge source="directions.Left" target="old.resources.Snake">
       <point x="0.0" y="-15.0" />
       <point x="297.5516046007527" y="250.0" />
       <point x="731.9780815914872" y="250.0" />
       <point x="-36.20833333333337" y="15.0" />
     </edge>
-    <edge source="display.Screen" target="resources.Cell">
+    <edge source="display.Screen" target="old.resources.Cell">
       <point x="-36.3125" y="-15.0" />
       <point x="429.8839375192733" y="610.0" />
       <point x="13.551604600752626" y="610.0" />
@@ -350,7 +350,7 @@
       <point x="554.0576539855074" y="80.0" />
       <point x="-23.304347826086996" y="15.0" />
     </edge>
-    <edge source="game.Game" target="resources.Snake">
+    <edge source="old.game.Game" target="old.resources.Snake">
       <point x="-17.28125" y="-15.0" />
       <point x="918.3110208526066" y="710.0" />
       <point x="782.2797708526066" y="710.0" />
@@ -358,7 +358,7 @@
       <point x="771.4780815914872" y="280.0" />
       <point x="3.2916666666666288" y="15.0" />
     </edge>
-    <edge source="game.Game" target="resources.SnakeBuilder">
+    <edge source="old.game.Game" target="old.resources.SnakeBuilder">
       <point x="-7.40625" y="-15.0" />
       <point x="928.1860208526066" y="690.0" />
       <point x="826.7172708526066" y="690.0" />
@@ -372,7 +372,7 @@
       <point x="449.7297708526065" y="410.0" />
       <point x="4.7999999999999545" y="15.0" />
     </edge>
-    <edge source="display.Screen" target="resources.Snake">
+    <edge source="display.Screen" target="old.resources.Snake">
       <point x="36.3125" y="-15.0" />
       <point x="502.5089375192733" y="610.0" />
       <point x="775.6964375192733" y="610.0" />
@@ -380,7 +380,7 @@
       <point x="764.894748258154" y="290.0" />
       <point x="-3.2916666666666288" y="15.0" />
     </edge>
-    <edge source="game.GameMaker" target="game.Game">
+    <edge source="old.game.GameMaker" target="old.game.Game">
       <point x="14.0" y="-15.0" />
       <point x="917.8422708526066" y="925.0" />
       <point x="909.3422708526065" y="925.0" />
@@ -388,25 +388,25 @@
       <point x="935.5922708526066" y="850.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="game.SnakeGame" target="game.GameMaker">
+    <edge source="old.game.SnakeGame" target="old.game.GameMaker">
       <point x="-31.428571428571445" y="-15.0" />
       <point x="1239.7286879340859" y="1020.0" />
       <point x="903.8422708526066" y="1020.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="game.GameMaker" target="game.ClientGame">
+    <edge source="old.game.GameMaker" target="old.game.ClientGame">
       <point x="42.0" y="-15.0" />
       <point x="945.8422708526066" y="925.0" />
       <point x="1104.9303248388478" y="925.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="game.Game" target="display.Screen">
+    <edge source="old.game.Game" target="display.Screen">
       <point x="-27.15625" y="-15.0" />
       <point x="908.4360208526066" y="730.0" />
       <point x="445.4464375192733" y="730.0" />
       <point x="-20.75" y="15.0" />
     </edge>
-    <edge source="resources.SnakeBuilder" target="exceptions.SnakeBuilderError">
+    <edge source="old.resources.SnakeBuilder" target="old.exceptions.SnakeBuilderError">
       <point x="43.5" y="-15.0" />
       <point x="899.2172708526066" y="610.0" />
       <point x="906.9672708526066" y="610.0" />
@@ -418,13 +418,13 @@
       <point x="626.6964375192733" y="500.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="reporting.GameReport" target="reporting.ReportObject">
+    <edge source="old.reporting.GameReport" target="old.reporting.ReportObject">
       <point x="38.333333333333314" y="-15.0" />
       <point x="1331.1343315914871" y="610.0" />
       <point x="1332.4676649248204" y="610.0" />
       <point x="39.66666666666663" y="15.0" />
     </edge>
-    <edge source="game.SnakeGame" target="game.Game">
+    <edge source="old.game.SnakeGame" target="old.game.Game">
       <point x="-15.71428571428578" y="-15.0" />
       <point x="1255.4429736483717" y="1010.0" />
       <point x="1186.7844915055146" y="1010.0" />
@@ -432,7 +432,7 @@
       <point x="969.4494137097494" y="830.0" />
       <point x="33.85714285714283" y="15.0" />
     </edge>
-    <edge source="game.SnakeGame" target="game.GameRecord">
+    <edge source="old.game.SnakeGame" target="old.game.GameRecord">
       <point x="47.14285714285711" y="-15.0" />
       <point x="1318.3001165055146" y="1030.0" />
       <point x="1362.8009982581539" y="1030.0" />
@@ -440,7 +440,7 @@
       <point x="1135.2172708526066" y="410.0" />
       <point x="43.5" y="15.0" />
     </edge>
-    <edge source="resources.Snake" target="resources.Cell">
+    <edge source="old.resources.Snake" target="old.resources.Cell">
       <point x="26.33333333333337" y="-15.0" />
       <point x="794.519748258154" y="110.0" />
       <point x="591.9272192028988" y="110.0" />
@@ -454,7 +454,7 @@
       <point x="440.1297708526066" y="410.0" />
       <point x="-4.7999999999999545" y="15.0" />
     </edge>
-    <edge source="directions.Down" target="resources.Cell">
+    <edge source="directions.Down" target="old.resources.Cell">
       <point x="15.799999999999955" y="-15.0" />
       <point x="642.4964375192733" y="400.0" />
       <point x="697.9047708526066" y="400.0" />
@@ -465,7 +465,7 @@
   </edges>
   <settings layout="Hierarchic Group" zoom="1.0" x="907.5" y="295.0" />
   <SelectedNodes>
-    <node>resources.Cell</node>
+    <node>old.resources.Cell</node>
   </SelectedNodes>
   <Categories />
   <SCOPE>All</SCOPE>

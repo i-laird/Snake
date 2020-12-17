@@ -1,8 +1,8 @@
-package game;
+package old.game;
 
 import display.Initializer;
-import exceptions.NetworkError;
-import reporting.GameReport;
+import old.exceptions.NetworkError;
+import old.reporting.GameReport;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -21,11 +21,11 @@ import java.util.logging.Logger;
 public class SnakeGame {
 
     public final static int PORT_NUM = 2000;
-    private static final Logger LOGGER = Logger.getLogger("command.SnakeRunner Class");
+    private static final Logger LOGGER = Logger.getLogger("old.command.SnakeRunner Class");
 
     /**
      * @author Andrew Walker
-     * This function starts the game
+     * This function starts the old.game
      */
     public void startGame() {
         boolean isServer;
@@ -34,8 +34,8 @@ public class SnakeGame {
 
         //Initializer i = new Initializer();
         Initializer.startModal();
-        isServer = Initializer.getIsServer();
-        host = Initializer.getHost();
+        //isServer = Initializer.getIsServer();
+        //host = Initializer.getHost();
         username = Initializer.getUsername();
         LOGGER.info("Generated Game Data");
 
@@ -88,7 +88,7 @@ public class SnakeGame {
             throw new RuntimeException();
         }
 
-        //Save the game state
+        //Save the old.game state
         GameRecord initialGame = ourGame.createRecord();
         try {
             do {
@@ -103,7 +103,7 @@ public class SnakeGame {
             } while (ourGame.playAgain(initialGame));
         } catch (Exception e) {
             e.printStackTrace();
-            LOGGER.severe("Exception occurred while playing the game: " + e.getMessage());
+            LOGGER.severe("Exception occurred while playing the old.game: " + e.getMessage());
         }
 
         try {
