@@ -3,6 +3,7 @@ package server;
 import communication.SynchronizedMessageHandler;
 import communication.message.*;
 import communication.message.Error;
+import exception.MessageTypeException;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -14,28 +15,6 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Server extends Thread {
-
-    /**
-     * @author Ian Laird
-     *
-     * Used to indicate that an unexpected message has been received from the client
-     */
-    private static class MessageTypeException extends Throwable{
-        /**
-         * constructor
-         */
-        private MessageTypeException(){
-            super();
-        }
-
-        /**
-         * custom constructor
-         * @param s message detailing the cause of the error
-         */
-        private MessageTypeException(String s){
-            super(s);
-        }
-    }
 
     // indicates that a client in a old.game is not ready for the old.game to start
     public static final boolean NOT_READY = false;
@@ -361,7 +340,8 @@ public class Server extends Thread {
         // send START to each client
         // for each client in the lobby interrupt that thread
         this.lobby.getPlayerToStatus().keySet().forEach(x -> {
-            playerToServer.get(x).interrupt();
+            Server server = playerToServer.get(x);
+            server.interrupt();
         });
     }
 
